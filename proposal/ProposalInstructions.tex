@@ -1,0 +1,212 @@
+% Master's thesis proposal template for Business Informatics and Data Science
+% at TU Wien.
+%
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[runningheads]{llncs}
+%
+\usepackage[T1]{fontenc}
+% T1 fonts are used for the final print and online PDFs. Other font
+% encodings may result in incorrectly rendered characters.
+%
+\usepackage{graphicx}
+% Use this package if the proposal contains figures.
+%
+% If you use the hyperref package, you may uncomment the following lines
+% to display URLs in blue roman font according to Springer's eBook style:
+%\usepackage{color}
+%\renewcommand\UrlFont{\color{blue}\rmfamily}
+%\urlstyle{rm}
+%
+
+\usepackage{xurl}
+\usepackage[final,hidelinks]{hyperref}
+\urlstyle{same}
+%
+\begin{document}
+%
+\title{Working Title of the Master's Thesis}
+%
+%\titlerunning{Abbreviated proposal title}
+% If the title is too long for the running head, provide a shortened version.
+%
+\author{Student Name\inst{1}}
+%
+\authorrunning{Student Name}
+%
+\institute{TU Wien, Student ID (Matrikelnummer),
+  \email{e00000000@student.tuwien.ac.at}}
+%
+\maketitle
+%
+Supervisor: Firstname Lastname, Research Unit, University \\
+Co-supervisor (if applicable): Firstname Lastname, Research Unit, University
+
+\medskip
+\noindent\textit{How to use this template.}
+Replace all instructional text with proposal content and remove all examples
+that do not apply. The stated character limits include spaces and
+apply to the body of the respective section; section headings and bibliography
+entries are excluded. Write concisely, use terminology consistently, define
+abbreviations at first use, and cite sources for non-obvious factual or
+scientific claims. The research problem, goals, research questions, methods,
+and evaluation must be clearly traceable to one another.
+
+\begin{abstract}
+\textbf{Length: max 1000 characters}
+
+Provide a self-contained summary of the proposed thesis. Briefly state the
+\textbf{topic and context}, the specific \textbf{research problem}, the \textbf{goal} and/or \textbf{expected results}, and the planned \textbf{methodology and evaluation}, and the anticipated scientific or practical \textbf{contribution}. Avoid detailed background information, undefined abbreviations, and citations unless they are essential. It is usually the easiest to (re-)write the abstract after completing the other sections.
+
+%\keywords{First keyword \and Second keyword \and Third keyword.}
+% Add three to five keywords if required by the programme or supervisor.
+\end{abstract}
+%
+\section{Introduction}
+\textbf{Maximum length: 1,500 characters.}
+
+Introduce the topic and provide the context needed to understand the remainder
+of the proposal. Explain why the topic matters scientifically, practically, or
+both, and identify the relevant setting or stakeholders where appropriate.
+
+
+You may describe the \emph{motivational problem}: the broader concern that
+makes the thesis worthwhile. This problem is often much larger than a single
+master thesis. Clearly distinguish this broader motivation from the specific, bounded research problem formulated in the next section. End the
+introduction by leading the reader directly to that research problem.
+
+\section{Research Problem}
+\textbf{Maximum length: 2,000 characters.}
+
+State the specific and sufficiently bounded problem that the thesis will
+investigate. Address the following points:
+\begin{itemize}
+  \item What is the current undesirable situation, or limitation, and in which context does it occur?
+  \item Who or what is affected, and what are the consequences?
+  \item Which observable characteristics or indicators demonstrate the
+        problem? These may be quantitative or qualitative.
+  \item What is the relevant baseline, such as an existing approach, current
+        process, or state of knowledge? Include known values or evidence where
+        available.
+\end{itemize}
+
+The problem statement specifies the research problem that the thesis intends to address. It also provides the basis for the final evaluation, which should determine to what extent the identified problem has been solved or reduced within the defined scope of the thesis. The problem should therefore be described in terms of observable and, where possible, measurable characteristics. These characteristics may be quantitative, qualitative, or a combination of both.
+
+A research problem describes an undesirable situation that the proposed research is intended to change. If the thesis is successful, the stated problem should no longer occur, or should occur to a demonstrably lesser extent, under the conditions defined in the proposal. This must be distinguished from challenges encountered while designing, implementing, or evaluating a solution. Such challenges may complicate the research process, but they do not constitute the research problem itself and do not necessarily disappear when the thesis is completed.
+
+In many cases, the problem statement is formulated by identifying measurable limitations of existing approaches. These may concern, for example, speed, accuracy, efficiency, scalability, usability, reliability, interpretability, or another relevant quality. When no comparable approach or artefact exists, the problem should instead be characterized through the current process or situation without the proposed artefact. This baseline should make it possible to assess whether and to what extent the proposed contribution improves the existing situation.
+
+The absence of a method, model, system, dataset, or other artefact is not, by
+itself, a sufficient research problem. Explain the negative consequence of
+that absence or the limitation of available alternatives. Likewise, do not
+confuse the research problem with the proposed solution or the thesis goal -- these are to be described in the next section. 
+
+\section{Goals and expected results}
+\textbf{Maximum length: 1,500 characters.}
+
+State the overall goal of the thesis and describe the results expected from the
+work. Expected results may include, for example, a model, method, algorithm,
+software prototype, process, framework, dataset, empirical findings, design
+principles, or evidence-based recommendations. Distinguish such results from
+activities: conducting a literature review, collecting data, or implementing
+a prototype is part of the work plan, not a contribution by itself.
+
+Creating a new artefact does not constitute a scientific contribution in itself; the artefact must demonstrably improve relevant outcomes compared with the existing situation or alternative approaches. This is in line with the following statement by Patterson et al. \cite{Patterson1999}: \textit{``Computation is synthetic in the sense that many of the phenomena computer scientists and engineers study are created by humans rather than occurring naturally in the physical world. Since anyone can create something new [in a synthetic field], that alone does not establish a contribution. Rather, one must show that the creation is better. Accordingly, research in computer science} [as in data science and business informatics] \textit{is largely devoted to establishing the “better” property. “Better” can mean many things including “solves a problem in less time,” “solves a larger class of problems,” “is more efficient of resources,” “is more expressive by some criterion,” “is more visually appealing in the case of graphics,” “presents a totally new capability,” etc. The artefact created in a thesis should lead to a “better” result. Thus, making the connection between the idea and the improvement is as important as quantifying how much the improvement is.''}
+
+Accordingly, the goals should describe not only the expected results—often the artefacts to be developed—but also the respects in which these results are expected to be better than the current situation or existing approaches.
+
+In many cases, the same improvement criterion links the goals to the problem statement. The problem statement identifies the inadequacies of existing approaches, while the goals specify how the proposed solution is expected to improve upon them with respect to the relevant property. Furthermore, avoid mentioning outcomes that are not related to any element of the problem statement.
+
+Where possible, define explicit criteria for determining whether the proposed solution is successful. These success criteria should refer directly to the identified improvement property and should be assessable during the evaluation.
+
+
+\section{Research Questions}
+\textbf{Maximum length: 1,200 characters.}
+
+List a small, coherent set of clearly numbered research questions.
+
+Research questions must be answerable through systematic observation or measurement, using quantitative, qualitative, or mixed measures as appropriate. They should therefore be formulated by considering what evidence must be collected to answer them. In particular, the measured or observed outcomes should provide a direct basis for answering each research question, including the extent to which the intended improvement has been achieved.
+
+For every research question, clearly specify what will be measured or assessed. This information may be included in the question itself. However, if doing so would make the question unnecessarily long or difficult to read, describe the relevant measures, criteria, and evidence in a separate paragraph immediately following the question.
+
+Each research question must be traceable to the identified research problem and the expected results. It should be clear which aspect of the problem the question addresses and how answering it contributes to evaluating the proposed solution.
+
+Avoid binary questions that can be answered only with yes or no. Such questions often depend on arbitrary thresholds and may obscure differences among several evaluation measures. When multiple measures are considered, some may improve while others worsen, making a binary answer inappropriate. Prefer questions that examine the extent or dimensions of an observed effect.
+
+Questions of the form “How can something be done?” should also be avoided. They are usually too broad because a task may be accomplished in many different ways, and it is often unclear when the question has been answered sufficiently. Instead, focus on the properties, effects, or performance of the proposed approach and on how these compare with the relevant baseline.
+
+Terms such as appropriate, suitable, or effective must be defined in the context of the research question. Specify the criteria according to which the corresponding property will be assessed.
+
+For most areas of research, avoid superlatives such as best or optimal. Such terms imply comparison with all possible present and future alternatives and are therefore generally difficult to substantiate. Instead, formulate questions in relation to clearly defined baselines, comparison approaches, or improvement criteria.
+
+Each research question is usually addressed through one or more research methods. Although the methodology is described in detail in the following section, briefly indicate for each question how it will be investigated and evaluated.
+
+The number of research questions is not a measure of the quality or ambition of a proposal. Include only questions that address the central research problem and require scientific investigation. Questions that merely describe development steps or intermediate results should instead be presented as tasks, milestones, or expected outputs.
+
+\section{Research Methodology}
+\textbf{Maximum length: 2,500 characters.}
+
+Describe a coherent and feasible plan for producing evidence that answers the
+research questions. Explain not only \emph{what} will be done, but \emph{how} it will be done and why the chosen methods are suitable. Always cite recognized methodological sources and briefly show how their relevant steps will be applied. Naming a broad framework, such as design science, is not sufficient; also identify the concrete methods used within that framework.
+
+As applicable, cover the following elements:
+\begin{itemize}
+  \item research design and rationale;
+  \item data, documents, cases, systems, or participants, including access,
+        selection, sampling, and inclusion or exclusion criteria;
+  \item artefact development, data collection, and analysis procedures;
+  \item evaluation design, baselines or comparison conditions, metrics or
+        qualitative criteria, and the planned interpretation of results;
+  \item measures for validity, reliability, robustness, and reproducibility;
+  \item ethical, legal, privacy, security, and bias considerations; and
+  \item important feasibility risks and suitable mitigation measures.
+\end{itemize}
+
+For research based on data, address data sources and provenance, processing
+steps, data leakage, training and evaluation splits, baselines, uncertainty,
+and reproducibility. For organizational, qualitative, or design research,
+address issues such as case selection, stakeholder
+recruitment, interview or observation protocols, coding, triangulation,
+context, and artefact evaluation. Make explicit how each method contributes to
+answering one or more research questions. The evaluation is an integral part
+of the methodology and must not be included in this section.
+
+\section{State-of-the-Art}
+\textbf{Maximum length: 1,200 characters.}
+
+This section may be placed elsewhere in the proposal if this improves the logical flow. For example, it may precede the problem statement when the problem formulation depends on concepts, evidence, or context introduced in this section.
+
+Provide a focused preliminary synthesis of the literature most relevant to the
+proposed thesis. This is not the full literature review that will appear in the
+completed thesis. Discuss approximately four to eight key sources, normally
+including the closest related approaches and the main theoretical or
+methodological foundations. Include recent high-quality work as well as
+seminal work where it remains relevant.
+
+Do not merely list references. For each source, or for meaningful groups of
+sources, explain the contribution and the relevance to the proposed work. Prefer peer-reviewed sources; justify the use of standards,
+technical reports, datasets, software documentation, or other non-peer-reviewed
+material when these are essential.
+
+\section{Timeline}
+\textbf{Maximum length: 1,000 characters.}
+
+Present a realistic timeline agreed with the supervisor. Organize it by dates
+or thesis months and define concrete milestones and deliverables, not only
+broad activities. Typical milestones may include completion of the focused
+literature review, confirmation of data or participant access, any required
+ethical or data-protection approval, finalization of the study design,
+implementation or data collection, analysis, evaluation, thesis drafting,
+revision, and submission.
+
+Include regular supervisory meetings, explicit feedback and revision cycles, and a
+reasonable buffer for unexpected delays. A compact table or Gantt-style summary may be used. 
+
+\section{Relevance to the Qualification Profile}
+\textbf{Maximum length: 800 characters.}
+
+In this section, briefly explain how the thesis contributes to the qualification profile of the relevant curriculum (see Section 2 of the curriculum). When referring to courses, do not simply list course titles; specify the knowledge, skills, or competencies from those courses that are relevant to the thesis.
+
+\bibliographystyle{splncs04}%
+\bibliography{literature}%
+
+\end{document}

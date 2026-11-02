@@ -1,0 +1,89 @@
+% Master's thesis proposal for Business Informatics and Data Science
+% at TU Wien (based on ProposalInstructions.tex).
+%
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[runningheads]{llncs}
+%
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage[final,hidelinks]{hyperref}
+\urlstyle{same}
+%
+\begin{document}
+%
+\title{A Quantitative Framework for Assessing the Empirical Adequacy of Markov Decision Process Models in Healthcare}
+%
+\titlerunning{Assessing the Adequacy of MDP Models in Healthcare}
+%
+\author{Florian Stadler\inst{1}}
+%
+\authorrunning{F. Stadler}
+%
+\institute{TU Wien, Student ID 11835945,
+  \email{e11835945@student.tuwien.ac.at}}
+%
+\maketitle
+%
+Supervisor: Andreas K\"orner, Institute of Analysis and Scientific Computing, TU Wien \\
+Co-supervisor (if applicable): Firstname Lastname, Research Unit, University
+
+\begin{abstract}
+Reinforcement learning (RL) studies in healthcare model clinical decisions as Markov decision processes (MDPs), yet rarely examine whether the chosen state, time grid, actions and reward are supported by the data. This thesis develops a framework that separates clinical formulation adequacy, empirical MDP adequacy and policy-learning feasibility, classifies the underlying assumptions by testability, and operationalises the testable ones as diagnostics with uncertainty quantification on interpretable scales. Instead of an aggregate score, the framework yields a diagnostic profile that localises violations and maps them to modelling remedies. The framework is evaluated on synthetic observational data generated from differential-equation models of intravenous anaesthesia, where the true process is known and violations can be injected in a controlled way, and is illustrated on existing healthcare datasets.
+
+\keywords{Markov decision process \and Reinforcement learning \and Healthcare \and Model diagnostics \and Observational data}
+\end{abstract}
+%
+\section{Introduction}
+Clinical treatment is often a sequence of interdependent decisions, such as titrating anaesthetics or vasopressors, where each choice changes the patient's future state and options. Markov decision processes (MDPs) and reinforcement learning (RL) offer a formal language for such problems~\cite{Puterman1994}, and RL on observational health records has attracted wide attention~\cite{Komorowski2018}. Every such study rests on a modelling step that is rarely examined: the clinical process, observed through irregular, incomplete measurements and recorded actions, is abstracted into a finite state, a fixed time grid, a discrete action set and a scalar reward, and is then assumed to be Markovian. If this abstraction is inadequate, conclusions about ``optimal'' treatments may reflect modelling artefacts rather than clinical reality. Existing guidance is largely qualitative~\cite{Gottesman2019}, and critiques of prominent sepsis studies show that results change substantially with the formulation~\cite{Jeter2019,Luo2024}. The broader concern, trustworthy data-driven support for sequential clinical decisions, exceeds a single thesis. This thesis addresses a bounded part of it: assessing, before any policy is learned, to what extent a given MDP formulation is supported by the available data.
+
+\section{Research Problem}
+Researchers who model a clinical decision problem as an MDP from observational data must choose a state representation, a decision-time grid, an action discretisation and a reward. Current practice assesses these choices qualitatively, if at all: guidelines pose questions such as whether the state captures all relevant information~\cite{Gottesman2019} without measures to answer them, and formulations are typically adopted from prior work without reporting whether the Markov, temporal or action assumptions hold. The consequences are observable. In more than 17,000 evaluation runs on a public sepsis dataset, conclusions about RL methods changed with the MDP formulation and evaluation metric, and in some settings random policies were not outperformed~\cite{Luo2024}. In preliminary work on public critical-care datasets, treatment variables were often missing or recorded only as sparse indicators, a limitation that existing guidelines do not allow to be quantified. Because violations are neither measured nor localised, researchers cannot tell whether poor or unstable results stem from a correctable formulation choice (e.g.\ a too coarse time grid or a state lacking relevant history) or from a fundamental lack of support. Existing quantitative tools address isolated aspects, namely a test of the Markov property~\cite{Shi2020}, positivity diagnostics~\cite{Petersen2012} and off-policy evaluation after training, but they do not cover temporal and action-related assumptions and do not separate model adequacy from the feasibility of learning a new policy. The baseline is therefore checklist-based assessment and isolated tests, which do not quantify the extent of a violation, do not attribute it to a modelling component, and do not indicate how a formulation should be revised.
+
+\section{Goals and expected results}
+The goal is a diagnostic framework that quantifies the extent to which observational data support a given MDP formulation of a clinical decision problem. Expected results are: (1) a formal specification of the observational decision process and of the MDP assumptions as an abstraction of it, distinguishing formulation adequacy, empirical model adequacy and policy-learning feasibility, with each assumption classified as testable, partially assessable or justification-dependent; (2) diagnostics for the testable assumptions (state sufficiency, temporal discretisation, action alignment and coverage, reward sufficiency, stationarity, transition estimability), each defined by an estimand, an estimator and an uncertainty interval; (3) a profile-based procedure mapping diagnostic patterns to modelling remedies without an aggregate score; and (4) evidence of the diagnostics' validity and of the remedies' effect. Compared with the baseline, the framework is expected to be better in that it quantifies, localises and remedies violations reproducibly. Pre-set success criteria on synthetic data: false-alarm rate $\le 0.05$ and power $\ge 0.8$ for violations of pre-defined moderate magnitude; Spearman $\rho \ge 0.5$ between diagnostics and true value errors; and a larger error reduction for recommended than for random revisions (95\% interval excluding zero).
+
+\section{Research Questions}
+\begin{description}
+  \item[RQ1] What detection power and false-alarm rate do the diagnostics achieve for controlled violations of state sufficiency, temporal discretisation, action alignment and reward sufficiency in synthetic clinical decision processes, depending on violation magnitude and sample size?
+  \item[RQ2] How strongly are the diagnostic values rank-correlated with the consequences of misspecification (value-estimation error, policy-value loss) when the true process is known?
+  \item[RQ3] By how much do formulations revised according to the framework's recommendations reduce the value-estimation error relative to the original formulation, compared with randomly revised formulations?
+\end{description}
+\emph{Measures.} RQ1: rejection rate at level $\alpha=0.05$ per violation type, magnitude and sample size (power), and on correctly specified data (false-alarm rate), compared with baseline indicators. RQ2: Spearman $\rho$ between diagnostics and true errors. RQ3: relative error reduction $(E_\mathrm{orig}-E_\mathrm{rev})/E_\mathrm{orig}$, recommended vs.\ random revision. All with 95\% bootstrap intervals; pre-set targets are given in Sect.~3.
+
+\section{Research Methodology}
+The thesis follows Design Science Research~\cite{Hevner2004,Peffers2007} with the framework as artefact and an evaluation strategy following FEDS~\cite{Venable2016}: artificial, summative evaluation on synthetic data (RQ1--3) and an illustrative application to existing data.
+\emph{Formalisation.} A targeted literature synthesis (MDP/POMDP theory, healthcare RL critiques, Markov testing, causal identification) yields an assumption inventory. The observational process is formalised via patient histories, irregular observations and recorded actions; a formulation is a tuple of state map, time grid, action map, reward and horizon. Each assumption is stated formally and classified by testability. Approximate information state theory~\cite{Subramanian2022} links the degree of Markov violation to bounds on value loss.
+\emph{Diagnostics.} Each testable assumption receives an estimand, estimator and uncertainty interval. Central is the cross-fitted history information gain: the gain in out-of-sample log-likelihood of the next state, reward or action when past history is added to the state, reported over lags and complemented by an existing test~\cite{Shi2020}. Further diagnostics address time-step sensitivity, within-step action changes, action coverage, stationarity and transition stability. Positivity is reported separately as a policy-learning diagnostic~\cite{Petersen2012}. Results are effect sizes with intervals; any thresholds undergo sensitivity analysis.
+\emph{Synthetic data.} Observational trajectories are generated from compartmental pharmacokinetic--pharmacodynamic differential-equation models of propofol anaesthesia~\cite{Schnider1998,Eleveld2018}, building on an open-source simulator~\cite{Aubouin2023}, with covariate-driven patient variability and simulated clinician dosing policies. Continuous-time ground truth allows controlled violations (hidden effect-site concentration, coarse sampling, aggregated infusion rates, delayed rewards, clinician information absent from the data) and exact computation of true errors. The design follows ADEMP~\cite{Morris2019}.
+\emph{Application.} The framework is applied to existing datasets or published formulations, selected by access, to illustrate interpretability.
+\emph{Validity.} Patient-level cross-fitting prevents leakage; several estimator classes separate absent violations from weak estimators. Code is released.
+
+\section{State-of-the-Art}
+MDP and POMDP theory~\cite{Puterman1994,Kaelbling1998} and clinical MDP modelling~\cite{Steimle2017} provide the formal basis; approximate information states~\cite{Subramanian2022} quantify the cost of imperfect state representations. In healthcare RL, Gottesman et al.~\cite{Gottesman2019} give qualitative guidelines, while critiques of sepsis studies~\cite{Jeter2019,Luo2024} show that conclusions depend on formulation and evaluation choices. Shi et al.~\cite{Shi2020} propose a test of the Markov property; Killian et al.~\cite{Killian2020} compare state representations for clinical RL. Causal inference contributes positivity diagnostics~\cite{Petersen2012} and shows that conditional independence testing has inherent limits~\cite{Shah2020}. In anaesthesia, differential-equation models of drug effect are well established~\cite{Schnider1998,Eleveld2018} and underlie RL dosing studies~\cite{Schamberg2022}, offering a ground truth rarely available elsewhere. None of these works organises the assumptions of the MDP abstraction into a quantitative, validated assessment that separates model adequacy from policy-learning feasibility.
+
+\section{Timeline}
+\noindent\begin{tabular}{@{}lp{0.85\textwidth}@{}}
+\toprule
+Month & Milestones and deliverables \\
+\midrule
+1 & Literature synthesis; formal framework and assumption taxonomy drafted \\
+2 & Diagnostics implemented; synthetic data generator built; ADEMP protocol fixed \\
+3 & Simulation study executed (RQ1, RQ2) \\
+4 & Remedy experiments (RQ3); illustrative application to existing data \\
+5 & Analysis; chapters on results and discussion drafted; feedback round \\
+6 & Revision of full draft, buffer (3 weeks), submission \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\noindent Supervisor meetings every two weeks; written feedback on the framework (end of month 2) and on the full draft (end of month 5).
+
+\section{Relevance to the Qualification Profile}
+The thesis applies core Data Science competencies: probabilistic modelling and statistical inference (formalising MDP assumptions, hypothesis tests, bootstrap uncertainty), machine learning (flexible conditional density and classification models, cross-fitting, leakage-free evaluation), and the design of reproducible simulation experiments based on differential-equation models. It further requires a responsible treatment of clinical data and communicating the limitations of data-driven decision support to an interdisciplinary audience, building directly on the preceding interdisciplinary project on modelling cardiac arrest as an MDP.
+
+\bibliographystyle{splncs04}%
+\bibliography{literature}%
+
+\end{document}
