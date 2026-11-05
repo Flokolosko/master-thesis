@@ -1,0 +1,236 @@
+{
+  "by_condition": [
+    {
+      "perturbation": "action_misalignment",
+      "level": 0.0,
+      "action_effect_gain": 0.43274150633051656,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5,
+      "interval_cv": 0.0,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "action_misalignment",
+      "level": 1.0,
+      "action_effect_gain": -0.00026377411007752965,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5,
+      "interval_cv": 0.0,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "action_misalignment",
+      "level": 2.0,
+      "action_effect_gain": -0.0003326084045000219,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5,
+      "interval_cv": 0.0,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "informative_missing",
+      "level": 0.0,
+      "action_effect_gain": 0.42668477651980974,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.4966481481481481,
+      "interval_cv": 0.0,
+      "missingness": 0.3006031746031746,
+      "obs_age_p90": 1.0
+    },
+    {
+      "perturbation": "informative_missing",
+      "level": 1.0,
+      "action_effect_gain": 0.404457011904933,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 1.0,
+      "interval_cv": 0.0,
+      "missingness": 0.32665873015873015,
+      "obs_age_p90": 2.0
+    },
+    {
+      "perturbation": "informative_missing",
+      "level": 2.0,
+      "action_effect_gain": 0.4039387944781764,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 1.0,
+      "interval_cv": 0.0,
+      "missingness": 0.3434761904761905,
+      "obs_age_p90": 3.3
+    },
+    {
+      "perturbation": "informative_missing",
+      "level": 3.0,
+      "action_effect_gain": 0.40312208410398886,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 1.0,
+      "interval_cv": 0.0,
+      "missingness": 0.3322063492063492,
+      "obs_age_p90": 1.0
+    },
+    {
+      "perturbation": "irregular_sampling",
+      "level": 0.0,
+      "action_effect_gain": 0.43274150633051656,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5,
+      "interval_cv": 0.0,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "irregular_sampling",
+      "level": 0.2,
+      "action_effect_gain": 0.2740990027240714,
+      "gap_traj_share": 0.11366666666666667,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.4857830687830688,
+      "interval_cv": 0.43764690216461516,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "irregular_sampling",
+      "level": 0.4,
+      "action_effect_gain": 0.16220486722531827,
+      "gap_traj_share": 0.526,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5100317460317461,
+      "interval_cv": 0.6088822836263063,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "irregular_sampling",
+      "level": 0.6,
+      "action_effect_gain": 0.08321984531654181,
+      "gap_traj_share": 0.274,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.4967936507936508,
+      "interval_cv": 0.7447034117950638,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "mcar_missing",
+      "level": 0.0,
+      "action_effect_gain": 0.43274150633051656,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5,
+      "interval_cv": 0.0,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "mcar_missing",
+      "level": 0.1,
+      "action_effect_gain": 0.43110714890552637,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5085925925925926,
+      "interval_cv": 0.0,
+      "missingness": 0.10123015873015873,
+      "obs_age_p90": 0.1
+    },
+    {
+      "perturbation": "mcar_missing",
+      "level": 0.3,
+      "action_effect_gain": 0.42668477651980974,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.4966481481481481,
+      "interval_cv": 0.0,
+      "missingness": 0.3006031746031746,
+      "obs_age_p90": 1.0
+    },
+    {
+      "perturbation": "mcar_missing",
+      "level": 0.5,
+      "action_effect_gain": 0.42874357381449235,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.4886190476190476,
+      "interval_cv": 0.0,
+      "missingness": 0.5012460317460318,
+      "obs_age_p90": 3.0
+    },
+    {
+      "perturbation": "timestamp_jitter_rounded",
+      "level": 0.0,
+      "action_effect_gain": 0.43274150633051656,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5,
+      "interval_cv": 0.0,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "timestamp_jitter_rounded",
+      "level": 0.1,
+      "action_effect_gain": 0.43274150633051656,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.5,
+      "interval_cv": 0.0,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    },
+    {
+      "perturbation": "timestamp_jitter_rounded",
+      "level": 0.3,
+      "action_effect_gain": 0.42319360032041853,
+      "gap_traj_share": 0.0,
+      "heaping_1": 1.0,
+      "inf_miss_auc": 0.47589947089947093,
+      "interval_cv": 0.4227951383423159,
+      "missingness": 0.0,
+      "obs_age_p90": 0.0
+    }
+  ],
+  "config": {
+    "seeds": 10,
+    "n_traj": 300,
+    "horizon": 20,
+    "drop_probs": [
+      0.0,
+      0.2,
+      0.4,
+      0.6
+    ],
+    "mcar_probs": [
+      0.0,
+      0.1,
+      0.3,
+      0.5
+    ],
+    "informative_strengths": [
+      0.0,
+      1.0,
+      2.0,
+      3.0
+    ],
+    "jitter_sd": [
+      0.0,
+      0.1,
+      0.3
+    ],
+    "action_shift": [
+      0,
+      1,
+      2
+    ]
+  },
+  "runtime_s": 50.9
+}

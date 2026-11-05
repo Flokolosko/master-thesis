@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+results/logs/
+proposal/*.aux
+proposal/*.log
+proposal/*.bbl
+proposal/*.blg
+proposal/*.fdb_latexmk
+proposal/*.fls
+proposal/.Rhistory

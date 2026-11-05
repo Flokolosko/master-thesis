@@ -1,0 +1,49 @@
+# Configuration of the controlled validation experiments.
+# Run: uv run python -m mdp_diagnostics.experiments.run <name> [--quick]
+
+overlap:
+  betas: [0.5, 1.0, 2.0, 4.0, 8.0]      # behaviour-policy sharpness (higher = more deterministic)
+  forbid_above: [null, 0.5, 0.0]        # hard support restriction of action 2 when x0 > threshold
+  n_traj: [100, 400]
+  seeds: 10
+  horizon: 10
+  target_lambda: 0.25                   # reference target policy (1-l) pi_b + l * uniform
+  mc: 20000                             # Monte-Carlo rollouts for the true policy value
+
+state:
+  latent_strengths: [0.0, 0.1, 0.2, 0.4, 0.8]
+  rho: 0.9
+  n_traj: [50, 100, 200, 400]
+  seeds: 20
+  horizon: 20
+  lags: 2
+  n_boot: 200
+  n_mult: 1000
+  mc: 20000
+  rollouts: 4000
+
+propofol:
+  decision_intervals: [2.0, 6.0]        # minutes
+  n_patients: [50, 150]
+  duration: 60.0
+  seeds: 5
+  lags: 2
+  models: [linear, gbm]
+  n_boot: 100
+  n_mult: 1000
+
+temporal:
+  seeds: 10
+  n_traj: 300
+  horizon: 20
+  drop_probs: [0.0, 0.2, 0.4, 0.6]
+  mcar_probs: [0.0, 0.1, 0.3, 0.5]
+  informative_strengths: [0.0, 1.0, 2.0, 3.0]
+  jitter_sd: [0.0, 0.1, 0.3]
+  action_shift: [0, 1, 2]
+
+quick:                                  # small settings for smoke tests
+  overlap: {betas: [1.0, 8.0], forbid_above: [null, 0.0], n_traj: [100], seeds: 2, mc: 3000}
+  state: {latent_strengths: [0.0, 0.8], n_traj: [100], seeds: 2, n_boot: 50, n_mult: 300, mc: 3000, rollouts: 1000}
+  propofol: {decision_intervals: [2.0], n_patients: [30], seeds: 1, models: [linear], n_boot: 50, n_mult: 300}
+  temporal: {seeds: 1, n_traj: 100}

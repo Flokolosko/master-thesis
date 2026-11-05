@@ -1,0 +1,42 @@
+# Case study: vasopressor (norepinephrine) titration in eICU sepsis patients.
+# Source: PhysioNet "Clinical Time Series Datasets for Trajectory Flow Matching Evaluation"
+# (doi:10.13026/pqe3-bv16), credentialed access. Data are NOT stored in this repository;
+# set data_dir (or the environment variable MDP_DIAG_DATA_DIR) to the local download.
+data_dir: ~/Coding/SS26/Interdisciplinary_project26/data/ICU Trajectories/physionet.org/files/clinical-trajectory-flow-icu/1.0.0
+file: eICU_sepsis_physionet.csv
+
+assessment:
+  schema:
+    id_col: HADM_ID
+    time_col: TIME_FROM_ADM          # minutes since ICU admission (first 24 h)
+    state_cols: [hr_normalized, map_normalized]
+    action_col: norepi_inf_scaled    # dose scaled by maximum dose (continuous)
+    action_type: continuous
+    outcome_col: HOSP_MORT
+  dt: 60.0                           # decision interval in minutes
+  impute: null                       # no imputation: empty grid steps break transitions (reported)
+  action_agg: mean
+  action_bins: 4                     # 0 = no norepinephrine, 3 dose quantile bins
+  terminal_reward: -1.0              # -1 for in-hospital death on the last transition
+  lags: 3
+  model: linear
+  n_boot: 300
+  seed: 0
+  clinical: {}                       # Level A/E answers require clinical experts; intentionally empty
+
+# Alternative formulations compared against the primary one (overrides of `assessment`).
+variants:
+  dt30: {dt: 30.0}
+  dt120: {dt: 120.0}
+  with_apache: {schema: {state_cols: [hr_normalized, map_normalized, apache]}}
+  gbm: {model: gbm, n_boot: 200}
+
+# Boundary case from the earlier cardiac-arrest feasibility work: no treatment variables.
+boundary_case:
+  file: eICU_cardiacArrest_physionet.csv
+  max_trajectories: 5000
+  schema:
+    id_col: HADM_ID
+    time_col: TIME_FROM_ADM
+    state_cols: [hr_normalized, dbp_normalized, rr_normalized]
+    outcome_col: HOSP_MORT

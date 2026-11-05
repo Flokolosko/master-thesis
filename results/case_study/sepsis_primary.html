@@ -1,0 +1,217 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>MDP feasibility report</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:24px auto;max-width:1100px;padding:0 16px;color:#1d2433;background:#fff}
+h1{font-size:1.5rem}h2{font-size:1.2rem;margin-top:2rem;border-bottom:1px solid #ddd;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}td,th{border-bottom:1px solid #eee;padding:6px;vertical-align:top;text-align:left}
+.s{font-weight:600;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.no_concern_detected{background:#e3f4e8}.concern{background:#fff1cc}.serious_concern{background:#fbd5d5}
+.inconclusive{background:#e8e8f4}.not_assessable{background:#eee}.expert_judgement_required{background:#e0eefc}
+.disc{background:#f6f6f6;padding:10px;border-left:4px solid #999;font-size:.9rem}details{font-size:.85rem}
+pre{white-space:pre-wrap}
+</style></head><body>
+<h1>MDP / offline-RL feasibility report</h1>
+<p class="disc">This report summarises statistical diagnostics of observational data. It does not establish causal identifiability, clinical validity or safety of any model or policy. 'No concern detected' means only that the diagnostics found no evidence of a problem with the given data, model class and power.</p>
+<p>Generated 2026-11-05T10:08:07+00:00 &middot; 3362 trajectories, 147212 rows &middot;
+status counts: <span class="s no_concern_detected">no_concern_detected: 11</span> <span class="s concern">concern: 5</span> <span class="s inconclusive">inconclusive: 1</span> <span class="s serious_concern">serious_concern: 1</span> <span class="s not_assessable">not_assessable: 1</span> <span class="s expert_judgement_required">expert_judgement_required: 11</span> </p>
+
+<h2>Level A &mdash; Clinical problem suitability</h2><p><em>Question A: Is the problem/formulation appropriate for MDP modelling?</em></p>
+<table><tr><th>Criterion</th><th>Status</th><th>Interpretation</th><th>Next step</th></tr>
+<tr><td>Observed action multiplicity<br><small>A.action_multiplicity &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>4 action levels used in >= 1% of decisions; 83.8% of trajectories change action at least once.
+<details><summary>metrics</summary><pre>n_actions_used: 4 levels
+share_trajectories_with_action_change: 0.8381915526472338 
+</pre></details>
+
+</td><td>If treatment rarely changes within a trajectory, a single-step (bandit/causal) formulation may suffice.</td></tr><tr><td>Delayed treatment effects (data proxy)<br><small>A.delayed_effects &middot; evidence: data</small></td>
+<td><span class="s inconclusive">inconclusive</span></td><td>No clear delayed effect of past actions: No relevant dependence detected (gain = -0.0003 nats [-0.0005, -0.0001]; threshold 0.01).
+<details><summary>metrics</summary><pre>delayed_action_effect_gain: -0.0002869272368258593 nats/transition [-0.0005231772342616485, -5.1448185519718334e-05]
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).</li><li>Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.</li><li>Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.</li><li>Transitions are pooled over time (time-homogeneity is assessed separately).</li></ul></details>
+</td><td>Delayed effects support a sequential formulation but require them to be represented in the state (e.g. cumulative dose).</td></tr><tr><td>Are there repeated decision points whose choices affect later options?<br><small>A.meta.sequential_decisions &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Are at least two clinically acceptable actions available at typical decision points?<br><small>A.meta.multiple_feasible_actions &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is the patient response to treatment variable/uncertain?<br><small>A.meta.stochastic_response &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Do actions have delayed effects or long-term consequences?<br><small>A.meta.delayed_effects &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is there a trade-off between immediate and long-term outcomes?<br><small>A.meta.tradeoffs &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is the reward a clinically endorsed proxy of the treatment goal?<br><small>A.meta.reward_alignment &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr></table>
+<h2>Level B &mdash; MDP formulation validity</h2><p><em>Question A: Is the problem/formulation appropriate for MDP modelling?</em></p>
+<table><tr><th>Criterion</th><th>Status</th><th>Interpretation</th><th>Next step</th></tr>
+<tr><td>Decision interval vs. decision frequency<br><small>B.decision_interval &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>6.3% of grid steps aggregate more than one distinct raw action (dt = 60).
+<details><summary>metrics</summary><pre>within_step_action_changes: 0.0632742490636988 share of grid steps
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Raw action values are recorded at their true times.</li></ul></details>
+</td><td>Use a finer grid or event-driven epochs if many decisions are aggregated; compare diagnostics across dt.</td></tr><tr><td>Recorded actions affect the next state (alignment)<br><small>B.action_alignment &middot; evidence: data</small></td>
+<td><span class="s concern">concern</span></td><td>Recorded actions carry little information about the next state: No relevant dependence detected (gain = 0.0005 nats [0.0001, 0.0009]; threshold 0.01).
+<details><summary>metrics</summary><pre>action_effect_gain: 0.0005385598592249058 nats/transition [0.00011751584986963107, 0.0008850986765835032]
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).</li><li>Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.</li><li>Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.</li><li>Interpretation requires prior knowledge that the action affects the state within one interval.</li></ul></details>
+</td><td>If actions should act within one interval, check timestamp alignment of treatments vs. observations and the decision interval.</td></tr><tr><td>State sufficiency (Markov property w.r.t. recorded history)<br><small>B.state_sufficiency &middot; evidence: data</small></td>
+<td><span class="s concern">concern</span></td><td>Relevant dependence detected (gain = 0.0856 nats [0.0789, 0.0926], GCM p = 0.0005; threshold 0.01).
+<details><summary>metrics</summary><pre>history_gain[state]: 0.08555395699412918 nats/transition [0.07891012630945715, 0.09260295647207874]
+history_gcm[state]: 29.77508031746974 max |T| p=0.0004997501249375312
+history_gain[state]: 0.06639487943755129 nats/transition
+history_gain[state]: 0.08148398592055821 nats/transition
+history_gain[state]: 0.08555395699412918 nats/transition
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).</li><li>Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.</li><li>Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.</li><li>No conditional-independence test has power against all alternatives; non-rejection is not evidence of Markovianity.</li><li>Trajectories are independent; dependence within a trajectory is handled by clustering.</li><li>Transitions are pooled over time (time-homogeneity is assessed separately).</li><li>Validity requires the regressions on the conditioning set to be consistent (Shah & Peters, 2020).</li></ul></details>
+</td><td>Augment the state with the lags/aggregates that carry the gain (see lag profile), or use a belief state / recurrent representation; partial observability is likely.</td></tr><tr><td>Reward depends only on (s, a, s')<br><small>B.reward_sufficiency &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>No relevant dependence detected (gain = -0.0001 nats [-0.0003, 0.0001], GCM p = 0.025; threshold 0.01). Dependence is statistically detectable but below the relevance threshold.
+<details><summary>metrics</summary><pre>history_gain[reward]: -0.00010674181060759994 nats/transition [-0.00031638214590967636, 8.64770432268577e-05]
+history_gcm[reward]: 3.179760888089335 max |T| p=0.02498750624687656
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).</li><li>Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.</li><li>Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.</li><li>No conditional-independence test has power against all alternatives; non-rejection is not evidence of Markovianity.</li><li>Trajectories are independent; dependence within a trajectory is handled by clustering.</li><li>Transitions are pooled over time (time-homogeneity is assessed separately).</li><li>Validity requires the regressions on the conditioning set to be consistent (Shah & Peters, 2020).</li></ul></details>
+</td><td></td></tr><tr><td>Time-homogeneous dynamics<br><small>B.stationarity &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>No relevant dependence detected (gain = 0.0014 nats [0.0010, 0.0019]; threshold 0.01).
+<details><summary>metrics</summary><pre>time_inhomogeneity_gain: 0.0014189125997348874 nats/transition [0.0009512693700452009, 0.0018810545699601091]
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).</li><li>Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.</li><li>Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.</li><li>Non-stationarity is only detected along decision step / elapsed time.</li></ul></details>
+</td><td></td></tr><tr><td>Transition dynamics estimable and stochastic<br><small>B.transition_estimability &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>Epistemic/aleatoric ratio = 0.014. Out-of-fold R^2 of next state: [0.835, 0.241] (values near 1 = nearly deterministic).
+<details><summary>metrics</summary><pre>transition_epistemic_ratio: 0.013690506260773075 bootstrap SD / residual SD
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Linear-in-features transition model; estimability of richer models can differ.</li></ul></details>
+</td><td>Coarsen the state/action space or collect more trajectories if dynamics are poorly determined.</td></tr></table>
+<h2>Level C &mdash; Dataset suitability (temporal data quality)</h2><p><em>Question B: Does the dataset support offline RL?</em></p>
+<table><tr><th>Criterion</th><th>Status</th><th>Interpretation</th><th>Next step</th></tr>
+<tr><td>State completeness<br><small>C.missingness &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>0.0% of state values missing on decision rows.
+<details><summary>metrics</summary><pre>state_missingness: 0.0 share of missing state values
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Counts missing cells on the decision rows provided; absent rows are not counted (see sampling intervals).</li></ul></details>
+</td><td>Consider a POMDP/belief-state formulation or explicit missingness indicators; never impute silently.</td></tr><tr><td>Sampling regularity and fragmentation<br><small>C.sampling &middot; evidence: data</small></td>
+<td><span class="s concern">concern</span></td><td>Interval CV = 1.45; 91.3% of trajectories contain gaps > 3x median interval.
+<details><summary>metrics</summary><pre>sampling_interval_cv: 1.4479056025675618 CV of inter-decision intervals (0 = regular grid)
+</pre></details>
+<details><summary>assumptions</summary><ul><li>A gap is an interval longer than 3 x the median interval.</li></ul></details>
+</td><td>Consider event-driven decision epochs (semi-MDP) or splitting trajectories at gaps.</td></tr><tr><td>Timestamp precision (heaping)<br><small>C.timestamps &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>2.0% of timestamps on multiples of the largest unit; interpret against the dataset's native grid.
+<details><summary>metrics</summary><pre>timestamp_heaping: 0.020304051300165746 share of times on multiples of 60
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Heaping can also be a deliberate grid of the source dataset.</li><li>Time unit of the data must be known (e.g. minutes).</li></ul></details>
+</td><td>Do not choose a decision interval finer than the effective timestamp resolution.</td></tr><tr><td>State freshness at decision times<br><small>C.alignment &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>90th percentile of observation age: 0 time units.
+<details><summary>metrics</summary><pre>observation_age_p90: 0.0 time units since last observation (90th pct over variables/decisions)
+action_change_without_observation: 0.0 share of action changes
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Assumes state and action share the row's timestamp.</li><li>Missing cells are treated as 'not measured at this time', not as data errors.</li></ul></details>
+</td><td>Compare observation age with the decision interval; stale states blur state-action ordering.</td></tr><tr><td>Informative observation process<br><small>C.informative_missingness &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>Outcome AUC from measurement patterns = 0.50 [0.47, 0.52].
+<details><summary>metrics</summary><pre>informative_missingness_outcome_auc: 0.5009781852857412 AUC [0.4729486068335833, 0.523822765204864]
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Association only; informative measurement can reflect clinician suspicion (confounding by indication).</li></ul></details>
+</td><td>If informative, include measurement indicators/times in the state and treat missingness as MNAR in sensitivity analyses.</td></tr><tr><td>Trajectory length<br><small>C.length &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>Median 37 rows; 1.2% shorter than 3.
+<details><summary>metrics</summary><pre>trajectory_length_median: 37.0 decision rows
+</pre></details>
+
+</td><td></td></tr></table>
+<h2>Level D &mdash; Offline RL feasibility</h2><p><em>Question B: Does the dataset support offline RL?</em></p>
+<table><tr><th>Criterion</th><th>Status</th><th>Interpretation</th><th>Next step</th></tr>
+<tr><td>Action overlap / positivity<br><small>D.overlap &middot; evidence: data</small></td>
+<td><span class="s concern">concern</span></td><td>0.0% [0.0%, 0.0%] of decisions have some action with pi_b < 0.01; mean normalised action entropy 0.97. With a history-aware behaviour model (state + 3 lags): 20.3% of decisions violate support, entropy 0.30; the state-only figures are over-optimistic if these differ.
+<details><summary>metrics</summary><pre>support_violation_rate: 0.0 share of decisions [0.0, 0.0]
+normalised_action_entropy: 0.9712718592048213 0 (deterministic) .. 1 (uniform) [0.9707620644415405, 0.9718917971101386]
+observed_action_propensity: 0.172468669952086 5th percentile of pi_b(a_obs|s)
+behaviour_calibration_ece: 0.003635256019201295 expected calibration error
+knn_locally_deterministic_share: 0.0 share of decisions
+action_overlap_index: 1.0 share of supported actions
+support_violation_rate[history-aware]: 0.20291499389073137 share of decisions [0.19506107572237122, 0.21050818305727084]
+normalised_action_entropy[history-aware]: 0.3004973349747819 0 (deterministic) .. 1 (uniform) [0.2991679649215361, 0.3019509716763313]
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Calibration is measured out-of-fold over all (decision, action) pairs.</li><li>Depends on |A| and epsilon; not comparable across action discretisations.</li><li>Euclidean distance on standardised states is a meaningful similarity.</li><li>Neighbourhoods become uninformative in high-dimensional state spaces.</li><li>Positivity is assessed relative to the recorded state only (no statement about unmeasured confounders).</li><li>Probabilities near the threshold are estimation-noise dominated; see the threshold sensitivity curve.</li><li>Results depend on the behaviour-policy model; misspecification can hide or exaggerate support problems.</li></ul></details>
+</td><td>Restrict candidate policies to supported actions, coarsen actions, or use pessimistic/constrained offline RL.</td></tr><tr><td>State-action coverage<br><small>D.coverage &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>Occupancy-weighted share of supported actions = 1.00; 0.1% of decisions lie in under-supported (cluster, action) cells.
+<details><summary>metrics</summary><pre>occupancy_weighted_support: 0.9992433622231394 mean share of supported actions
+esac: 0.955 share of (cluster, action) cells
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Depends on the clustering granularity and N_min; cells are unweighted.</li><li>Result should be checked for sensitivity to n_clusters and n_min.</li><li>State clusters approximate regions of similar patients.</li></ul></details>
+</td><td>Check sensitivity to n_clusters/n_min; consider coarser state abstraction.</td></tr><tr><td>Importance-sampling OPE reliability (pre-training)<br><small>D.ope_reliability &middot; evidence: data</small></td>
+<td><span class="s serious_concern">serious_concern</span></td><td>For a reference policy deviating by lambda=0.25 from practice: ESS share = 0.332, Pareto-k = 0.58. History-aware behaviour model: ESS share = 0.001, Pareto-k = 1.34.
+<details><summary>metrics</summary><pre>is_ess_share[mix_uniform_0.05]: 0.9651976034037082 ESS / n_trajectories
+is_ess_share[mix_uniform_0.1]: 0.8649996537672683 ESS / n_trajectories
+is_ess_share[mix_uniform_0.25]: 0.3323866673814504 ESS / n_trajectories
+is_ess_share[mix_uniform_0.5]: 0.018121669946212712 ESS / n_trajectories
+is_ess_share[mix_uniform_1]: 0.0013457159733100286 ESS / n_trajectories
+is_ess_share[mix_uniform_0.05][history-aware]: 0.3999200028451984 ESS / n_trajectories
+is_ess_share[mix_uniform_0.1][history-aware]: 0.05635933951774667 ESS / n_trajectories
+is_ess_share[mix_uniform_0.25][history-aware]: 0.0009039685426665199 ESS / n_trajectories
+is_ess_share[mix_uniform_0.5][history-aware]: 0.00037312432243199545 ESS / n_trajectories
+is_ess_share[mix_uniform_1][history-aware]: 0.0003607851041536566 ESS / n_trajectories
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Diagnostics describe variance/stability of IS-type estimators, not their bias.</li><li>Importance weights use the estimated behaviour policy; its errors propagate into the weights.</li><li>Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS).</li><li>Weights are only valid under sequential exchangeability given the recorded state (untestable from data).</li></ul></details>
+</td><td>Prefer model-based/FQE estimates with uncertainty, restrict deviation from practice, or shorten horizons.</td></tr><tr><td>Behaviour policy depends on unrecorded/historical information (symptom)<br><small>D.behaviour_history &middot; evidence: data</small></td>
+<td><span class="s concern">concern</span></td><td>Relevant dependence detected (gain = 0.9502 nats [0.9382, 0.9613]; threshold 0.01). A positive gain means clinicians use information beyond the current state, a symptom (not proof) of potential confounding.
+<details><summary>metrics</summary><pre>history_gain[action]: 0.9501796609003998 nats/transition [0.9382055019754494, 0.96125853396002]
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).</li><li>Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.</li><li>Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.</li><li>Transitions are pooled over time (time-homogeneity is assessed separately).</li></ul></details>
+</td><td>Include the predictive history in the state used for propensity models; plan confounding sensitivity analyses.</td></tr><tr><td>No unmeasured confounding (sequential exchangeability)<br><small>D.unmeasured_confounding &middot; evidence: none</small></td>
+<td><span class="s not_assessable">not_assessable</span></td><td>Not testable from observational data alone.
+
+
+</td><td>Use clinical knowledge to list plausible unrecorded confounders; run sensitivity analyses (e.g. marginal sensitivity models) and negative-control checks.</td></tr></table>
+<h2>Level E &mdash; Safety and deployment readiness (qualitative)</h2><p><em>Deployment prerequisites (outside the scope of data diagnostics)</em></p>
+<table><tr><th>Criterion</th><th>Status</th><th>Interpretation</th><th>Next step</th></tr>
+<tr><td>Can hard clinical constraints (contraindications, dose limits) be specified?<br><small>E.meta.constraints_definable &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Are interpretability requirements for recommendations defined?<br><small>E.meta.interpretability_required &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is there a defined fallback (e.g. standard of care) policy?<br><small>E.meta.fallback_policy &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Are out-of-distribution safeguards planned?<br><small>E.meta.ood_safeguards &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is clinician oversight of recommendations ensured?<br><small>E.meta.clinician_oversight &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr></table>
+<h2>Data and preprocessing</h2><pre>[
+  {
+    "action_agg": "mean",
+    "dt": 60.0,
+    "impute": null,
+    "n_bins": 77182,
+    "n_empty_bins": 11231,
+    "step": "resample_to_grid"
+  },
+  {
+    "n_levels": 4,
+    "source": "norepi_inf_scaled",
+    "step": "discretize_actions",
+    "target": "norepi_inf_scaled_bin"
+  },
+  {
+    "outcome": "HOSP_MORT",
+    "scale": -1.0,
+    "step": "add_terminal_outcome_reward"
+  }
+]</pre>
+<h2>Validation issues</h2><ul></ul>
+</body></html>

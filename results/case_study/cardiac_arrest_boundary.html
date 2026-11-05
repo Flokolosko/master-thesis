@@ -1,0 +1,107 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>MDP feasibility report</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:24px auto;max-width:1100px;padding:0 16px;color:#1d2433;background:#fff}
+h1{font-size:1.5rem}h2{font-size:1.2rem;margin-top:2rem;border-bottom:1px solid #ddd;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}td,th{border-bottom:1px solid #eee;padding:6px;vertical-align:top;text-align:left}
+.s{font-weight:600;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.no_concern_detected{background:#e3f4e8}.concern{background:#fff1cc}.serious_concern{background:#fbd5d5}
+.inconclusive{background:#e8e8f4}.not_assessable{background:#eee}.expert_judgement_required{background:#e0eefc}
+.disc{background:#f6f6f6;padding:10px;border-left:4px solid #999;font-size:.9rem}details{font-size:.85rem}
+pre{white-space:pre-wrap}
+</style></head><body>
+<h1>MDP / offline-RL feasibility report</h1>
+<p class="disc">This report summarises statistical diagnostics of observational data. It does not establish causal identifiability, clinical validity or safety of any model or policy. 'No concern detected' means only that the diagnostics found no evidence of a problem with the given data, model class and power.</p>
+<p>Generated 2026-11-05T10:08:56+00:00 &middot; 5000 trajectories, 129256 rows &middot;
+status counts: <span class="s no_concern_detected">no_concern_detected: 5</span> <span class="s concern">concern: 1</span> <span class="s serious_concern">serious_concern: 1</span> <span class="s expert_judgement_required">expert_judgement_required: 11</span> </p>
+
+<h2>Level A &mdash; Clinical problem suitability</h2><p><em>Question A: Is the problem/formulation appropriate for MDP modelling?</em></p>
+<table><tr><th>Criterion</th><th>Status</th><th>Interpretation</th><th>Next step</th></tr>
+<tr><td>Actions recorded<br><small>A.actions &middot; evidence: data</small></td>
+<td><span class="s serious_concern">serious_concern</span></td><td>No action variable available: the decision process cannot be modelled as an MDP from these data.
+
+
+</td><td>Identify a source of time-stamped treatment data before any MDP/RL modelling.</td></tr><tr><td>Are there repeated decision points whose choices affect later options?<br><small>A.meta.sequential_decisions &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Are at least two clinically acceptable actions available at typical decision points?<br><small>A.meta.multiple_feasible_actions &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is the patient response to treatment variable/uncertain?<br><small>A.meta.stochastic_response &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Do actions have delayed effects or long-term consequences?<br><small>A.meta.delayed_effects &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is there a trade-off between immediate and long-term outcomes?<br><small>A.meta.tradeoffs &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is the reward a clinically endorsed proxy of the treatment goal?<br><small>A.meta.reward_alignment &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr></table>
+<h2>Level C &mdash; Dataset suitability (temporal data quality)</h2><p><em>Question B: Does the dataset support offline RL?</em></p>
+<table><tr><th>Criterion</th><th>Status</th><th>Interpretation</th><th>Next step</th></tr>
+<tr><td>State completeness<br><small>C.missingness &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>0.0% of state values missing on decision rows.
+<details><summary>metrics</summary><pre>state_missingness: 0.0 share of missing state values
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Counts missing cells on the decision rows provided; absent rows are not counted (see sampling intervals).</li></ul></details>
+</td><td>Consider a POMDP/belief-state formulation or explicit missingness indicators; never impute silently.</td></tr><tr><td>Sampling regularity and fragmentation<br><small>C.sampling &middot; evidence: data</small></td>
+<td><span class="s concern">concern</span></td><td>Interval CV = 1.44; 74.8% of trajectories contain gaps > 3x median interval.
+<details><summary>metrics</summary><pre>sampling_interval_cv: 1.4362005375258784 CV of inter-decision intervals (0 = regular grid)
+</pre></details>
+<details><summary>assumptions</summary><ul><li>A gap is an interval longer than 3 x the median interval.</li></ul></details>
+</td><td>Consider event-driven decision epochs (semi-MDP) or splitting trajectories at gaps.</td></tr><tr><td>Timestamp precision (heaping)<br><small>C.timestamps &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>1.8% of timestamps on multiples of the largest unit; interpret against the dataset's native grid.
+<details><summary>metrics</summary><pre>timestamp_heaping: 0.018250603453611437 share of times on multiples of 60
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Heaping can also be a deliberate grid of the source dataset.</li><li>Time unit of the data must be known (e.g. minutes).</li></ul></details>
+</td><td>Do not choose a decision interval finer than the effective timestamp resolution.</td></tr><tr><td>State freshness at decision times<br><small>C.alignment &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>90th percentile of observation age: 0 time units.
+<details><summary>metrics</summary><pre>observation_age_p90: 0.0 time units since last observation (90th pct over variables/decisions)
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Missing cells are treated as 'not measured at this time', not as data errors.</li></ul></details>
+</td><td>Compare observation age with the decision interval; stale states blur state-action ordering.</td></tr><tr><td>Informative observation process<br><small>C.informative_missingness &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>Outcome AUC from measurement patterns = 0.57 [0.54, 0.60].
+<details><summary>metrics</summary><pre>informative_missingness_outcome_auc: 0.5718066801162622 AUC [0.5416160440552966, 0.6012169670559956]
+</pre></details>
+<details><summary>assumptions</summary><ul><li>Association only; informative measurement can reflect clinician suspicion (confounding by indication).</li></ul></details>
+</td><td>If informative, include measurement indicators/times in the state and treat missingness as MNAR in sensitivity analyses.</td></tr><tr><td>Trajectory length<br><small>C.length &middot; evidence: data</small></td>
+<td><span class="s no_concern_detected">no_concern_detected</span></td><td>Median 23 rows; 4.0% shorter than 3.
+<details><summary>metrics</summary><pre>trajectory_length_median: 23.0 decision rows
+</pre></details>
+
+</td><td></td></tr></table>
+<h2>Level E &mdash; Safety and deployment readiness (qualitative)</h2><p><em>Deployment prerequisites (outside the scope of data diagnostics)</em></p>
+<table><tr><th>Criterion</th><th>Status</th><th>Interpretation</th><th>Next step</th></tr>
+<tr><td>Can hard clinical constraints (contraindications, dose limits) be specified?<br><small>E.meta.constraints_definable &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Are interpretability requirements for recommendations defined?<br><small>E.meta.interpretability_required &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is there a defined fallback (e.g. standard of care) policy?<br><small>E.meta.fallback_policy &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Are out-of-distribution safeguards planned?<br><small>E.meta.ood_safeguards &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr><tr><td>Is clinician oversight of recommendations ensured?<br><small>E.meta.clinician_oversight &middot; evidence: metadata</small></td>
+<td><span class="s expert_judgement_required">expert_judgement_required</span></td><td>Not answered; requires clinical expert assessment.
+
+
+</td><td>Document the clinical rationale and its source.</td></tr></table>
+<h2>Data and preprocessing</h2><pre>[]</pre>
+<h2>Validation issues</h2><ul><li>warning: No action column: MDP and offline-RL diagnostics are not assessable.</li></ul>
+</body></html>

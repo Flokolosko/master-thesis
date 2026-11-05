@@ -1,0 +1,376 @@
+{
+  "by_condition": [
+    {
+      "decision_interval": 2.0,
+      "n_patients": 50,
+      "representation": "bis_covariates",
+      "model": "gbm",
+      "gain": 0.08908219448475954,
+      "gain_lower": 0.05244900515768029,
+      "gain_upper": 0.12314987093899254,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 50,
+      "representation": "bis_covariates",
+      "model": "linear",
+      "gain": 0.06309200475934137,
+      "gain_lower": 0.04579507829738796,
+      "gain_upper": 0.08039353658981405,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 50,
+      "representation": "bis_only",
+      "model": "gbm",
+      "gain": 0.07764913523624786,
+      "gain_lower": 0.05578461335954647,
+      "gain_upper": 0.1006213967992687,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 50,
+      "representation": "bis_only",
+      "model": "linear",
+      "gain": 0.07140529714834214,
+      "gain_lower": 0.0526323816898284,
+      "gain_upper": 0.08960361917922452,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 50,
+      "representation": "bis_prev_action",
+      "model": "gbm",
+      "gain": 0.1383456080048166,
+      "gain_lower": 0.11631115123852634,
+      "gain_upper": 0.1589710495279531,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 50,
+      "representation": "bis_prev_action",
+      "model": "linear",
+      "gain": 0.1475092718908404,
+      "gain_lower": 0.12231211202951715,
+      "gain_upper": 0.1679788881661777,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 50,
+      "representation": "full_compartments",
+      "model": "gbm",
+      "gain": 0.31531648100850396,
+      "gain_lower": 0.23600742701192656,
+      "gain_upper": 0.3975644617182711,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 50,
+      "representation": "full_compartments",
+      "model": "linear",
+      "gain": 0.7494792944587227,
+      "gain_lower": 0.5035912044564113,
+      "gain_upper": 0.9997906172548456,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 150,
+      "representation": "bis_covariates",
+      "model": "gbm",
+      "gain": 0.12079718585673853,
+      "gain_lower": 0.10108345830980073,
+      "gain_upper": 0.13873314452649474,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 150,
+      "representation": "bis_covariates",
+      "model": "linear",
+      "gain": 0.06808098041349123,
+      "gain_lower": 0.055144008898888354,
+      "gain_upper": 0.07900603216466937,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 150,
+      "representation": "bis_only",
+      "model": "gbm",
+      "gain": 0.09955263613715831,
+      "gain_lower": 0.08469519094759086,
+      "gain_upper": 0.11322538569483993,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 150,
+      "representation": "bis_only",
+      "model": "linear",
+      "gain": 0.07418016764721588,
+      "gain_lower": 0.06044923298462383,
+      "gain_upper": 0.08575735786288893,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 150,
+      "representation": "bis_prev_action",
+      "model": "gbm",
+      "gain": 0.1657079955595936,
+      "gain_lower": 0.15076381654852625,
+      "gain_upper": 0.18123428998454832,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 150,
+      "representation": "bis_prev_action",
+      "model": "linear",
+      "gain": 0.15593356416875975,
+      "gain_lower": 0.14029036055730615,
+      "gain_upper": 0.1700721258281646,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 150,
+      "representation": "full_compartments",
+      "model": "gbm",
+      "gain": 0.45885883981982295,
+      "gain_lower": 0.38072058331769654,
+      "gain_upper": 0.5332018252262462,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 2.0,
+      "n_patients": 150,
+      "representation": "full_compartments",
+      "model": "linear",
+      "gain": 0.7974473537397453,
+      "gain_lower": 0.6207472175569284,
+      "gain_upper": 0.9552307647794978,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 50,
+      "representation": "bis_covariates",
+      "model": "gbm",
+      "gain": 0.4054081988224617,
+      "gain_lower": 0.2843663310618937,
+      "gain_upper": 0.5423942324966797,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 50,
+      "representation": "bis_covariates",
+      "model": "linear",
+      "gain": 0.5257831221527945,
+      "gain_lower": 0.4080124278410368,
+      "gain_upper": 0.64289958586994,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 50,
+      "representation": "bis_only",
+      "model": "gbm",
+      "gain": 0.4330828433148214,
+      "gain_lower": 0.35680702244790585,
+      "gain_upper": 0.5130435506158288,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 50,
+      "representation": "bis_only",
+      "model": "linear",
+      "gain": 0.5893678345720644,
+      "gain_lower": 0.48399795806081725,
+      "gain_upper": 0.6981629616544354,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 50,
+      "representation": "bis_prev_action",
+      "model": "gbm",
+      "gain": 0.05749895238371681,
+      "gain_lower": -0.003297495326562043,
+      "gain_upper": 0.12245238891933019,
+      "gcm_p": 0.003796203796203796,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 50,
+      "representation": "bis_prev_action",
+      "model": "linear",
+      "gain": 0.16984824975007815,
+      "gain_lower": 0.11650714846699362,
+      "gain_upper": 0.2199336558720605,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 50,
+      "representation": "full_compartments",
+      "model": "gbm",
+      "gain": 0.22175568518819028,
+      "gain_lower": 0.06985560067162805,
+      "gain_upper": 0.3692434662651838,
+      "gcm_p": 0.002197802197802198,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 50,
+      "representation": "full_compartments",
+      "model": "linear",
+      "gain": 0.8260166285029404,
+      "gain_lower": 0.3613821428595417,
+      "gain_upper": 1.2068072202646345,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 150,
+      "representation": "bis_covariates",
+      "model": "gbm",
+      "gain": 0.5209056668089296,
+      "gain_lower": 0.43263781309706034,
+      "gain_upper": 0.6115745176959919,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 150,
+      "representation": "bis_covariates",
+      "model": "linear",
+      "gain": 0.5429568133149021,
+      "gain_lower": 0.47294990258933145,
+      "gain_upper": 0.6074312003921192,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 150,
+      "representation": "bis_only",
+      "model": "gbm",
+      "gain": 0.5053087283968264,
+      "gain_lower": 0.44085304059427133,
+      "gain_upper": 0.5601370672279748,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 150,
+      "representation": "bis_only",
+      "model": "linear",
+      "gain": 0.6002513987015241,
+      "gain_lower": 0.5348139559799941,
+      "gain_upper": 0.666581890196885,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 150,
+      "representation": "bis_prev_action",
+      "model": "gbm",
+      "gain": 0.14144051228598034,
+      "gain_lower": 0.10216637164223359,
+      "gain_upper": 0.17774504625770576,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 150,
+      "representation": "bis_prev_action",
+      "model": "linear",
+      "gain": 0.19778435581322537,
+      "gain_lower": 0.16508927838273127,
+      "gain_upper": 0.22970290454208825,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 150,
+      "representation": "full_compartments",
+      "model": "gbm",
+      "gain": 0.25751547101227296,
+      "gain_lower": 0.10930043484033918,
+      "gain_upper": 0.39149470043239576,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    },
+    {
+      "decision_interval": 6.0,
+      "n_patients": 150,
+      "representation": "full_compartments",
+      "model": "linear",
+      "gain": 1.211809018110142,
+      "gain_lower": 0.9583499447646739,
+      "gain_upper": 1.486883837722574,
+      "gcm_p": 0.000999000999000999,
+      "reject": 1.0
+    }
+  ],
+  "config": {
+    "decision_intervals": [
+      2.0,
+      6.0
+    ],
+    "n_patients": [
+      50,
+      150
+    ],
+    "duration": 60.0,
+    "seeds": 5,
+    "lags": 2,
+    "models": [
+      "linear",
+      "gbm"
+    ],
+    "n_boot": 100,
+    "n_mult": 1000
+  },
+  "runtime_s": 492.3
+}

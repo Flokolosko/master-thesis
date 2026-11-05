@@ -1,0 +1,1719 @@
+{
+  "generated": "2026-11-05T10:08:07+00:00",
+  "disclaimer": "This report summarises statistical diagnostics of observational data. It does not establish causal identifiability, clinical validity or safety of any model or policy. 'No concern detected' means only that the diagnostics found no evidence of a problem with the given data, model class and power.",
+  "data": {
+    "n_trajectories": 3362,
+    "n_rows": 147212,
+    "schema": {
+      "id_col": "HADM_ID",
+      "time_col": "TIME_FROM_ADM",
+      "state_cols": [
+        "hr_normalized",
+        "map_normalized"
+      ],
+      "action_col": "norepi_inf_scaled",
+      "action_type": "continuous",
+      "reward_col": null,
+      "outcome_col": "HOSP_MORT",
+      "action_levels": null
+    },
+    "mdp_schema": {
+      "id_col": "HADM_ID",
+      "time_col": "TIME_FROM_ADM",
+      "state_cols": [
+        "hr_normalized",
+        "map_normalized"
+      ],
+      "action_col": "norepi_inf_scaled_bin",
+      "action_type": "discrete",
+      "reward_col": "terminal_reward",
+      "outcome_col": "HOSP_MORT",
+      "action_levels": null
+    }
+  },
+  "config": {
+    "schema": {
+      "id_col": "HADM_ID",
+      "time_col": "TIME_FROM_ADM",
+      "state_cols": [
+        "hr_normalized",
+        "map_normalized"
+      ],
+      "action_col": "norepi_inf_scaled",
+      "action_type": "continuous",
+      "outcome_col": "HOSP_MORT"
+    },
+    "dt": 60.0,
+    "impute": null,
+    "action_agg": "mean",
+    "action_bins": 4,
+    "terminal_reward": -1.0,
+    "lags": 3,
+    "model": "linear",
+    "n_splits": 5,
+    "n_boot": 300,
+    "seed": 0,
+    "alpha": 0.05,
+    "gamma": 1.0,
+    "thresholds": {
+      "min_gain_nats": 0.01,
+      "positivity_epsilon": 0.01,
+      "support_violation_concern": 0.1,
+      "support_violation_serious": 0.5,
+      "pareto_k_unreliable": 0.7,
+      "ess_share_concern": 0.1,
+      "reference_deviation": 0.25,
+      "missingness_concern": 0.3,
+      "informative_auc_concern": 0.6,
+      "gap_trajectory_share_concern": 0.2,
+      "gap_factor": 3.0,
+      "epistemic_ratio_concern": 0.25,
+      "within_step_change_concern": 0.2
+    },
+    "clinical": {}
+  },
+  "preprocessing": [
+    {
+      "step": "resample_to_grid",
+      "dt": 60.0,
+      "action_agg": "mean",
+      "impute": null,
+      "n_bins": 77182,
+      "n_empty_bins": 11231
+    },
+    {
+      "step": "discretize_actions",
+      "source": "norepi_inf_scaled",
+      "target": "norepi_inf_scaled_bin",
+      "n_levels": 4
+    },
+    {
+      "step": "add_terminal_outcome_reward",
+      "outcome": "HOSP_MORT",
+      "scale": -1.0
+    }
+  ],
+  "validation_issues": [],
+  "status_counts": {
+    "no_concern_detected": 11,
+    "concern": 5,
+    "inconclusive": 1,
+    "serious_concern": 1,
+    "not_assessable": 1,
+    "expert_judgement_required": 11
+  },
+  "criteria": [
+    {
+      "id": "C.missingness",
+      "level": "C",
+      "level_name": "Dataset suitability (temporal data quality)",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "State completeness",
+      "status": "no_concern_detected",
+      "interpretation": "0.0% of state values missing on decision rows.",
+      "next_step": "Consider a POMDP/belief-state formulation or explicit missingness indicators; never impute silently.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Counts missing cells on the decision rows provided; absent rows are not counted (see sampling intervals)."
+      ],
+      "metrics": [
+        {
+          "name": "state_missingness",
+          "value": 0.0,
+          "unit": "share of missing state values",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": 3362,
+          "details": {
+            "per_variable": {
+              "hr_normalized": 0.0,
+              "map_normalized": 0.0
+            },
+            "rows_with_any_missing": 0.0,
+            "rows_all_missing": 0.0,
+            "per_trajectory_p90": 0.0
+          },
+          "assumptions": [
+            "Counts missing cells on the decision rows provided; absent rows are not counted (see sampling intervals)."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "C.sampling",
+      "level": "C",
+      "level_name": "Dataset suitability (temporal data quality)",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "Sampling regularity and fragmentation",
+      "status": "concern",
+      "interpretation": "Interval CV = 1.45; 91.3% of trajectories contain gaps > 3x median interval.",
+      "next_step": "Consider event-driven decision epochs (semi-MDP) or splitting trajectories at gaps.",
+      "evidence_type": "data",
+      "assumptions": [
+        "A gap is an interval longer than 3 x the median interval."
+      ],
+      "metrics": [
+        {
+          "name": "sampling_interval_cv",
+          "value": 1.4479056025675618,
+          "unit": "CV of inter-decision intervals (0 = regular grid)",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": 3362,
+          "details": {
+            "median_interval": 15.0,
+            "iqr": [
+              15.0,
+              30.0
+            ],
+            "p95_interval": 60.0,
+            "gap_factor": 3.0,
+            "gap_rate": 0.22009037191518943,
+            "share_trajectories_with_gap": 0.9134443783462225,
+            "share_zero_intervals": 0.0
+          },
+          "assumptions": [
+            "A gap is an interval longer than 3 x the median interval."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "C.timestamps",
+      "level": "C",
+      "level_name": "Dataset suitability (temporal data quality)",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "Timestamp precision (heaping)",
+      "status": "no_concern_detected",
+      "interpretation": "2.0% of timestamps on multiples of the largest unit; interpret against the dataset's native grid.",
+      "next_step": "Do not choose a decision interval finer than the effective timestamp resolution.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Heaping can also be a deliberate grid of the source dataset.",
+        "Time unit of the data must be known (e.g. minutes)."
+      ],
+      "metrics": [
+        {
+          "name": "timestamp_heaping",
+          "value": 0.020304051300165746,
+          "unit": "share of times on multiples of 60",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": null,
+          "details": {
+            "shares_by_unit": {
+              "5": 0.2337241529223161,
+              "15": 0.07986441322718257,
+              "30": 0.04049941580849387,
+              "60": 0.020304051300165746
+            },
+            "expected_if_uniform_on_finest_unit": {
+              "5": 1.0,
+              "15": 0.3333333333333333,
+              "30": 0.16666666666666666,
+              "60": 0.08333333333333333
+            }
+          },
+          "assumptions": [
+            "Time unit of the data must be known (e.g. minutes).",
+            "Heaping can also be a deliberate grid of the source dataset."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "C.alignment",
+      "level": "C",
+      "level_name": "Dataset suitability (temporal data quality)",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "State freshness at decision times",
+      "status": "no_concern_detected",
+      "interpretation": "90th percentile of observation age: 0 time units.",
+      "next_step": "Compare observation age with the decision interval; stale states blur state-action ordering.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Assumes state and action share the row's timestamp.",
+        "Missing cells are treated as 'not measured at this time', not as data errors."
+      ],
+      "metrics": [
+        {
+          "name": "observation_age_p90",
+          "value": 0.0,
+          "unit": "time units since last observation (90th pct over variables/decisions)",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": 3362,
+          "details": {
+            "per_variable": {
+              "hr_normalized": {
+                "median": 0.0,
+                "p90": 0.0,
+                "never_observed_share": 0.0
+              },
+              "map_normalized": {
+                "median": 0.0,
+                "p90": 0.0,
+                "never_observed_share": 0.0
+              }
+            }
+          },
+          "assumptions": [
+            "Missing cells are treated as 'not measured at this time', not as data errors."
+          ],
+          "error": null
+        },
+        {
+          "name": "action_change_without_observation",
+          "value": 0.0,
+          "unit": "share of action changes",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": 3362,
+          "details": {
+            "n_action_changes": 11666
+          },
+          "assumptions": [
+            "Assumes state and action share the row's timestamp."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "C.informative_missingness",
+      "level": "C",
+      "level_name": "Dataset suitability (temporal data quality)",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "Informative observation process",
+      "status": "no_concern_detected",
+      "interpretation": "Outcome AUC from measurement patterns = 0.50 [0.47, 0.52].",
+      "next_step": "If informative, include measurement indicators/times in the state and treat missingness as MNAR in sensitivity analyses.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Association only; informative measurement can reflect clinician suspicion (confounding by indication)."
+      ],
+      "metrics": [
+        {
+          "name": "informative_missingness_outcome_auc",
+          "value": 0.5009781852857412,
+          "unit": "AUC",
+          "lower": 0.4729486068335833,
+          "upper": 0.523822765204864,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": 3362,
+          "details": {},
+          "assumptions": [
+            "Association only; informative measurement can reflect clinician suspicion (confounding by indication)."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "C.length",
+      "level": "C",
+      "level_name": "Dataset suitability (temporal data quality)",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "Trajectory length",
+      "status": "no_concern_detected",
+      "interpretation": "Median 37 rows; 1.2% shorter than 3.",
+      "next_step": "",
+      "evidence_type": "data",
+      "assumptions": [],
+      "metrics": [
+        {
+          "name": "trajectory_length_median",
+          "value": 37.0,
+          "unit": "decision rows",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": 3362,
+          "details": {
+            "iqr": [
+              24.0,
+              66.0
+            ],
+            "min_length": 3,
+            "share_shorter_than_min": 0.012492563950029744
+          },
+          "assumptions": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "B.decision_interval",
+      "level": "B",
+      "level_name": "MDP formulation validity",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Decision interval vs. decision frequency",
+      "status": "no_concern_detected",
+      "interpretation": "6.3% of grid steps aggregate more than one distinct raw action (dt = 60).",
+      "next_step": "Use a finer grid or event-driven epochs if many decisions are aggregated; compare diagnostics across dt.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Raw action values are recorded at their true times."
+      ],
+      "metrics": [
+        {
+          "name": "within_step_action_changes",
+          "value": 0.0632742490636988,
+          "unit": "share of grid steps",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": null,
+          "details": {
+            "mean_raw_rows_per_step": 2.232142044851481
+          },
+          "assumptions": [
+            "Raw action values are recorded at their true times."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "A.action_multiplicity",
+      "level": "A",
+      "level_name": "Clinical problem suitability",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Observed action multiplicity",
+      "status": "no_concern_detected",
+      "interpretation": "4 action levels used in >= 1% of decisions; 83.8% of trajectories change action at least once.",
+      "next_step": "If treatment rarely changes within a trajectory, a single-step (bandit/causal) formulation may suffice.",
+      "evidence_type": "data",
+      "assumptions": [],
+      "metrics": [
+        {
+          "name": "n_actions_used",
+          "value": 4,
+          "unit": "levels",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": null,
+          "details": {},
+          "assumptions": [],
+          "error": null
+        },
+        {
+          "name": "share_trajectories_with_action_change",
+          "value": 0.8381915526472338,
+          "unit": "",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": null,
+          "n_trajectories": null,
+          "details": {},
+          "assumptions": [],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "B.action_alignment",
+      "level": "B",
+      "level_name": "MDP formulation validity",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Recorded actions affect the next state (alignment)",
+      "status": "concern",
+      "interpretation": "Recorded actions carry little information about the next state: No relevant dependence detected (gain = 0.0005 nats [0.0001, 0.0009]; threshold 0.01).",
+      "next_step": "If actions should act within one interval, check timestamp alignment of treatments vs. observations and the decision interval.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+        "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+        "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+        "Interpretation requires prior knowledge that the action affects the state within one interval."
+      ],
+      "metrics": [
+        {
+          "name": "action_effect_gain",
+          "value": 0.0005385598592249058,
+          "unit": "nats/transition",
+          "lower": 0.00011751584986963107,
+          "upper": 0.0008850986765835032,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "excluded_deterministic_dims": [],
+            "per_dimension_gain_nats": [
+              6.459385337172312e-05,
+              0.00047397191826365967
+            ],
+            "oof_r2_base": [
+              0.8292716813796479,
+              0.23166843714404328
+            ],
+            "oof_r2_full": [
+              0.8292937359549859,
+              0.23239642721209886
+            ]
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Interpretation requires prior knowledge that the action affects the state within one interval."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "A.delayed_effects",
+      "level": "A",
+      "level_name": "Clinical problem suitability",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Delayed treatment effects (data proxy)",
+      "status": "inconclusive",
+      "interpretation": "No clear delayed effect of past actions: No relevant dependence detected (gain = -0.0003 nats [-0.0005, -0.0001]; threshold 0.01).",
+      "next_step": "Delayed effects support a sequential formulation but require them to be represented in the state (e.g. cumulative dose).",
+      "evidence_type": "data",
+      "assumptions": [
+        "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+        "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+        "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+        "Transitions are pooled over time (time-homogeneity is assessed separately)."
+      ],
+      "metrics": [
+        {
+          "name": "delayed_action_effect_gain",
+          "value": -0.0002869272368258593,
+          "unit": "nats/transition",
+          "lower": -0.0005231772342616485,
+          "upper": -5.1448185519718334e-05,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "excluded_deterministic_dims": [],
+            "per_dimension_gain_nats": [
+              -0.00018112883041768377,
+              -0.00010578639129139494
+            ],
+            "oof_r2_base": [
+              0.834776476815532,
+              0.24141959106096123
+            ],
+            "oof_r2_full": [
+              0.8347166124860069,
+              0.2412590791136483
+            ]
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Transitions are pooled over time (time-homogeneity is assessed separately)."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "B.state_sufficiency",
+      "level": "B",
+      "level_name": "MDP formulation validity",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "State sufficiency (Markov property w.r.t. recorded history)",
+      "status": "concern",
+      "interpretation": "Relevant dependence detected (gain = 0.0856 nats [0.0789, 0.0926], GCM p = 0.0005; threshold 0.01).",
+      "next_step": "Augment the state with the lags/aggregates that carry the gain (see lag profile), or use a belief state / recurrent representation; partial observability is likely.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+        "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+        "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+        "No conditional-independence test has power against all alternatives; non-rejection is not evidence of Markovianity.",
+        "Trajectories are independent; dependence within a trajectory is handled by clustering.",
+        "Transitions are pooled over time (time-homogeneity is assessed separately).",
+        "Validity requires the regressions on the conditioning set to be consistent (Shah & Peters, 2020)."
+      ],
+      "metrics": [
+        {
+          "name": "history_gain[state]",
+          "value": 0.08555395699412918,
+          "unit": "nats/transition",
+          "lower": 0.07891012630945715,
+          "upper": 0.09260295647207874,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "excluded_deterministic_dims": [],
+            "per_dimension_gain_nats": [
+              0.04215850943769311,
+              0.0433954880787477
+            ],
+            "oof_r2_base": [
+              0.834776476815532,
+              0.24141959106096123
+            ],
+            "oof_r2_full": [
+              0.848136479776458,
+              0.3044813491414995
+            ],
+            "lags": 3
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Transitions are pooled over time (time-homogeneity is assessed separately)."
+          ],
+          "error": null
+        },
+        {
+          "name": "history_gcm[state]",
+          "value": 29.77508031746974,
+          "unit": "max |T|",
+          "lower": null,
+          "upper": null,
+          "p_value": 0.0004997501249375312,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "n_pairs": 36
+          },
+          "assumptions": [
+            "Validity requires the regressions on the conditioning set to be consistent (Shah & Peters, 2020).",
+            "No conditional-independence test has power against all alternatives; non-rejection is not evidence of Markovianity.",
+            "Trajectories are independent; dependence within a trajectory is handled by clustering."
+          ],
+          "error": null
+        },
+        {
+          "name": "history_gain[state]",
+          "value": 0.06639487943755129,
+          "unit": "nats/transition",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "excluded_deterministic_dims": [],
+            "per_dimension_gain_nats": [
+              0.03584515184984427,
+              0.03054973927205647
+            ],
+            "oof_r2_base": [
+              0.834776476815532,
+              0.24141959106096123
+            ],
+            "oof_r2_full": [
+              0.8462067851469511,
+              0.28638091535005294
+            ],
+            "lags": 1
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Transitions are pooled over time (time-homogeneity is assessed separately)."
+          ],
+          "error": null
+        },
+        {
+          "name": "history_gain[state]",
+          "value": 0.08148398592055821,
+          "unit": "nats/transition",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "excluded_deterministic_dims": [],
+            "per_dimension_gain_nats": [
+              0.04126014558919874,
+              0.040223854715135815
+            ],
+            "oof_r2_base": [
+              0.834776476815532,
+              0.24141959106096123
+            ],
+            "oof_r2_full": [
+              0.8478633771114188,
+              0.3000554663882975
+            ],
+            "lags": 2
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Transitions are pooled over time (time-homogeneity is assessed separately)."
+          ],
+          "error": null
+        },
+        {
+          "name": "history_gain[state]",
+          "value": 0.08555395699412918,
+          "unit": "nats/transition",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "excluded_deterministic_dims": [],
+            "per_dimension_gain_nats": [
+              0.04215850943769311,
+              0.0433954880787477
+            ],
+            "oof_r2_base": [
+              0.834776476815532,
+              0.24141959106096123
+            ],
+            "oof_r2_full": [
+              0.848136479776458,
+              0.3044813491414995
+            ],
+            "lags": 3
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Transitions are pooled over time (time-homogeneity is assessed separately)."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "B.reward_sufficiency",
+      "level": "B",
+      "level_name": "MDP formulation validity",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Reward depends only on (s, a, s')",
+      "status": "no_concern_detected",
+      "interpretation": "No relevant dependence detected (gain = -0.0001 nats [-0.0003, 0.0001], GCM p = 0.025; threshold 0.01). Dependence is statistically detectable but below the relevance threshold.",
+      "next_step": "",
+      "evidence_type": "data",
+      "assumptions": [
+        "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+        "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+        "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+        "No conditional-independence test has power against all alternatives; non-rejection is not evidence of Markovianity.",
+        "Trajectories are independent; dependence within a trajectory is handled by clustering.",
+        "Transitions are pooled over time (time-homogeneity is assessed separately).",
+        "Validity requires the regressions on the conditioning set to be consistent (Shah & Peters, 2020)."
+      ],
+      "metrics": [
+        {
+          "name": "history_gain[reward]",
+          "value": -0.00010674181060759994,
+          "unit": "nats/transition",
+          "lower": -0.00031638214590967636,
+          "upper": 8.64770432268577e-05,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "excluded_deterministic_dims": [],
+            "per_dimension_gain_nats": [
+              -0.00010671886296100762
+            ],
+            "oof_r2_base": [
+              0.0007954339333036131
+            ],
+            "oof_r2_full": [
+              0.0005821432216589484
+            ],
+            "lags": 3
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Transitions are pooled over time (time-homogeneity is assessed separately)."
+          ],
+          "error": null
+        },
+        {
+          "name": "history_gcm[reward]",
+          "value": 3.179760888089335,
+          "unit": "max |T|",
+          "lower": null,
+          "upper": null,
+          "p_value": 0.02498750624687656,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "n_pairs": 18
+          },
+          "assumptions": [
+            "Validity requires the regressions on the conditioning set to be consistent (Shah & Peters, 2020).",
+            "No conditional-independence test has power against all alternatives; non-rejection is not evidence of Markovianity.",
+            "Trajectories are independent; dependence within a trajectory is handled by clustering."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "B.stationarity",
+      "level": "B",
+      "level_name": "MDP formulation validity",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Time-homogeneous dynamics",
+      "status": "no_concern_detected",
+      "interpretation": "No relevant dependence detected (gain = 0.0014 nats [0.0010, 0.0019]; threshold 0.01).",
+      "next_step": "",
+      "evidence_type": "data",
+      "assumptions": [
+        "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+        "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+        "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+        "Non-stationarity is only detected along decision step / elapsed time."
+      ],
+      "metrics": [
+        {
+          "name": "time_inhomogeneity_gain",
+          "value": 0.0014189125997348874,
+          "unit": "nats/transition",
+          "lower": 0.0009512693700452009,
+          "upper": 0.0018810545699601091,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "excluded_deterministic_dims": [],
+            "per_dimension_gain_nats": [
+              0.00017109734863532964,
+              0.0012478153055273998
+            ],
+            "oof_r2_base": [
+              0.8292937359549859,
+              0.23239642721209886
+            ],
+            "oof_r2_full": [
+              0.8293521407398592,
+              0.2343096937891721
+            ]
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Non-stationarity is only detected along decision step / elapsed time."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "B.transition_estimability",
+      "level": "B",
+      "level_name": "MDP formulation validity",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Transition dynamics estimable and stochastic",
+      "status": "no_concern_detected",
+      "interpretation": "Epistemic/aleatoric ratio = 0.014. Out-of-fold R^2 of next state: [0.835, 0.241] (values near 1 = nearly deterministic).",
+      "next_step": "Coarsen the state/action space or collect more trajectories if dynamics are poorly determined.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Linear-in-features transition model; estimability of richer models can differ."
+      ],
+      "metrics": [
+        {
+          "name": "transition_epistemic_ratio",
+          "value": 0.013690506260773075,
+          "unit": "bootstrap SD / residual SD",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "per_dimension": [
+              0.011401653755715923,
+              0.015979358765830228
+            ],
+            "p90_over_decisions": 0.01855808381113719
+          },
+          "assumptions": [
+            "Linear-in-features transition model; estimability of richer models can differ."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "D.overlap",
+      "level": "D",
+      "level_name": "Offline RL feasibility",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "Action overlap / positivity",
+      "status": "concern",
+      "interpretation": "0.0% [0.0%, 0.0%] of decisions have some action with pi_b < 0.01; mean normalised action entropy 0.97. With a history-aware behaviour model (state + 3 lags): 20.3% of decisions violate support, entropy 0.30; the state-only figures are over-optimistic if these differ.",
+      "next_step": "Restrict candidate policies to supported actions, coarsen actions, or use pessimistic/constrained offline RL.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Calibration is measured out-of-fold over all (decision, action) pairs.",
+        "Depends on |A| and epsilon; not comparable across action discretisations.",
+        "Euclidean distance on standardised states is a meaningful similarity.",
+        "Neighbourhoods become uninformative in high-dimensional state spaces.",
+        "Positivity is assessed relative to the recorded state only (no statement about unmeasured confounders).",
+        "Probabilities near the threshold are estimation-noise dominated; see the threshold sensitivity curve.",
+        "Results depend on the behaviour-policy model; misspecification can hide or exaggerate support problems."
+      ],
+      "metrics": [
+        {
+          "name": "support_violation_rate",
+          "value": 0.0,
+          "unit": "share of decisions",
+          "lower": 0.0,
+          "upper": 0.0,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "epsilon": 0.01,
+            "per_action_share_below_epsilon": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0
+            },
+            "threshold_sensitivity": {
+              "0.001": 0.0,
+              "0.005": 0.0,
+              "0.01": 0.0,
+              "0.02": 0.0,
+              "0.05": 0.0,
+              "0.1": 0.001203741917732838
+            }
+          },
+          "assumptions": [
+            "Positivity is assessed relative to the recorded state only (no statement about unmeasured confounders).",
+            "Results depend on the behaviour-policy model; misspecification can hide or exaggerate support problems.",
+            "Probabilities near the threshold are estimation-noise dominated; see the threshold sensitivity curve."
+          ],
+          "error": null
+        },
+        {
+          "name": "normalised_action_entropy",
+          "value": 0.9712718592048213,
+          "unit": "0 (deterministic) .. 1 (uniform)",
+          "lower": 0.9707620644415405,
+          "upper": 0.9718917971101386,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "effective_number_of_actions_mean": 3.8451917415811856,
+            "n_actions": 4
+          },
+          "assumptions": [
+            "Positivity is assessed relative to the recorded state only (no statement about unmeasured confounders).",
+            "Results depend on the behaviour-policy model; misspecification can hide or exaggerate support problems.",
+            "Probabilities near the threshold are estimation-noise dominated; see the threshold sensitivity curve."
+          ],
+          "error": null
+        },
+        {
+          "name": "observed_action_propensity",
+          "value": 0.172468669952086,
+          "unit": "5th percentile of pi_b(a_obs|s)",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "min": 0.08871520641556269,
+            "p01": 0.14627620509171668,
+            "p05": 0.172468669952086,
+            "median": 0.2429626488061971,
+            "behaviour_log_loss": 1.3473470362296254,
+            "marginal_log_loss": 1.3565355488269446
+          },
+          "assumptions": [
+            "Positivity is assessed relative to the recorded state only (no statement about unmeasured confounders).",
+            "Results depend on the behaviour-policy model; misspecification can hide or exaggerate support problems.",
+            "Probabilities near the threshold are estimation-noise dominated; see the threshold sensitivity curve."
+          ],
+          "error": null
+        },
+        {
+          "name": "behaviour_calibration_ece",
+          "value": 0.003635256019201295,
+          "unit": "expected calibration error",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "log_loss": 1.3473470362296254,
+            "marginal_log_loss": 1.3565355488269446,
+            "n_bins": 10
+          },
+          "assumptions": [
+            "Calibration is measured out-of-fold over all (decision, action) pairs."
+          ],
+          "error": null
+        },
+        {
+          "name": "knn_locally_deterministic_share",
+          "value": 0.0,
+          "unit": "share of decisions",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "k": 25,
+            "mean_neighbourhood_entropy": 0.9165375349930637,
+            "n_queries": 5000
+          },
+          "assumptions": [
+            "Euclidean distance on standardised states is a meaningful similarity.",
+            "Neighbourhoods become uninformative in high-dimensional state spaces."
+          ],
+          "error": null
+        },
+        {
+          "name": "action_overlap_index",
+          "value": 1.0,
+          "unit": "share of supported actions",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "epsilon": 0.05
+          },
+          "assumptions": [
+            "Positivity is assessed relative to the recorded state only (no statement about unmeasured confounders).",
+            "Results depend on the behaviour-policy model; misspecification can hide or exaggerate support problems.",
+            "Probabilities near the threshold are estimation-noise dominated; see the threshold sensitivity curve.",
+            "Depends on |A| and epsilon; not comparable across action discretisations."
+          ],
+          "error": null
+        },
+        {
+          "name": "support_violation_rate[history-aware]",
+          "value": 0.20291499389073137,
+          "unit": "share of decisions",
+          "lower": 0.19506107572237122,
+          "upper": 0.21050818305727084,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "epsilon": 0.01,
+            "per_action_share_below_epsilon": {
+              "0": 0.022626112759643918,
+              "1": 0.0764749519986036,
+              "2": 0.03818292895793332,
+              "3": 0.0810569034735556
+            },
+            "threshold_sensitivity": {
+              "0.001": 4.363763309478094e-05,
+              "0.005": 0.017629603770291498,
+              "0.01": 0.20291499389073137,
+              "0.02": 0.8346788270204224,
+              "0.05": 0.9834395182405307,
+              "0.1": 0.9999563623669052
+            }
+          },
+          "assumptions": [
+            "Positivity is assessed relative to the recorded state only (no statement about unmeasured confounders).",
+            "Results depend on the behaviour-policy model; misspecification can hide or exaggerate support problems.",
+            "Probabilities near the threshold are estimation-noise dominated; see the threshold sensitivity curve."
+          ],
+          "error": null
+        },
+        {
+          "name": "normalised_action_entropy[history-aware]",
+          "value": 0.3004973349747819,
+          "unit": "0 (deterministic) .. 1 (uniform)",
+          "lower": 0.2991679649215361,
+          "upper": 0.3019509716763313,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "effective_number_of_actions_mean": 1.5283742149970017,
+            "n_actions": 4
+          },
+          "assumptions": [
+            "Positivity is assessed relative to the recorded state only (no statement about unmeasured confounders).",
+            "Results depend on the behaviour-policy model; misspecification can hide or exaggerate support problems.",
+            "Probabilities near the threshold are estimation-noise dominated; see the threshold sensitivity curve."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "D.coverage",
+      "level": "D",
+      "level_name": "Offline RL feasibility",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "State-action coverage",
+      "status": "no_concern_detected",
+      "interpretation": "Occupancy-weighted share of supported actions = 1.00; 0.1% of decisions lie in under-supported (cluster, action) cells.",
+      "next_step": "Check sensitivity to n_clusters/n_min; consider coarser state abstraction.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Depends on the clustering granularity and N_min; cells are unweighted.",
+        "Result should be checked for sensitivity to n_clusters and n_min.",
+        "State clusters approximate regions of similar patients."
+      ],
+      "metrics": [
+        {
+          "name": "occupancy_weighted_support",
+          "value": 0.9992433622231394,
+          "unit": "mean share of supported actions",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "n_clusters": 50,
+            "n_min": 10,
+            "share_decisions_in_unsupported_cell": 0.0005158893933140734
+          },
+          "assumptions": [
+            "State clusters approximate regions of similar patients.",
+            "Result should be checked for sensitivity to n_clusters and n_min."
+          ],
+          "error": null
+        },
+        {
+          "name": "esac",
+          "value": 0.955,
+          "unit": "share of (cluster, action) cells",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "n_clusters": 50,
+            "n_min": 10
+          },
+          "assumptions": [
+            "Depends on the clustering granularity and N_min; cells are unweighted."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "D.ope_reliability",
+      "level": "D",
+      "level_name": "Offline RL feasibility",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "Importance-sampling OPE reliability (pre-training)",
+      "status": "serious_concern",
+      "interpretation": "For a reference policy deviating by lambda=0.25 from practice: ESS share = 0.332, Pareto-k = 0.58. History-aware behaviour model: ESS share = 0.001, Pareto-k = 1.34.",
+      "next_step": "Prefer model-based/FQE estimates with uncertainty, restrict deviation from practice, or shorten horizons.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+        "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+        "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS).",
+        "Weights are only valid under sequential exchangeability given the recorded state (untestable from data)."
+      ],
+      "metrics": [
+        {
+          "name": "is_ess_share[mix_uniform_0.05]",
+          "value": 0.9651976034037082,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.9998009264157404,
+              "2": 0.9993184007201287,
+              "5": 0.9966282586186467,
+              "10": 0.9896754220405204,
+              "20": 0.9715973266264794
+            },
+            "target": "mix_uniform_0.05",
+            "ess": 2832.8549659898836,
+            "pareto_k": 0.18794026315089105,
+            "max_weight_share": 0.0007943670688346642,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.15529376280211693,
+            "wis_ci": [
+              -0.1690740357026649,
+              -0.14085629711783226
+            ],
+            "wis_ci_width_in_return_sd": 0.07796483652240237
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_0.1]",
+          "value": 0.8649996537672683,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.999191172046305,
+              "2": 0.9972160191016358,
+              "5": 0.9862872429303902,
+              "10": 0.9589442728387875,
+              "20": 0.8908446935068567
+            },
+            "target": "mix_uniform_0.1",
+            "ess": 2538.7739838069324,
+            "pareto_k": 0.2987054149792423,
+            "max_weight_share": 0.0017322712941106606,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.15753796718758944,
+            "wis_ci": [
+              -0.17188477496563997,
+              -0.14212999549986877
+            ],
+            "wis_ci_width_in_return_sd": 0.08221163825140546
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_0.25]",
+          "value": 0.3323866673814504,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.9947121740478795,
+              "2": 0.9816717007436639,
+              "5": 0.9139063985029217,
+              "10": 0.768365614691847,
+              "20": 0.4591449906687208
+            },
+            "target": "mix_uniform_0.25",
+            "ess": 975.5548687645569,
+            "pareto_k": 0.5812768032393363,
+            "max_weight_share": 0.012387518486534849,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.17321963255667894,
+            "wis_ci": [
+              -0.19639857637182007,
+              -0.14792483266553683
+            ],
+            "wis_ci_width_in_return_sd": 0.13393162220733706
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_0.5]",
+          "value": 0.018121669946212712,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.9773669371118694,
+              "2": 0.9232413637301783,
+              "5": 0.6981348493049888,
+              "10": 0.36183998994479305,
+              "20": 0.05723139525467846
+            },
+            "target": "mix_uniform_0.5",
+            "ess": 53.187101292134315,
+            "pareto_k": 0.9930343303647426,
+            "max_weight_share": 0.10582496121666166,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.1931969365190282,
+            "wis_ci": [
+              -0.27360113061066266,
+              -0.13472454238517736
+            ],
+            "wis_ci_width_in_return_sd": 0.38371219809970347
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_1]",
+          "value": 0.0013457159733100286,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 58152,
+          "n_trajectories": 2935,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.8999613970509844,
+              "2": 0.7141910046530758,
+              "5": 0.30080194668597743,
+              "10": 0.04903896693301735,
+              "20": 0.004383486583455033
+            },
+            "target": "mix_uniform_1",
+            "ess": 3.949676381664934,
+            "pareto_k": 1.576099110823104,
+            "max_weight_share": 0.4773235249213053,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.11493583154145912,
+            "wis_ci": [
+              -0.35091943377290447,
+              -0.03844640564887955
+            ],
+            "wis_ci_width_in_return_sd": 0.8633543925608709
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_0.05][history-aware]",
+          "value": 0.3999200028451984,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.9792572131625885,
+              "2": 0.9596822400585019,
+              "5": 0.8773258872762567,
+              "10": 0.6479726848044238,
+              "20": 0.3999340976719053
+            },
+            "target": "mix_uniform_0.05",
+            "ess": 1108.57824788689,
+            "pareto_k": 0.38529535794819286,
+            "max_weight_share": 0.007581894406028651,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.13761143781688887,
+            "wis_ci": [
+              -0.16190056351934104,
+              -0.11720692202002667
+            ],
+            "wis_ci_width_in_return_sd": 0.12589459701614403
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_0.1][history-aware]",
+          "value": 0.05635933951774667,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.9227864022578173,
+              "2": 0.8483298886022067,
+              "5": 0.5664639503532429,
+              "10": 0.16695898028488848,
+              "20": 0.056430749695850324
+            },
+            "target": "mix_uniform_0.1",
+            "ess": 156.22808914319378,
+            "pareto_k": 0.680295575674697,
+            "max_weight_share": 0.05265642064347154,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.1313370343859924,
+            "wis_ci": [
+              -0.18196919535288972,
+              -0.0888579584996357
+            ],
+            "wis_ci_width_in_return_sd": 0.26227895620219216
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_0.25][history-aware]",
+          "value": 0.0009039685426665199,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.6649293959985593,
+              "2": 0.41611491701968967,
+              "5": 0.08231662573160199,
+              "10": 0.010322027113453794,
+              "20": 0.0009060083233926609
+            },
+            "target": "mix_uniform_0.25",
+            "ess": 2.5058008002715932,
+            "pareto_k": 1.3433497861663524,
+            "max_weight_share": 0.6288296511573728,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.04882164449084583,
+            "wis_ci": [
+              -0.19643459074420805,
+              -0.008814692731997186
+            ],
+            "wis_ci_width_in_return_sd": 0.5284942255783672
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_0.5][history-aware]",
+          "value": 0.00037312432243199545,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.3451080270094552,
+              "2": 0.10943821022157321,
+              "5": 0.013039315103253013,
+              "10": 0.0035986258094813065,
+              "20": 0.0003731736155439234
+            },
+            "target": "mix_uniform_0.5",
+            "ess": 1.0343006217814914,
+            "pareto_k": 2.06438294905713,
+            "max_weight_share": 0.9832654164428506,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -0.0012744999560147866,
+            "wis_ci": [
+              -0.17069926819947145,
+              -6.218020781208687e-05
+            ],
+            "wis_ci_width_in_return_sd": 0.4806564582357383
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        },
+        {
+          "name": "is_ess_share[mix_uniform_1][history-aware]",
+          "value": 0.0003607851041536566,
+          "unit": "ESS / n_trajectories",
+          "lower": null,
+          "upper": null,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "ess_share_by_horizon": {
+              "1": 0.12882086760203945,
+              "2": 0.01995734175532054,
+              "5": 0.002362058064669035,
+              "10": 0.002938500799848435,
+              "20": 0.0003607851193106023
+            },
+            "target": "mix_uniform_1",
+            "ess": 1.000096308713936,
+            "pareto_k": 2.138034668650785,
+            "max_weight_share": 0.9999518487154174,
+            "n_behaviour_prob_floored": 0,
+            "wis_estimate": -2.7587777609006585e-07,
+            "wis_ci": [
+              -0.021235121409085032,
+              -5.099938061266824e-09
+            ],
+            "wis_ci_width_in_return_sd": 0.0598158109442037
+          },
+          "assumptions": [
+            "Importance weights use the estimated behaviour policy; its errors propagate into the weights.",
+            "Weights are only valid under sequential exchangeability given the recorded state (untestable from data).",
+            "Diagnostics describe variance/stability of IS-type estimators, not their bias.",
+            "Pareto-k > 0.7 indicates unreliable IS (Vehtari et al., PSIS)."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "D.behaviour_history",
+      "level": "D",
+      "level_name": "Offline RL feasibility",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "Behaviour policy depends on unrecorded/historical information (symptom)",
+      "status": "concern",
+      "interpretation": "Relevant dependence detected (gain = 0.9502 nats [0.9382, 0.9613]; threshold 0.01). A positive gain means clinicians use information beyond the current state, a symptom (not proof) of potential confounding.",
+      "next_step": "Include the predictive history in the state used for propensity models; plan confounding sensitivity analyses.",
+      "evidence_type": "data",
+      "assumptions": [
+        "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+        "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+        "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+        "Transitions are pooled over time (time-homogeneity is assessed separately)."
+      ],
+      "metrics": [
+        {
+          "name": "history_gain[action]",
+          "value": 0.9501796609003998,
+          "unit": "nats/transition",
+          "lower": 0.9382055019754494,
+          "upper": 0.96125853396002,
+          "p_value": null,
+          "n_transitions": 45832,
+          "n_trajectories": 2772,
+          "details": {
+            "lags": 3
+          },
+          "assumptions": [
+            "Detects only dependence on *recorded* history; latent variables that leave no trace in observed history are undetectable.",
+            "Effect size is relative to the regression model class; a too-weak model under-detects, a mis-tuned flexible model can over- or under-detect.",
+            "Continuous targets: Gaussian, homoscedastic residuals per dimension (gain = Gaussian conditional mutual information).",
+            "Transitions are pooled over time (time-homogeneity is assessed separately)."
+          ],
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "D.unmeasured_confounding",
+      "level": "D",
+      "level_name": "Offline RL feasibility",
+      "question": "Question B: Does the dataset support offline RL?",
+      "title": "No unmeasured confounding (sequential exchangeability)",
+      "status": "not_assessable",
+      "interpretation": "Not testable from observational data alone.",
+      "next_step": "Use clinical knowledge to list plausible unrecorded confounders; run sensitivity analyses (e.g. marginal sensitivity models) and negative-control checks.",
+      "evidence_type": "none",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "A.meta.sequential_decisions",
+      "level": "A",
+      "level_name": "Clinical problem suitability",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Are there repeated decision points whose choices affect later options?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "A.meta.multiple_feasible_actions",
+      "level": "A",
+      "level_name": "Clinical problem suitability",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Are at least two clinically acceptable actions available at typical decision points?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "A.meta.stochastic_response",
+      "level": "A",
+      "level_name": "Clinical problem suitability",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Is the patient response to treatment variable/uncertain?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "A.meta.delayed_effects",
+      "level": "A",
+      "level_name": "Clinical problem suitability",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Do actions have delayed effects or long-term consequences?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "A.meta.tradeoffs",
+      "level": "A",
+      "level_name": "Clinical problem suitability",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Is there a trade-off between immediate and long-term outcomes?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "A.meta.reward_alignment",
+      "level": "A",
+      "level_name": "Clinical problem suitability",
+      "question": "Question A: Is the problem/formulation appropriate for MDP modelling?",
+      "title": "Is the reward a clinically endorsed proxy of the treatment goal?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "E.meta.constraints_definable",
+      "level": "E",
+      "level_name": "Safety and deployment readiness (qualitative)",
+      "question": "Deployment prerequisites (outside the scope of data diagnostics)",
+      "title": "Can hard clinical constraints (contraindications, dose limits) be specified?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "E.meta.interpretability_required",
+      "level": "E",
+      "level_name": "Safety and deployment readiness (qualitative)",
+      "question": "Deployment prerequisites (outside the scope of data diagnostics)",
+      "title": "Are interpretability requirements for recommendations defined?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "E.meta.fallback_policy",
+      "level": "E",
+      "level_name": "Safety and deployment readiness (qualitative)",
+      "question": "Deployment prerequisites (outside the scope of data diagnostics)",
+      "title": "Is there a defined fallback (e.g. standard of care) policy?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "E.meta.ood_safeguards",
+      "level": "E",
+      "level_name": "Safety and deployment readiness (qualitative)",
+      "question": "Deployment prerequisites (outside the scope of data diagnostics)",
+      "title": "Are out-of-distribution safeguards planned?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    },
+    {
+      "id": "E.meta.clinician_oversight",
+      "level": "E",
+      "level_name": "Safety and deployment readiness (qualitative)",
+      "question": "Deployment prerequisites (outside the scope of data diagnostics)",
+      "title": "Is clinician oversight of recommendations ensured?",
+      "status": "expert_judgement_required",
+      "interpretation": "Not answered; requires clinical expert assessment.",
+      "next_step": "Document the clinical rationale and its source.",
+      "evidence_type": "metadata",
+      "assumptions": [],
+      "metrics": []
+    }
+  ]
+}

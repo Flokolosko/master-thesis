@@ -1,0 +1,15 @@
+|                           | sepsis_primary                  | sepsis_dt30                     | sepsis_dt120                    | sepsis_with_apache             | sepsis_gbm                     |
+|:--------------------------|:--------------------------------|:--------------------------------|:--------------------------------|:-------------------------------|:-------------------------------|
+| C.missingness             | no_concern_detected (0)         | no_concern_detected (0)         | no_concern_detected (0)         | no_concern_detected (0)        | no_concern_detected (0)        |
+| C.sampling                | concern (1.45)                  | concern (1.45)                  | concern (1.45)                  | concern (1.45)                 | concern (1.45)                 |
+| C.informative_missingness | no_concern_detected (0.501)     | no_concern_detected (0.501)     | no_concern_detected (0.501)     | no_concern_detected (0.501)    | no_concern_detected (0.501)    |
+| B.decision_interval       | no_concern_detected (0.0633)    | no_concern_detected (0.0245)    | no_concern_detected (0.186)     | no_concern_detected (0.0633)   | no_concern_detected (0.0633)   |
+| B.action_alignment        | concern (0.000539)              | concern (0.000817)              | concern (0.00029)               | concern (0.000522)             | concern (0.000572)             |
+| B.state_sufficiency       | concern (0.0856)                | concern (0.0924)                | concern (0.0627)                | concern (0.0847)               | concern (0.0952)               |
+| B.reward_sufficiency      | no_concern_detected (-0.000107) | no_concern_detected (-0.000115) | no_concern_detected (-3.43e-05) | no_concern_detected (-0.00013) | no_concern_detected (0.000367) |
+| B.stationarity            | no_concern_detected (0.00142)   | no_concern_detected (0.00086)   | no_concern_detected (0.00113)   | no_concern_detected (0.00145)  | no_concern_detected (0.00366)  |
+| B.transition_estimability | no_concern_detected (0.0137)    | no_concern_detected (0.0153)    | no_concern_detected (0.0161)    | no_concern_detected (0.0252)   | no_concern_detected (0.0137)   |
+| D.overlap                 | concern (0)                     | serious_concern (0)             | no_concern_detected (0)         | concern (0)                    | concern (0)                    |
+| D.coverage                | no_concern_detected (0.999)     | no_concern_detected (1)         | no_concern_detected (0.997)     | no_concern_detected (1)        | no_concern_detected (0.999)    |
+| D.ope_reliability         | serious_concern (0.332)         | serious_concern (0.00656)       | serious_concern (0.85)          | serious_concern (0.0045)       | serious_concern (0.145)        |
+| D.behaviour_history       | concern (0.95)                  | concern (1.07)                  | concern (0.738)                 | concern (0.939)                | concern (0.961)                |
