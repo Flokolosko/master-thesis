@@ -39,6 +39,13 @@ an injected violation.
 - **Perturbations (one at a time):** irregular sampling (drop prob 0–0.6), MCAR missingness (0–0.5), informative missingness driven by the outcome (strength 0–3), timestamp jitter with rounding (sd 0–0.3), action recorded 0–2 steps late.
 - **Performance:** monotone response of the targeted indicator; non-response of the others (specificity); action-effect gain under misalignment.
 
+## Exp 4 — Gene / medication baseline with downstream agents (`gene`)
+- **Origin:** baseline suggested by the supervisor: an arbitrary illness with three measurables, two medications and a partially hidden gene that makes medication 1 ineffective.
+- **DGM:** `GeneTreatmentEnv`. Measurables m0–m2 (0 = healthy) evolve linearly with an illness drive; medication 1 (strong, few side effects) has no effect in gene carriers; medication 2 (weaker, more side effects) works for everyone. Simulated clinician: first-line medication 1, switch to medication 2 after non-response; known carriers never receive medication 1. Factors: carrier prevalence ∈ {0, 0.15, 0.3}; process noise σ ∈ {0.15, 0.3}; scenarios *hidden* (never tested), *partial* (50 % tested, result recorded), *confounded* (50 % tested, clinician uses the result, data do not record it); 300 patients × 12 steps, 5 seeds (90 datasets).
+- **Ground truth:** naive state (m0–m2) is non-Markov iff prevalence > 0; state + true gene is Markov by construction (positive control). True policy values by 10 000 Monte-Carlo rollouts.
+- **Pipeline per dataset:** (1) full framework assessment of the naive formulation (gbm); (2) state-sufficiency diagnostics for each formulation (naive, oracle, recorded test, history 2 lags, revised = recorded test + lags, two random revisions); (3) fitted Q iteration (gradient-boosted trees, γ = 0.95), with and without a support constraint (π̂_b ≥ 0.05), trained on each formulation and evaluated in the true simulator.
+- **Performance:** verdict rates per formulation; Spearman ρ between the naive-state gain and the naive agent's regret relative to the oracle-formulation agent; value gain of recommended vs random revisions among flagged datasets; effect of the support constraint; optimism of the agents' own Q estimates.
+
 ## Known limitations of the validation design
 - Synthetic DGMs are linear-Gaussian or compartmental; nonlinear clinical dynamics may behave differently (mitigation: PK/PD environment; gbm model class).
 - The PK/PD parameters are illustrative (see `experiments/synthetic.py`); conclusions concern detectability of structural violations, not anaesthesia practice.

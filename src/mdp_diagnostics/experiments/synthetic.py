@@ -8,6 +8,10 @@
    propofol anaesthesia (Schnider et al. 1998 PK, effect-site compartment,
    sigmoid Emax (Hill) BIS response). Hidden compartment concentrations make
    the BIS-only state non-Markov in a physiologically meaningful way.
+3. ``GeneTreatmentEnv``: an arbitrary illness with three measurables, two
+   medications and a (partially recorded) gene that makes medication 1
+   ineffective. With the gene hidden, the measurables are not Markov; with the
+   true gene in the state they are Markov by construction.
 
 PK/PD parameter values follow the commonly implemented Schnider model; they
 serve to create realistic *structure* (latent compartments, delays,
@@ -227,3 +231,109 @@ class PropofolEnv:
     def policy_value(self, patients: list[Patient], policy, seed: int = 999) -> float:
         df = self.simulate(patients, seed=seed, policy=policy)
         return float(df.groupby("id")["reward"].sum().mean())
+
+
+# ========================================================= gene / medication
+@dataclass
+class GeneTreatmentEnv:
+    """Arbitrary illness, three measurables, two medications and a gene.
+
+    Dynamics (x = measurables, 0 = healthy, positive = ill):
+        x_{t+1} = A x_t + d - [a=1] (1 - g) e1 - [a=2] e2 + sigma * eps
+    Actions: 0 = no treatment, 1 = medication 1, 2 = medication 2.
+    Medication 1 is more effective and has fewer side effects, but has no
+    effect in gene carriers (g = 1). Medication 2 works for everyone.
+    Reward: -mean(x_{t+1}^2) - side-effect cost of the action.
+
+    Gene status is known (tested) for a share ``test_share`` of patients. The
+    simulated clinician uses a known result (carriers never receive
+    medication 1) and otherwise starts with medication 1 and switches to
+    medication 2 after non-response. ``record_test=False`` keeps known results
+    out of the data: the clinician acts on information the data lack
+    (unmeasured confounding).
+    """
+
+    prevalence: float = 0.2
+    test_share: float = 0.0
+    record_test: bool = True
+    horizon: int = 12
+    sigma: float = 0.3
+    A: np.ndarray = field(default_factory=lambda: np.array([[0.8, 0.1, 0.0], [0.1, 0.75, 0.05], [0.0, 0.1, 0.85]]))
+    drive: np.ndarray = field(default_factory=lambda: np.array([0.3, 0.2, 0.15]))
+    e1: np.ndarray = field(default_factory=lambda: np.array([0.45, 0.3, 0.2]))
+    e2: np.ndarray = field(default_factory=lambda: np.array([0.3, 0.25, 0.2]))
+    costs: np.ndarray = field(default_factory=lambda: np.array([0.0, 0.05, 0.3]))
+    switch_strength: float = 1.5  # how strongly the clinician switches to medication 2 after non-response
+    n_actions: int = 3
+
+    def _patients(self, n, rng):
+        g = (rng.random(n) < self.prevalence).astype(float)
+        tested = rng.random(n) < self.test_share
+        x = rng.normal(1.2, 0.4, (n, 3))
+        return g, tested, x
+
+    def _step(self, x, a, g, rng):
+        eff = (a == 1)[:, None] * (1 - g)[:, None] * self.e1 + (a == 2)[:, None] * self.e2
+        x_next = x @ self.A.T + self.drive - eff + self.sigma * rng.standard_normal(x.shape)
+        r = -(x_next**2).mean(axis=1) - self.costs[a]
+        return x_next, r
+
+    def behaviour_proba(self, x, g, tested, nonresponse) -> np.ndarray:
+        sev = x.mean(axis=1)
+        known_carrier = tested & (g == 1)
+        known_non = tested & (g == 0)
+        logits = np.column_stack([
+            2.0 * (0.5 - sev),
+            0.8 + 1.0 * known_non,
+            -0.5 + self.switch_strength * nonresponse + 2.5 * known_carrier,
+        ])
+        p = _softmax(logits)
+        p[known_carrier, 1] = 0.0  # hard rule: no medication 1 for known carriers
+        return p / p.sum(axis=1, keepdims=True)
+
+    def generate(self, n_traj: int, seed: int = 0) -> pd.DataFrame:
+        """Observational data with true gene, recorded test result and true behaviour probabilities ``pb_<a>``."""
+        rng = np.random.default_rng(seed)
+        g, tested, x = self._patients(n_traj, rng)
+        nonresp = np.zeros(n_traj)
+        recorded = tested & self.record_test
+        rows = []
+        for t in range(self.horizon + 1):
+            p = self.behaviour_proba(x, g, tested, nonresp)
+            a = np.minimum((p.cumsum(axis=1) < rng.random(n_traj)[:, None]).sum(axis=1), self.n_actions - 1)
+            x_next, r = self._step(x, a, g, rng)
+            last = t == self.horizon
+            frame = {"id": np.arange(n_traj), "time": float(t), "m0": x[:, 0], "m1": x[:, 1], "m2": x[:, 2],
+                     "gene": g, "gene_tested": recorded.astype(float), "gene_positive": (recorded & (g == 1)).astype(float),
+                     "action": np.where(last, np.nan, a.astype(float)), "reward": np.where(last, np.nan, r)}
+            frame |= {f"pb_{k}": p[:, k] for k in range(self.n_actions)}
+            rows.append(pd.DataFrame(frame))
+            improved = x_next.mean(axis=1) < x.mean(axis=1) - 0.05
+            nonresp = np.where(a == 1, np.where(improved, 0.0, np.minimum(nonresp + 1, 2)), np.where(a == 2, nonresp, 0.0))
+            x = x_next
+        return pd.concat(rows, ignore_index=True).sort_values(["id", "time"], kind="mergesort").reset_index(drop=True)
+
+    def rollout(self, policy, n_traj: int = 10000, seed: int = 123, gamma: float = 1.0) -> float:
+        """Monte-Carlo value of ``policy(obs) -> probabilities`` in the true environment.
+
+        ``obs`` is a dict with the current measurables ``m``, lists ``m_hist`` and
+        ``a_hist`` of past measurables/actions (most recent last), the recorded
+        gene columns ``gene_tested``/``gene_positive``, the true ``gene`` (for
+        oracle policies only) and the step ``t``.
+        """
+        rng = np.random.default_rng(seed)
+        g, tested, x = self._patients(n_traj, rng)
+        recorded = tested & self.record_test
+        obs = {"gene": g, "gene_tested": recorded.astype(float), "gene_positive": (recorded & (g == 1)).astype(float),
+               "m_hist": [], "a_hist": []}
+        ret = np.zeros(n_traj)
+        for t in range(self.horizon):
+            obs |= {"m": x, "t": t}
+            p = policy(obs)
+            a = np.minimum((p.cumsum(axis=1) < rng.random(n_traj)[:, None]).sum(axis=1), self.n_actions - 1)
+            x_next, r = self._step(x, a, g, rng)
+            ret += gamma**t * r
+            obs["m_hist"].append(x)
+            obs["a_hist"].append(a)
+            x = x_next
+        return float(ret.mean())

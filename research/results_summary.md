@@ -106,6 +106,38 @@ Interpretation (statistical, not clinical)
 
 **Boundary case (eICU cardiac arrest, 5 000 stays):** no treatment variable → Level A `serious_concern` ("cannot be modelled as an MDP from these data"), consistent with the earlier interdisciplinary-project finding that action data are the bottleneck. Measurement patterns are weakly informative of mortality (AUC 0.57 [0.54, 0.60]).
 
+## Exp 4 — Gene / medication baseline with offline RL agents (90 datasets)
+
+Share of datasets with state-sufficiency status `concern` (GCM rejection rate in brackets), scenario *hidden*:
+
+| prevalence | σ = 0.15 naive | σ = 0.15 oracle (gene in state) | σ = 0.3 naive | σ = 0.3 oracle |
+|---|---|---|---|---|
+| 0 (naive is Markov) | 0.0 (0.2) | 0.0 (0.2) | 0.0 (0.0) | 0.0 (0.0) |
+| 0.15 | 0.4 (1.0) | 0.0 (0.4) | 0.0 (0.0) | 0.0 (0.0) |
+| 0.3 | 1.0 (1.0) | 0.0 (0.2) | 0.0 (0.2) | 0.0 (0.0) |
+
+In *partial*/*confounded* (half the carriers already identified and treated with medication 2) the naive state is flagged in 0.6 (σ = 0.15, prevalence 0.3) and otherwise rarely. The positive control (true gene in the state) is never flagged as a concern (0/90).
+
+Agents (true value, higher is better; mean over seeds), scenario *partial*, σ = 0.15:
+
+| prevalence | clinician | naive agent | oracle-formulation agent | recorded test (unconstrained) | recorded test + support constraint |
+|---|---|---|---|---|---|
+| 0 | −5.40 | **−3.89** | −3.89 | −3.91 | −3.91 |
+| 0.15 | −6.18 | −6.79 | −4.49 | −7.01 | **−5.66** |
+| 0.3 | −7.01 | −8.40 | −5.08 | −8.95 | **−6.40** |
+
+Findings
+- **When the formulation is adequate, offline RL works:** with no carriers, every agent clearly beats the clinician (−3.9 vs −5.4).
+- **A hidden gene makes the naive agent fail:** with carriers, the naive agent is worse than the clinician in 57 % (prevalence 0.15) and 67 % (0.3) of datasets, because it cannot tell carriers apart and keeps giving medication 1. The agent's own value estimate is over-optimistic by about 2 units (oracle formulation: 0.5).
+- **State-sufficiency detection depends on how clearly a response reveals the gene.** The gene itself carries ≈ 0.1 nats about the next state, but two steps of history recover only ≈ 0.01–0.04 nats: one noisy response to medication 1 is weak evidence, and the clinician's switching keeps carriers off medication 1. At σ = 0.15 the framework flags the hidden gene; at σ = 0.3 the GCM test rarely rejects and the gain stays below δ = 0.01, so the framework misses a violation that costs the agent 2–3 units of value. Where the GCM test rejects but the gain is below δ (σ = 0.15, prevalence 0.15), the equivalence rule reports "no relevant dependence" although the consequence is large. → evidence against a fixed δ (open question 4).
+- **RQ2 analogue:** ρ(naive gain, naive regret) = 0.46 [0.29, 0.61] — moderate, just below the 0.5 target used in Exp 2. Mean naive regret 2.48 when flagged vs 1.52 when not (15 vs 75 datasets).
+- **RQ3 analogue fails here:** the generic recommendation (add 2 lags) does not improve the agent (value gain +0.01 vs −0.07 for random revisions; difference 0.08 [−0.30, 0.40]). Short history is not enough to identify a static patient trait; a belief state over the gene or a longer summary (e.g. "no response to medication 1 so far") would be needed.
+- **Level D recommendation works:** adding the recorded test result *without* restricting actions makes the agent worse (−0.54 [−0.78, −0.33] vs naive), because known carriers never received medication 1 and the Q function extrapolates into this unsupported region. Restricting the agent to supported actions — the framework's recommendation for the `D.overlap` concern — turns this into +1.46 [1.20, 1.76] over the naive agent.
+- **Behaviour-history dependence** rises with prevalence (0.00 → 0.135 nats at σ = 0.15) but is also present without any confounding (the switching rule uses history), and the data of *partial* and *confounded* are identical in the naive columns: the indicator is a symptom, not a test for confounding — as designed.
+- **Uninformative here:** `D.ope_reliability` is a serious concern in all 90 datasets (reference policy λ = 0.25, horizon 12); `D.coverage` never flags.
+
+Implementation note: gradient boosting with the default OpenMP threading was ≈ 180× slower than single-threaded on this machine (11 s vs 0.06 s per fit on 1 500 rows); the gene experiment limits each worker process to one thread (`threadpoolctl`).
+
 ## Implementation issues found by the experiments (fixed)
 1. **Deterministic next-state components** (lag columns inside a history-augmented state, static covariates, noise-free compartment amounts) produced spurious information gains of > 2 nats and 100 % GCM rejections. Fix: target dimensions predicted with out-of-fold R² ≥ 0.999 by the base features (linear or configured model) are excluded and listed in `details.excluded_deterministic_dims`. Regression test added.
 2. **Overlap measured on an insufficient state is over-optimistic.** In the eICU data, dose given (HR, MAP) looks almost random (entropy 0.97), while the previous dose predicts the next dose with a gain of 0.95 nats. Fix: when behaviour-history dependence is a concern, overlap and IS diagnostics are recomputed with a history-aware behaviour model and the worse status is reported.

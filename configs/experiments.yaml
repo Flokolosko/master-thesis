@@ -42,8 +42,28 @@ temporal:
   jitter_sd: [0.0, 0.1, 0.3]
   action_shift: [0, 1, 2]
 
+gene:
+  prevalences: [0.0, 0.15, 0.3]         # share of gene carriers (medication 1 ineffective)
+  sigmas: [0.15, 0.3]                   # process noise: how clearly a response reveals the gene
+  scenarios:
+    hidden: {test_share: 0.0, record_test: true}        # gene never tested
+    partial: {test_share: 0.5, record_test: true}       # half the patients tested, result recorded
+    confounded: {test_share: 0.5, record_test: false}   # clinician knows the result, data do not
+  n_traj: 300
+  horizon: 12
+  seeds: 5
+  lags: 2
+  model: gbm                            # interaction (medication x gene) needs a flexible model
+  n_boot: 100
+  n_mult: 500
+  gamma: 0.95
+  fqi_iterations: 15
+  mc: 10000                             # Monte-Carlo rollouts for the agents' true value
+  workers: 6
+
 quick:                                  # small settings for smoke tests
   overlap: {betas: [1.0, 8.0], forbid_above: [null, 0.0], n_traj: [100], seeds: 2, mc: 3000}
   state: {latent_strengths: [0.0, 0.8], n_traj: [100], seeds: 2, n_boot: 50, n_mult: 300, mc: 3000, rollouts: 1000}
   propofol: {decision_intervals: [2.0], n_patients: [30], seeds: 1, models: [linear], n_boot: 50, n_mult: 300}
   temporal: {seeds: 1, n_traj: 100}
+  gene: {prevalences: [0.0, 0.3], sigmas: [0.15], scenarios: {partial: {test_share: 0.5, record_test: true}}, n_traj: 150, seeds: 1, n_boot: 30, n_mult: 200, mc: 2000, fqi_iterations: 8, workers: 2}

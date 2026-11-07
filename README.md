@@ -34,7 +34,7 @@ Configs can be loaded with `AssessmentConfig.from_yaml(...)`; see `configs/case_
 | `src/mdp_diagnostics/data` | schema, validation, explicit preprocessing (grid, discretisation, terminal reward) |
 | `src/mdp_diagnostics/metrics` | Markov/information-gain + GCM, overlap, coverage, IS reliability, temporal indicators |
 | `src/mdp_diagnostics/framework` | criteria A–E, assessment logic, JSON/HTML reports |
-| `src/mdp_diagnostics/experiments` | synthetic environments (latent linear, PK/PD propofol), perturbations, runners |
+| `src/mdp_diagnostics/experiments` | synthetic environments (latent linear, PK/PD propofol, gene/medication), perturbations, offline RL agents (FQI) for downstream checks, runners |
 | `configs/` | experiment and case-study configurations |
 | `examples/case_study_icu.py` | eICU sepsis case study (data not included) |
 | `research/` | literature inventory, metric comparison, framework spec, validation plan, gap, open questions, results |

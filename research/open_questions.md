@@ -22,6 +22,9 @@
 14. **Comparability of gains across formulations.** Gains are relative to the base model's fit; should comparisons be reported jointly with out-of-fold R² or normalised?
 15. **Case-study interpretation.** The near-zero action-effect gain in eICU sepsis is consistent with closed-loop titration (confounding by indication) or misalignment. Is there a way (e.g. raw timestamps from the source eICU tables) to separate these?
 
+16. **Gene baseline (Exp 4): detection vs consequence.** A hidden patient trait revealed only through noisy responses produces small history gains (< δ) yet large agent regret. Should δ be calibrated against downstream regret (e.g. via this simulator), should the GCM rejection alone trigger a concern, or should the framework add a dedicated "latent patient type" diagnostic (e.g. a mixture / random-effects model of response)?
+17. **Revision recommendation.** "Add lags" did not help the agent in Exp 4. Should the framework recommend belief-state or summary features (e.g. cumulative non-response) when the lag profile keeps rising, and should agent-based evaluation become part of RQ3?
+
 ## Known limitations to discuss
 - RQ1 false-alarm rate (0.062 for the Markov state) slightly exceeds the 0.05 target; consider a cluster-wild bootstrap or a permutation calibration.
 - Diagnostics are blind to latent variables that leave no trace in recorded history.

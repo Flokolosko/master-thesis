@@ -1,0 +1,3463 @@
+{
+  "framework_on_state": [
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.004651929639582765
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.015407821161820675
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.015407821161820675
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.009560183016028716
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.010966181859986265
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.015407821161820675
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.004651929639582765
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0066345379224424916
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007884354454834121
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007884354454834121
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.006326893221216878
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007346836114699778
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007884354454834121
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0066345379224424916
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.006364819407166275
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.010497956272230113
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.025608523039690557
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.00518896314651721
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.011664574455717098
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.010497956272230113
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.006364819407166275
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.006756253071113873
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.004858204830167727
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.008067502478622708
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0035554642499331093
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007541856933258259
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.004858204830167727
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.006756253071113873
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0014246013614992684
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 0.8,
+      "ci": [
+        0.37553462976252533,
+        0.9637758913675698
+      ],
+      "share_concern": 0.6,
+      "mean_gain": 0.009684933536551376
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.025837337448804766
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.8,
+      "ci": [
+        0.37553462976252533,
+        0.9637758913675698
+      ],
+      "share_concern": 0.6,
+      "mean_gain": 0.011523814037243407
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 0.8,
+      "ci": [
+        0.37553462976252533,
+        0.9637758913675698
+      ],
+      "share_concern": 0.4,
+      "mean_gain": 0.00748541354194181
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "gcm_rejection": 0.8,
+      "ci": [
+        0.37553462976252533,
+        0.9637758913675698
+      ],
+      "share_concern": 0.6,
+      "mean_gain": 0.009684933536551376
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0014246013614992684
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.008931446827071206
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.2,
+      "mean_gain": 0.0029774621919098692
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.01065326788413962
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": 0.00023034456218716735
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.005690680137205762
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.2,
+      "mean_gain": 0.0029774621919098692
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "revised",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.008931446827071206
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.005765054305117006
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.010719969928983445
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.010719969928983445
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.00862711749590456
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.2,
+      "mean_gain": 0.002705162126599897
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0013219564059521554
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.009363212199029846
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.009363212199029846
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0067331851619791255
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": 0.0051357313910445805
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.6,
+      "ci": [
+        0.2307242812760128,
+        0.882379225767352
+      ],
+      "share_concern": 0.2,
+      "mean_gain": -0.00342937954181845
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 1.0,
+      "ci": [
+        0.5655175352168251,
+        1.0
+      ],
+      "share_concern": 0.4,
+      "mean_gain": 0.01179833417559852
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.022603481808133007
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 1.0,
+      "ci": [
+        0.5655175352168251,
+        1.0
+      ],
+      "share_concern": 0.6,
+      "mean_gain": 0.01680234154420578
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 0.8,
+      "ci": [
+        0.37553462976252533,
+        0.9637758913675698
+      ],
+      "share_concern": 0.4,
+      "mean_gain": 0.007688954292521711
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007941418076365173
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.004765862655696931
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0076487514740118
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.2,
+      "mean_gain": -0.0009536456779140519
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.004403239615512845
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.2,
+      "mean_gain": 0.012177444858343345
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 1.0,
+      "ci": [
+        0.5655175352168251,
+        1.0
+      ],
+      "share_concern": 1.0,
+      "mean_gain": 0.042937406284206524
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.022678701826595794
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 1.0,
+      "ci": [
+        0.5655175352168251,
+        1.0
+      ],
+      "share_concern": 1.0,
+      "mean_gain": 0.046799261274363055
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 1.0,
+      "ci": [
+        0.5655175352168251,
+        1.0
+      ],
+      "share_concern": 1.0,
+      "mean_gain": 0.04665573103530035
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.010815105734606579
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0022701072047667413
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.009956069429954246
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.2,
+      "mean_gain": 0.008335937929370688
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.2,
+      "mean_gain": -0.00248756682263742
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.004651929639582765
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.015407821161820675
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.015407821161820675
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.009560183016028716
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.010966181859986265
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.017401673486623435
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "revised",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.002970271660819838
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0066345379224424916
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007884354454834121
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007884354454834121
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.006326893221216878
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007346836114699778
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.005891010595357948
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.003927643818059115
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.006364819407166275
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.010497956272230113
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.025608523039690557
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.00518896314651721
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 0.4,
+      "ci": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.011664574455717098
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.011200177946367846
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.002666673855454607
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.006756253071113873
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.004858204830167727
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.008067502478622708
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0035554642499331093
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007541856933258259
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.003839983521121472
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.007005851176560612
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "history",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.0014246013614992684
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "naive",
+      "gcm_rejection": 0.8,
+      "ci": [
+        0.37553462976252533,
+        0.9637758913675698
+      ],
+      "share_concern": 0.6,
+      "mean_gain": 0.009684933536551376
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.025837337448804766
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.8,
+      "ci": [
+        0.37553462976252533,
+        0.9637758913675698
+      ],
+      "share_concern": 0.6,
+      "mean_gain": 0.011523814037243407
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "gcm_rejection": 0.8,
+      "ci": [
+        0.37553462976252533,
+        0.9637758913675698
+      ],
+      "share_concern": 0.4,
+      "mean_gain": 0.00748541354194181
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "gcm_rejection": 0.6,
+      "ci": [
+        0.2307242812760128,
+        0.882379225767352
+      ],
+      "share_concern": 0.4,
+      "mean_gain": 0.00347888321249145
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": 0.0017730497066821616
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "history",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.008931446827071206
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "naive",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.2,
+      "mean_gain": 0.0029774621919098692
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.01065326788413962
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "gcm_rejection": 0.2,
+      "ci": [
+        0.03622410863243014,
+        0.6244653702374747
+      ],
+      "share_concern": 0.0,
+      "mean_gain": 0.00023034456218716735
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.005690680137205762
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": 0.0005349553326762816
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "revised",
+      "gcm_rejection": 0.0,
+      "ci": [
+        0.0,
+        0.43448246478317476
+      ],
+      "share_concern": 0.0,
+      "mean_gain": -0.008769278985376446
+    }
+  ],
+  "agents": [
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.03446143133631887,
+      "v_agent": -3.9205840569983677,
+      "q_estimate": -3.7689182103594248
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -3.8861226256620482,
+      "q_estimate": -3.675705664432948,
+      "v_agent_constrained": -3.8833586794581323,
+      "q_estimate_constrained": -3.675067479895256
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -3.8861226256620482,
+      "q_estimate": -3.675705664432948
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.010937402197634949,
+      "v_agent": -3.897060027859683,
+      "q_estimate": -3.5042858437828577
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.005809237986241023,
+      "v_agent": -3.89193186364829,
+      "q_estimate": -3.685191269667439
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -3.8861226256620482,
+      "q_estimate": -3.675705664432948
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "revised",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.03446143133631887,
+      "v_agent": -3.9205840569983677,
+      "q_estimate": -3.7689182103594248,
+      "v_agent_constrained": -3.9061441465117435,
+      "q_estimate_constrained": -3.766049010314254
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.02421068233420396,
+      "v_agent": -5.381400225607965,
+      "q_estimate": -5.055395411977911
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.357189543273761,
+      "q_estimate": -4.808003118638511,
+      "v_agent_constrained": -5.334372190597963,
+      "q_estimate_constrained": -4.813155728540766
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.357189543273761,
+      "q_estimate": -4.808003118638511
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": -0.03601754366023435,
+      "v_agent": -5.321171999613528,
+      "q_estimate": -4.631507725330996
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.029749315589811864,
+      "v_agent": -5.386938858863573,
+      "q_estimate": -4.821074743414947
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.357189543273761,
+      "q_estimate": -4.808003118638511
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "revised",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.02421068233420396,
+      "v_agent": -5.381400225607965,
+      "q_estimate": -5.055395411977911,
+      "v_agent_constrained": -5.384796190938372,
+      "q_estimate_constrained": -5.047198539287192
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.3906023005950425,
+      "v_agent": -6.878113146196826,
+      "q_estimate": -4.245279412622802
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.3017996855213876,
+      "v_agent": -6.789310531123171,
+      "q_estimate": -4.251183711146146,
+      "v_agent_constrained": -6.838687702837065,
+      "q_estimate_constrained": -4.252438760990035
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -4.4875108456017845,
+      "q_estimate": -4.152195269849271
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.7553884201138734,
+      "v_agent": -7.242899265715657,
+      "q_estimate": -4.048360593953169
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.5686490361023333,
+      "v_agent": -7.056159881704116,
+      "q_estimate": -4.26799068080823
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.3017996855213876,
+      "v_agent": -6.789310531123171,
+      "q_estimate": -4.251183711146146
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "revised",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.3906023005950425,
+      "v_agent": -6.878113146196826,
+      "q_estimate": -4.245279412622802,
+      "v_agent_constrained": -6.933851876853042,
+      "q_estimate_constrained": -4.249920983394253
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.2641385296042587,
+      "v_agent": -8.24912163550536,
+      "q_estimate": -5.68129897833864
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.1163282047242333,
+      "v_agent": -8.101311310625334,
+      "q_estimate": -5.459235268412333,
+      "v_agent_constrained": -8.073409216534948,
+      "q_estimate_constrained": -5.466409245400887
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.984983105901103,
+      "q_estimate": -5.312776319844713
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.321670971723636,
+      "v_agent": -8.306654077624739,
+      "q_estimate": -5.230047414092817
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.3136425730302586,
+      "v_agent": -8.29862567893136,
+      "q_estimate": -5.490570798755482
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.1163282047242333,
+      "v_agent": -8.101311310625334,
+      "q_estimate": -5.459235268412333
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "revised",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.2641385296042587,
+      "v_agent": -8.24912163550536,
+      "q_estimate": -5.68129897833864,
+      "v_agent_constrained": -8.167436761741047,
+      "q_estimate_constrained": -5.679908523878661
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.1207837605704527,
+      "v_agent": -8.201117672532172,
+      "q_estimate": -4.8107282937612466
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.3208251858616493,
+      "v_agent": -8.40115909782337,
+      "q_estimate": -4.843065534710663,
+      "v_agent_constrained": -8.503180352997063,
+      "q_estimate_constrained": -4.849009344425623
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.080333911961721,
+      "q_estimate": -4.599620458703335
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.6468001270313364,
+      "v_agent": -8.727134038993057,
+      "q_estimate": -4.7053449452697365
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.3682680819582247,
+      "v_agent": -8.448601993919945,
+      "q_estimate": -4.87809288333216
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.3208251858616493,
+      "v_agent": -8.40115909782337,
+      "q_estimate": -4.843065534710663
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "revised",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.1207837605704527,
+      "v_agent": -8.201117672532172,
+      "q_estimate": -4.8107282937612466,
+      "v_agent_constrained": -8.128871260740645,
+      "q_estimate_constrained": -4.781937938440347
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.0606547455339403,
+      "v_agent": -9.727005429064523,
+      "q_estimate": -6.434413359593739
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.1915997353843863,
+      "v_agent": -9.857950418914967,
+      "q_estimate": -6.127438385396092,
+      "v_agent_constrained": -9.842361648487193,
+      "q_estimate_constrained": -6.1228287950683775
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -6.666350683530583,
+      "q_estimate": -5.715610766920715
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.50968354429133,
+      "v_agent": -10.176034227821912,
+      "q_estimate": -5.951504096868177
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.1559565901877606,
+      "v_agent": -9.822307273718343,
+      "q_estimate": -6.188196466596027
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.1915997353843863,
+      "v_agent": -9.857950418914967,
+      "q_estimate": -6.127438385396092
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "revised",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.0606547455339403,
+      "v_agent": -9.727005429064523,
+      "q_estimate": -6.434413359593739,
+      "v_agent_constrained": -9.883664668433324,
+      "q_estimate_constrained": -6.407766679874328
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -5.963622177776389,
+      "regret_vs_oracle_agent": 0.0755628871486386,
+      "v_agent": -4.167865257341272,
+      "q_estimate": -3.742175127944016
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -5.963622177776389,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -4.092302370192633,
+      "q_estimate": -3.6362278730134165,
+      "v_agent_constrained": -4.08477450444507,
+      "q_estimate_constrained": -3.632342594929201
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -5.963622177776389,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -4.092302370192633,
+      "q_estimate": -3.6362278730134165
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -5.963622177776389,
+      "regret_vs_oracle_agent": -0.10906523744664032,
+      "v_agent": -3.9832371327459923,
+      "q_estimate": -3.4562872423777926
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -5.963622177776389,
+      "regret_vs_oracle_agent": -0.002962815288839238,
+      "v_agent": -4.089339554903793,
+      "q_estimate": -3.643511317926632
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -7.616942561775128,
+      "regret_vs_oracle_agent": 0.26052599114463587,
+      "v_agent": -5.66106314103099,
+      "q_estimate": -5.003680244863935
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -7.616942561775128,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.400537149886354,
+      "q_estimate": -4.722537638956996,
+      "v_agent_constrained": -5.384538429054147,
+      "q_estimate_constrained": -4.72941739569233
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -7.616942561775128,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.400537149886354,
+      "q_estimate": -4.722537638956996
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -7.616942561775128,
+      "regret_vs_oracle_agent": -0.05574910364978809,
+      "v_agent": -5.344788046236566,
+      "q_estimate": -4.556698851338297
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -7.616942561775128,
+      "regret_vs_oracle_agent": 0.11049773107036209,
+      "v_agent": -5.511034880956716,
+      "q_estimate": -4.757361628003891
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -7.045246109936052,
+      "regret_vs_oracle_agent": 1.6295694073882294,
+      "v_agent": -6.393246925022234,
+      "q_estimate": -4.701794737324908
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -7.045246109936052,
+      "regret_vs_oracle_agent": 1.7816999133444313,
+      "v_agent": -6.545377430978435,
+      "q_estimate": -4.645370082676858,
+      "v_agent_constrained": -6.543314314545495,
+      "q_estimate_constrained": -4.652993706716903
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -7.045246109936052,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -4.763677517634004,
+      "q_estimate": -4.08357494234806
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -7.045246109936052,
+      "regret_vs_oracle_agent": 1.8786228846127444,
+      "v_agent": -6.642300402246749,
+      "q_estimate": -4.458177775637477
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -7.045246109936052,
+      "regret_vs_oracle_agent": 1.9041049074504812,
+      "v_agent": -6.667782425084485,
+      "q_estimate": -4.678292833196794
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -8.807131171199872,
+      "regret_vs_oracle_agent": 1.8815037492129072,
+      "v_agent": -8.065411112126881,
+      "q_estimate": -6.121118806017108
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -8.807131171199872,
+      "regret_vs_oracle_agent": 1.7900865194168791,
+      "v_agent": -7.973993882330854,
+      "q_estimate": -5.829644429821703,
+      "v_agent_constrained": -7.921424674028917,
+      "q_estimate_constrained": -5.827694447448083
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -8.807131171199872,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -6.183907362913975,
+      "q_estimate": -5.233050039192937
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -8.807131171199872,
+      "regret_vs_oracle_agent": 1.7709458982356758,
+      "v_agent": -7.954853261149651,
+      "q_estimate": -5.615803604851477
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -8.807131171199872,
+      "regret_vs_oracle_agent": 1.8493371607544127,
+      "v_agent": -8.033244523668387,
+      "q_estimate": -5.876285238331963
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -8.214642157110811,
+      "regret_vs_oracle_agent": 2.0214393059883813,
+      "v_agent": -7.216399470162321,
+      "q_estimate": -5.49866932590274
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -8.214642157110811,
+      "regret_vs_oracle_agent": 2.352601496221159,
+      "v_agent": -7.547561660395099,
+      "q_estimate": -5.310949349667053,
+      "v_agent_constrained": -7.527429077904759,
+      "q_estimate_constrained": -5.319662080560341
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -8.214642157110811,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.194960164173939,
+      "q_estimate": -4.466563708453025
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -8.214642157110811,
+      "regret_vs_oracle_agent": 2.335883336815636,
+      "v_agent": -7.530843500989576,
+      "q_estimate": -5.272758888100389
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -8.214642157110811,
+      "regret_vs_oracle_agent": 2.3154139059869165,
+      "v_agent": -7.5103740701608555,
+      "q_estimate": -5.3843010920768135
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -10.09676412889447,
+      "regret_vs_oracle_agent": 2.4175427537877914,
+      "v_agent": -9.245432504353435,
+      "q_estimate": -7.126154071435475
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -10.09676412889447,
+      "regret_vs_oracle_agent": 2.4449312213242362,
+      "v_agent": -9.27282097188988,
+      "q_estimate": -6.6831015135919385,
+      "v_agent_constrained": -9.314619315714618,
+      "q_estimate_constrained": -6.707651101799877
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -10.09676412889447,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -6.827889750565643,
+      "q_estimate": -5.6111834633032895
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -10.09676412889447,
+      "regret_vs_oracle_agent": 2.60151951463285,
+      "v_agent": -9.429409265198494,
+      "q_estimate": -6.693981894164
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -10.09676412889447,
+      "regret_vs_oracle_agent": 2.479478449320439,
+      "v_agent": -9.307368199886083,
+      "q_estimate": -6.762996026781787
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.03446143133631887,
+      "v_agent": -3.9205840569983677,
+      "q_estimate": -3.7689182103594248
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -3.8861226256620482,
+      "q_estimate": -3.675705664432948,
+      "v_agent_constrained": -3.8833586794581323,
+      "q_estimate_constrained": -3.675067479895256
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -3.8861226256620482,
+      "q_estimate": -3.675705664432948
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.010937402197634949,
+      "v_agent": -3.897060027859683,
+      "q_estimate": -3.5042858437828577
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.005809237986241023,
+      "v_agent": -3.89193186364829,
+      "q_estimate": -3.685191269667439
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.0056834432434796685,
+      "v_agent": -3.8918060689055283,
+      "q_estimate": -3.677004044192666
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "representation": "revised",
+      "v_behaviour": -5.402124077550592,
+      "regret_vs_oracle_agent": 0.026286873844240954,
+      "v_agent": -3.91240949950629,
+      "q_estimate": -3.761592521427255,
+      "v_agent_constrained": -3.9128147259475328,
+      "q_estimate_constrained": -3.7634518528846703
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.02421068233420396,
+      "v_agent": -5.381400225607965,
+      "q_estimate": -5.055395411977911
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.357189543273761,
+      "q_estimate": -4.808003118638511,
+      "v_agent_constrained": -5.334372190597963,
+      "q_estimate_constrained": -4.813155728540766
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.357189543273761,
+      "q_estimate": -4.808003118638511
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": -0.03601754366023435,
+      "v_agent": -5.321171999613528,
+      "q_estimate": -4.631507725330996
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.029749315589811864,
+      "v_agent": -5.386938858863573,
+      "q_estimate": -4.821074743414947
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.01017421606284028,
+      "v_agent": -5.367363759336602,
+      "q_estimate": -4.816809595722464
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "representation": "revised",
+      "v_behaviour": -7.068300880043753,
+      "regret_vs_oracle_agent": 0.07696225910539489,
+      "v_agent": -5.434151802379157,
+      "q_estimate": -5.059922366395566,
+      "v_agent_constrained": -5.377487009133629,
+      "q_estimate_constrained": -5.061837852127561
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.3906023005950425,
+      "v_agent": -6.878113146196826,
+      "q_estimate": -4.245279412622802
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.3017996855213876,
+      "v_agent": -6.789310531123171,
+      "q_estimate": -4.251183711146146,
+      "v_agent_constrained": -6.838687702837065,
+      "q_estimate_constrained": -4.252438760990035
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -4.4875108456017845,
+      "q_estimate": -4.152195269849271
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.7553884201138734,
+      "v_agent": -7.242899265715657,
+      "q_estimate": -4.048360593953169
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.5686490361023333,
+      "v_agent": -7.056159881704116,
+      "q_estimate": -4.26799068080823
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.5776659988323365,
+      "v_agent": -7.06517684443412,
+      "q_estimate": -4.221746981942534
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "representation": "revised",
+      "v_behaviour": -6.176576042468601,
+      "regret_vs_oracle_agent": 2.526463889481522,
+      "v_agent": -7.013974735083306,
+      "q_estimate": -4.270208899643283,
+      "v_agent_constrained": -5.664031424909937,
+      "q_estimate_constrained": -4.488804993579394
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.2641385296042587,
+      "v_agent": -8.24912163550536,
+      "q_estimate": -5.68129897833864
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.1163282047242333,
+      "v_agent": -8.101311310625334,
+      "q_estimate": -5.459235268412333,
+      "v_agent_constrained": -8.073409216534948,
+      "q_estimate_constrained": -5.466409245400887
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.984983105901103,
+      "q_estimate": -5.312776319844713
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.321670971723636,
+      "v_agent": -8.306654077624739,
+      "q_estimate": -5.230047414092817
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.3136425730302586,
+      "v_agent": -8.29862567893136,
+      "q_estimate": -5.490570798755482
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.272005572380097,
+      "v_agent": -8.2569886782812,
+      "q_estimate": -5.417128848225627
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "representation": "revised",
+      "v_behaviour": -7.895602545546285,
+      "regret_vs_oracle_agent": 2.5328780954122947,
+      "v_agent": -8.517861201313394,
+      "q_estimate": -5.699356765907647,
+      "v_agent_constrained": -7.151392308121061,
+      "q_estimate_constrained": -5.89208525416007
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "history",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.1207837605704527,
+      "v_agent": -8.201117672532172,
+      "q_estimate": -4.8107282937612466
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "naive",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.3208251858616493,
+      "v_agent": -8.40115909782337,
+      "q_estimate": -4.843065534710663,
+      "v_agent_constrained": -8.503180352997063,
+      "q_estimate_constrained": -4.849009344425623
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "oracle",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -5.080333911961721,
+      "q_estimate": -4.599620458703335
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_drop_m2",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.6468001270313364,
+      "v_agent": -8.727134038993057,
+      "q_estimate": -4.7053449452697365
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "random_noise",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.3682680819582247,
+      "v_agent": -8.448601993919945,
+      "q_estimate": -4.87809288333216
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "recorded",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.8078173794539394,
+      "v_agent": -8.888151291415658,
+      "q_estimate": -4.627385680097207
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "representation": "revised",
+      "v_behaviour": -7.009613522232544,
+      "regret_vs_oracle_agent": 3.870208549091454,
+      "v_agent": -8.950542461053175,
+      "q_estimate": -4.727119395552642,
+      "v_agent_constrained": -6.403713244136192,
+      "q_estimate_constrained": -5.13536454667065
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "history",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.0606547455339403,
+      "v_agent": -9.727005429064523,
+      "q_estimate": -6.434413359593739
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "naive",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.1915997353843863,
+      "v_agent": -9.857950418914967,
+      "q_estimate": -6.127438385396092,
+      "v_agent_constrained": -9.842361648487193,
+      "q_estimate_constrained": -6.1228287950683775
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "oracle",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 0.0,
+      "v_agent": -6.666350683530583,
+      "q_estimate": -5.715610766920715
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_drop_m2",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.50968354429133,
+      "v_agent": -10.176034227821912,
+      "q_estimate": -5.951504096868177
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "random_noise",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.1559565901877606,
+      "v_agent": -9.822307273718343,
+      "q_estimate": -6.188196466596027
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "recorded",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 3.946959843831192,
+      "v_agent": -10.613310527361772,
+      "q_estimate": -5.899774678259499
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "representation": "revised",
+      "v_behaviour": -8.780259775112214,
+      "regret_vs_oracle_agent": 4.147579626244343,
+      "v_agent": -10.813930309774923,
+      "q_estimate": -6.224755875688179,
+      "v_agent_constrained": -8.103055606231127,
+      "q_estimate_constrained": -6.633370731766368
+    }
+  ],
+  "verdicts_naive": [
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 5
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[D.overlap]": {
+        "inconclusive": 4,
+        "no_concern_detected": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "inconclusive": 5
+      }
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[D.overlap]": {
+        "inconclusive": 5
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "inconclusive": 3,
+        "concern": 2
+      }
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[B.stationarity]": {
+        "inconclusive": 3,
+        "no_concern_detected": 1,
+        "concern": 1
+      },
+      "status[D.overlap]": {
+        "inconclusive": 4,
+        "concern": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "inconclusive": 3,
+        "no_concern_detected": 2
+      },
+      "status[D.overlap]": {
+        "inconclusive": 4,
+        "concern": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "concern": 3,
+        "inconclusive": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "inconclusive": 4,
+        "concern": 1
+      },
+      "status[D.overlap]": {
+        "concern": 4,
+        "inconclusive": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "confounded",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "inconclusive": 2,
+        "no_concern_detected": 2,
+        "concern": 1
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[D.overlap]": {
+        "concern": 4,
+        "inconclusive": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 5
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 5
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[D.overlap]": {
+        "inconclusive": 5
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "inconclusive": 5
+      }
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[D.overlap]": {
+        "inconclusive": 5
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "inconclusive": 3,
+        "concern": 2
+      }
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "inconclusive": 3,
+        "concern": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[B.stationarity]": {
+        "inconclusive": 5
+      },
+      "status[D.overlap]": {
+        "inconclusive": 5
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 4,
+        "inconclusive": 1
+      }
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "inconclusive": 3,
+        "no_concern_detected": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "inconclusive": 3,
+        "no_concern_detected": 2
+      },
+      "status[D.overlap]": {
+        "inconclusive": 3,
+        "concern": 2
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 4,
+        "inconclusive": 1
+      }
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "concern": 5
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "concern": 4,
+        "inconclusive": 1
+      },
+      "status[D.overlap]": {
+        "concern": 3,
+        "inconclusive": 2
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "hidden",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "inconclusive": 5
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[D.overlap]": {
+        "concern": 4,
+        "inconclusive": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 5
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[D.overlap]": {
+        "inconclusive": 4,
+        "no_concern_detected": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "inconclusive": 5
+      }
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.0,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[D.overlap]": {
+        "inconclusive": 5
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "inconclusive": 3,
+        "concern": 2
+      }
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 4,
+        "inconclusive": 1
+      },
+      "status[B.stationarity]": {
+        "inconclusive": 3,
+        "no_concern_detected": 1,
+        "concern": 1
+      },
+      "status[D.overlap]": {
+        "inconclusive": 4,
+        "concern": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.15,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "inconclusive": 3,
+        "no_concern_detected": 2
+      },
+      "status[D.overlap]": {
+        "inconclusive": 4,
+        "concern": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.15,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "concern": 3,
+        "inconclusive": 2
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "inconclusive": 4,
+        "concern": 1
+      },
+      "status[D.overlap]": {
+        "concern": 4,
+        "inconclusive": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    },
+    {
+      "scenario": "partial",
+      "prevalence": 0.3,
+      "sigma": 0.3,
+      "status[B.action_alignment]": {
+        "no_concern_detected": 5
+      },
+      "status[B.state_sufficiency]": {
+        "inconclusive": 2,
+        "no_concern_detected": 2,
+        "concern": 1
+      },
+      "status[B.reward_sufficiency]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[B.stationarity]": {
+        "no_concern_detected": 3,
+        "inconclusive": 2
+      },
+      "status[D.overlap]": {
+        "concern": 4,
+        "inconclusive": 1
+      },
+      "status[D.coverage]": {
+        "no_concern_detected": 5
+      },
+      "status[D.ope_reliability]": {
+        "serious_concern": 5
+      },
+      "status[D.behaviour_history]": {
+        "concern": 5
+      }
+    }
+  ],
+  "rq": {
+    "spearman_naive_gain_vs_regret": {
+      "value": 0.4591438399078202,
+      "lower": 0.29157807052653706,
+      "upper": 0.6051729392824853
+    },
+    "naive_regret_by_verdict": {
+      "concern": 2.47519580336466,
+      "no_concern_or_inconclusive": 1.5203224908797357,
+      "n_concern": 15,
+      "n_other": 75
+    },
+    "revision_vs_random": {
+      "n_flagged": 15,
+      "recommended": "history",
+      "mean_value_gain_recommended": 0.010808277713079305,
+      "mean_value_gain_random": -0.07037838951951082,
+      "difference": 0.08118666723259012,
+      "difference_ci": [
+        -0.2986918334007154,
+        0.40057676420172583
+      ],
+      "definition": "value gain = true value of the agent on the revised formulation minus the naive agent (same dataset); recommended = 'revised' (recorded gene + 2 lags) where a test result is recorded, else 'history'."
+    },
+    "recorded_gene_agents": {
+      "v_agent_minus_naive": {
+        "mean": -0.5366443371844896,
+        "ci": [
+          -0.7827861719542514,
+          -0.3257720913022917
+        ],
+        "n": 20
+      },
+      "v_agent_constrained_minus_naive": {
+        "mean": 1.4568846937721318,
+        "ci": [
+          1.1981682504881692,
+          1.7622226847720333
+        ],
+        "n": 20
+      }
+    },
+    "share_naive_agent_worse_than_clinician": {
+      "0.0": 0.0,
+      "0.15": 0.5666666666666667,
+      "0.3": 0.6666666666666666
+    },
+    "optimism": [
+      {
+        "scenario": "confounded",
+        "representation": "history",
+        "opt": 2.060218083208575
+      },
+      {
+        "scenario": "confounded",
+        "representation": "naive",
+        "opt": 2.2047353074476606
+      },
+      {
+        "scenario": "confounded",
+        "representation": "oracle",
+        "opt": 0.5330965195902511
+      },
+      {
+        "scenario": "confounded",
+        "representation": "random_drop_m2",
+        "opt": 2.59998383638847
+      },
+      {
+        "scenario": "confounded",
+        "representation": "random_noise",
+        "opt": 2.262241451368557
+      },
+      {
+        "scenario": "confounded",
+        "representation": "recorded",
+        "opt": 2.2047353074476606
+      },
+      {
+        "scenario": "confounded",
+        "representation": "revised",
+        "opt": 2.060218083208575
+      },
+      {
+        "scenario": "hidden",
+        "representation": "history",
+        "opt": 1.425971016091492
+      },
+      {
+        "scenario": "hidden",
+        "representation": "naive",
+        "opt": 1.6674604296575486
+      },
+      {
+        "scenario": "hidden",
+        "representation": "oracle",
+        "opt": 0.7850227750164708
+      },
+      {
+        "scenario": "hidden",
+        "representation": "random_drop_m2",
+        "opt": 1.8052872253495995
+      },
+      {
+        "scenario": "hidden",
+        "representation": "random_noise",
+        "opt": 1.6693992530570736
+      },
+      {
+        "scenario": "partial",
+        "representation": "history",
+        "opt": 2.060218083208575
+      },
+      {
+        "scenario": "partial",
+        "representation": "naive",
+        "opt": 2.2047353074476606
+      },
+      {
+        "scenario": "partial",
+        "representation": "oracle",
+        "opt": 0.5330965195902511
+      },
+      {
+        "scenario": "partial",
+        "representation": "random_drop_m2",
+        "opt": 2.59998383638847
+      },
+      {
+        "scenario": "partial",
+        "representation": "random_noise",
+        "opt": 2.262241451368557
+      },
+      {
+        "scenario": "partial",
+        "representation": "recorded",
+        "opt": 2.5704912235491473
+      },
+      {
+        "scenario": "partial",
+        "representation": "revised",
+        "opt": 2.4833190307492794
+      }
+    ]
+  },
+  "config": {
+    "prevalences": [
+      0.0,
+      0.15,
+      0.3
+    ],
+    "sigmas": [
+      0.15,
+      0.3
+    ],
+    "scenarios": {
+      "hidden": {
+        "test_share": 0.0,
+        "record_test": true
+      },
+      "partial": {
+        "test_share": 0.5,
+        "record_test": true
+      },
+      "confounded": {
+        "test_share": 0.5,
+        "record_test": false
+      }
+    },
+    "n_traj": 300,
+    "horizon": 12,
+    "seeds": 5,
+    "lags": 2,
+    "model": "gbm",
+    "n_boot": 100,
+    "n_mult": 500,
+    "gamma": 0.95,
+    "fqi_iterations": 15,
+    "mc": 10000,
+    "workers": 6
+  },
+  "runtime_s": 1485.5
+}
