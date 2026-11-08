@@ -1,0 +1,347 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>MDP Diagnostics Progress</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap">
+<style>
+/* Layout: single reading column (~72ch) with wide tables allowed to scroll; status pills carry state. */
+:root {
+  --bg: #f7f8f9;
+  --surface: #ffffff;
+  --fg: #1b2228;
+  --muted: #5b6670;
+  --line: #dde2e6;
+  --accent: #0e6a78;
+  --accent-soft: #e2f0f2;
+  --ok: #1f7a46; --ok-bg: #e3f3e9;
+  --warn: #8a5a00; --warn-bg: #fbf0d9;
+  --bad: #a3322b; --bad-bg: #f9e3e1;
+  --na: #55606a; --na-bg: #eceff1;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171b; --surface: #182026; --fg: #e3e8ec; --muted: #9aa6b0; --line: #2a343c;
+    --accent: #5cc3cf; --accent-soft: #173238;
+    --ok: #7fd6a0; --ok-bg: #173226; --warn: #f0c46a; --warn-bg: #3a2e14;
+    --bad: #f19a92; --bad-bg: #3d1f1d; --na: #aab4bc; --na-bg: #252e35;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171b; --surface: #182026; --fg: #e3e8ec; --muted: #9aa6b0; --line: #2a343c;
+  --accent: #5cc3cf; --accent-soft: #173238;
+  --ok: #7fd6a0; --ok-bg: #173226; --warn: #f0c46a; --warn-bg: #3a2e14;
+  --bad: #f19a92; --bad-bg: #3d1f1d; --na: #aab4bc; --na-bg: #252e35;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+}
+.page {
+  max-width: 820px; margin: 0 auto;
+  padding-block: 40px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 40px;
+}
+header { display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid var(--line); padding-bottom: 28px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(28px, 5vw, 38px); line-height: 1.2; margin: 0; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0; max-width: 65ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.meta b { color: var(--fg); font-weight: 500; }
+section { display: flex; flex-direction: column; gap: 14px; }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 23px; margin: 0; text-wrap: balance; }
+h3 { font-size: 16px; font-weight: 600; margin: 8px 0 0; }
+p { margin: 0; max-width: 68ch; }
+ul, ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; max-width: 68ch; }
+code, .mono { font-family: var(--font-mono); font-size: .88em; }
+.summary { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); background: var(--bg); }
+tr:last-child td { border-bottom: none; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 13.5px; white-space: nowrap; }
+.pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.ok { color: var(--ok); background: var(--ok-bg); }
+.warn { color: var(--warn); background: var(--warn-bg); }
+.bad { color: var(--bad); background: var(--bad-bg); }
+.na { color: var(--na); background: var(--na-bg); }
+.steps { list-style: none; padding: 0; gap: 0; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 34px 1fr; gap: 4px 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.steps li:first-child { border-top: none; }
+.steps li::before { counter-increment: s; content: counter(s); font-family: var(--font-mono); font-size: 13px; color: var(--accent); background: var(--accent-soft); border-radius: 6px; width: 28px; height: 28px; display: grid; place-items: center; }
+.steps li > div { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.steps strong { font-weight: 600; }
+.steps span { color: var(--muted); font-size: 15px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.box h3 { margin: 0; }
+.box p, .box li { font-size: 15px; }
+.finding { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; display: flex; flex-direction: column; gap: 6px; }
+.note { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding-top: 18px; font-size: 13.5px; color: var(--muted); }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="page">
+  <header>
+    <div class="eyebrow">Master's thesis &middot; progress report</div>
+    <h1>Assessing the empirical adequacy of MDP models in healthcare</h1>
+    <p class="lede">What has been built, what the validation experiments show, and what still needs a decision with the supervisor.</p>
+    <div class="meta">
+      <span>Date <b>5 Nov 2026</b></span>
+      <span>Branch <b>feature/mdp-diagnostics</b></span>
+      <span>Commit <b>a6fef3b</b></span>
+      <span>Tests <b>38 passing</b></span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Status at a glance</h2>
+    <div class="summary">
+      <p>The diagnostic framework is implemented as the Python package <code>mdp_diagnostics</code>. It has been validated in four controlled experiments and applied to one real ICU cohort. Two of the three research questions meet their pre-set targets, and the third meets its power target but slightly misses the false-alarm target.</p>
+      <p>The thesis text, the proposal and the earlier idea notes were not changed. Work is committed on a feature branch and not merged into <code>main</code>.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Proposal target</th><th>Result</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>RQ1: false-alarm rate &le; 0.05</td><td class="num">0.062 (25 / 400)</td><td><span class="pill warn">Slightly missed</span></td></tr>
+          <tr><td>RQ1: power &ge; 0.8 at moderate violation</td><td class="num">&ge; 0.95 from strength 0.2</td><td><span class="pill ok">Met</span></td></tr>
+          <tr><td>RQ2: Spearman &rho; (diagnostic vs value error) &ge; 0.5</td><td class="num">0.74 [0.69, 0.79]</td><td><span class="pill ok">Met</span></td></tr>
+          <tr><td>RQ3: recommended revision beats random revision (95% CI excludes 0)</td><td class="num">0.94 [0.84, 1.05]</td><td><span class="pill ok">Met</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>What was done</h2>
+    <ol class="steps">
+      <li><div><strong>Repository and proposal audit</strong><span>The final proposal was taken as the reference. The task description's "offline-RL feasibility" topic was mapped onto the proposal's separation of MDP adequacy and policy-learning feasibility.</span></div></li>
+      <li><div><strong>Literature research</strong><span>Three parallel searches covered seven areas: problem suitability, Markov property and state sufficiency, overlap, coverage, temporal data quality, confounding, and off-policy evaluation reliability. Result: about 65 methods documented with definition, requirements, limitations, timing and a recommendation, and about 115 references confirmed to exist.</span></div></li>
+      <li><div><strong>Metric selection</strong><span>Established methods were preferred and adapted. The three originally proposed metrics (AOI, ESAC, TOR) were checked against the literature and the experiments.</span></div></li>
+      <li><div><strong>Framework design and implementation</strong><span>Five levels (A–E), two questions kept separate, conservative statuses, no overall score. Python package, JSON/HTML reports, 38 automated tests.</span></div></li>
+      <li><div><strong>Synthetic validation</strong><span>Four experiments with known ground truth: overlap and coverage, hidden state (RQ1–RQ3), a PK/PD anaesthesia simulator, and temporal data defects.</span></div></li>
+      <li><div><strong>Clinical case study</strong><span>Norepinephrine titration in 3,362 eICU sepsis stays with five alternative formulations, plus the eICU cardiac-arrest cohort as a boundary case.</span></div></li>
+      <li><div><strong>Critical evaluation and documentation</strong><span>Research gap, open questions, negative results and bugs found by the experiments are written up in <code>research/</code>.</span></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>The framework</h2>
+    <p>The framework assesses a concrete MDP formulation of observational clinical data before any reinforcement-learning agent is trained. It answers two questions separately, because an MDP can be a sound description of practice while the data still cannot support evaluating a different policy.</p>
+    <div class="grid2">
+      <div class="box">
+        <h3>Question A: is MDP modelling appropriate?</h3>
+        <ul>
+          <li>Level A: clinical problem suitability (expert metadata plus data proxies)</li>
+          <li>Level B: formulation validity: state and reward sufficiency, decision interval, action alignment, stationarity, transition estimability</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Question B: does the dataset support offline RL?</h3>
+        <ul>
+          <li>Level C: temporal data quality</li>
+          <li>Level D: overlap, coverage, importance-sampling reliability, behaviour-history dependence; unmeasured confounding is always reported as not assessable</li>
+        </ul>
+      </div>
+    </div>
+    <p>Level E (deployment readiness) is qualitative and answered only by clinical metadata. Each criterion reports a value, an uncertainty interval, its assumptions, a status and a recommended next step. The strongest positive status is <span class="pill ok">no concern detected</span>; the framework never states that data are safe, valid or causally identified.</p>
+
+    <h3>Methods and metrics per level</h3>
+    <div class="box">
+      <h3>Shared core: cross-fitted information gain plus GCM test</h3>
+      <p>Most of Levels A, B and D use one estimator. It asks whether extra information Z improves the prediction of a target Y when X is already known. The <strong>gain</strong> is the out-of-sample improvement in log-likelihood (Gaussian for continuous targets, log-loss for actions) when Z is added. Its unit is nats per transition. It uses 5-fold cross-fitting grouped by patient, and a bootstrap over trajectories gives the CI. For Gaussian residuals the gain estimates the conditional mutual information I(Y; Z | X). Where marked, the <strong>GCM conditional-independence test</strong> (Shah &amp; Peters 2020), clustered by trajectory, runs alongside it.</p>
+      <p><strong>Equivalence rule</strong> with relevance threshold &delta; = 0.01 nats:</p>
+      <ul>
+        <li><span class="pill ok">No concern detected</span> when the upper CI bound is below &delta;, even if the test rejects.</li>
+        <li><span class="pill warn">Concern</span> when the lower bound is at least &delta; and the test rejects.</li>
+        <li>Otherwise <span class="pill na">Inconclusive</span>.</li>
+      </ul>
+    </div>
+
+    <p><strong>Question A, Level A: clinical problem suitability</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criterion</th><th>Method / metric</th><th>Status rule</th></tr></thead>
+        <tbody>
+          <tr><td>Clinical questions (6)</td><td>Expert metadata: sequential decisions, several acceptable actions, stochastic response, delayed effects, trade-offs, reward aligned with the clinical goal</td><td>Taken from the config; <span class="pill na">expert judgement required</span> if missing</td></tr>
+          <tr><td>Actions recorded</td><td>Whether an action variable exists</td><td>None recorded &rarr; <span class="pill bad">Serious concern</span> and the assessment stops (cardiac-arrest case)</td></tr>
+          <tr><td>Action multiplicity</td><td>Action levels used in &ge; 1% of decisions; share of trajectories that change action at least once</td><td>&lt; 2 levels &rarr; serious; &lt; 10% change &rarr; concern (a bandit formulation may be enough)</td></tr>
+          <tr><td>Delayed effects</td><td>Gain from past actions for predicting the next state</td><td>A detected gain supports a sequential formulation; otherwise inconclusive</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Question A, Level B: formulation validity</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criterion</th><th>Method / metric</th><th>Status rule</th></tr></thead>
+        <tbody>
+          <tr><td>State sufficiency (Markov property)</td><td>Gain from k lags of states and actions for predicting s&prime; given (s, a), plus the GCM test and a lag profile k = 1&hellip;K; next-state dimensions with out-of-fold R&sup2; &ge; 0.999 are excluded</td><td>Equivalence rule</td></tr>
+          <tr><td>Reward sufficiency</td><td>Same, with r as the target given (s, a, s&prime;), plus the GCM test</td><td>Equivalence rule; not assessable without a reward</td></tr>
+          <tr><td>Decision interval</td><td>Share of grid steps that combine more than one distinct raw action</td><td>&ge; 20% &rarr; concern</td></tr>
+          <tr><td>Action alignment</td><td>Gain from a for predicting s&prime; given s</td><td>Inverted: <em>no</em> detectable effect &rarr; concern (misalignment or closed-loop titration)</td></tr>
+          <tr><td>Stationarity</td><td>Gain from time / step index for predicting s&prime;</td><td>Equivalence rule</td></tr>
+          <tr><td>Transition estimability</td><td>Epistemic-to-aleatoric ratio from an ensemble of transition models; out-of-fold R&sup2; of s&prime;</td><td>Ratio &ge; 0.25 &rarr; concern</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Question B, Level C: temporal data quality</strong> (on raw data, before the grid)</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criterion</th><th>Method / metric</th><th>Status rule</th></tr></thead>
+        <tbody>
+          <tr><td>Missingness</td><td>Share of missing state values on decision rows</td><td>&ge; 30% &rarr; concern</td></tr>
+          <tr><td>Sampling</td><td>Coefficient of variation of sampling intervals; share of trajectories with a gap longer than 3&times; the median interval</td><td>Gap share &ge; 20% &rarr; concern</td></tr>
+          <tr><td>Timestamps</td><td>Heaping: share of timestamps on round units</td><td>&ge; 50% &rarr; concern (not validated)</td></tr>
+          <tr><td>Alignment</td><td>90th-percentile observation age at decision time; actions taken without a fresh observation</td><td>Inconclusive if values are missing</td></tr>
+          <tr><td>Informative missingness</td><td>Outcome AUC from measurement patterns; gain from measurement indicators for predicting the action</td><td>AUC &ge; 0.60 with lower bound &gt; 0.5 &rarr; concern</td></tr>
+          <tr><td>Trajectory length</td><td>Median length; share of short trajectories</td><td>&ge; 25% short &rarr; concern</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Question B, Level D: overlap, coverage, OPE reliability, confounding</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criterion</th><th>Method / metric</th><th>Status rule</th></tr></thead>
+        <tbody>
+          <tr><td>Behaviour-history dependence (evaluated first)</td><td>Gain from history for predicting the action given s, i.e. whether clinicians use information the state omits</td><td>Equivalence rule; a concern is a <em>symptom</em> of confounding, not proof, and triggers the history-aware reruns below</td></tr>
+          <tr><td>Overlap (positivity)</td><td>Cross-fitted behaviour policy &pi;<sub>b</sub>: <strong>support-violation rate</strong> (share of decisions where some declared action has &pi;<sub>b</sub> &lt; 0.01), with CI. Also reported: normalised action entropy, propensity percentiles, model-free kNN action diversity, AOI as a baseline. <strong>Calibration (ECE)</strong> acts as a gate.</td><td>SVR &ge; 10% &rarr; concern, &ge; 50% &rarr; serious; ECE &gt; 0.05 downgrades "no concern" to inconclusive; repeated with a <strong>history-aware &pi;<sub>b</sub></strong>, the worse result counts</td></tr>
+          <tr><td>Coverage</td><td>Occupancy-weighted support over (state cluster, action) cells; ESAC as a baseline</td><td>&ge; 10% of decisions in under-supported cells &rarr; concern, &ge; 30% &rarr; serious</td></tr>
+          <tr><td>OPE reliability</td><td>Importance weights for reference policies &pi;<sub>&lambda;</sub> = (1&minus;&lambda;)&pi;<sub>b</sub> + &lambda;&middot;uniform: <strong>Kish ESS share</strong>, <strong>Pareto-k&#770;</strong> (PSIS), ESS by horizon, WIS CI; status at &lambda; = 0.25</td><td>k&#770; &gt; 0.7 &rarr; serious; ESS share &le; 10% &rarr; concern; also repeated history-aware</td></tr>
+          <tr><td>Unmeasured confounding</td><td>Not testable from observational data</td><td>Always <span class="pill na">Not assessable</span>, with advice on sensitivity analyses and negative controls</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Level E (deployment) has five metadata questions: definable constraints, interpretability requirements, a fallback policy, safeguards for unusual patients, clinician oversight. All thresholds except Pareto-k&#770; = 0.7 (Vehtari et al.) are conventions documented in the code and reported with sensitivity analyses. Within one criterion the worst sub-result counts; there is no aggregate score.</p>
+    <p class="note">Main sources: information gain and approximate information states (Subramanian et al. 2022); GCM test (Shah &amp; Peters 2020); positivity (Petersen et al. 2012; Raghu et al. 2018); ESS and PSIS (Kish; Vehtari et al.); temporal data quality (Kahn et al. 2016; Agniel et al. 2018).</p>
+  </section>
+
+  <section>
+    <h2>Verdicts on the originally proposed metrics</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th>Verdict</th><th>Reason</th></tr></thead>
+        <tbody>
+          <tr><td>AOI</td><td><span class="pill na">Comparison only</span></td><td>Same information as the support-violation rate (&rho; &minus;0.83 vs 0.82 against true support); depends on the number of actions and &epsilon;.</td></tr>
+          <tr><td>ESAC</td><td><span class="pill na">Replaced</span></td><td>Weights every cell equally and depends on the cluster count; weak in experiments (&rho; &minus;0.32). An occupancy-weighted variant is kept, but it is also weak.</td></tr>
+          <tr><td>TOR</td><td><span class="pill na">Split</span></td><td>Completeness alone mixes four different problems that need different remedies.</td></tr>
+          <tr><td>Bellman–Wasserstein distance</td><td><span class="pill bad">Excluded</span></td><td>Measures behaviour quality relative to random, needs a trained critic, validated only on locomotion tasks.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Validation results</h2>
+
+    <h3>Hidden state (RQ1–RQ3)</h3>
+    <p>A linear process with a latent factor of strength c; hiding the factor makes the observed state non-Markov. GCM rejection rate at &alpha; = 0.05, 20 seeds per cell:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Latent strength c</th><th class="num">n = 50</th><th class="num">n = 100</th><th class="num">n = 200</th><th class="num">n = 400</th></tr></thead>
+        <tbody>
+          <tr><td>0 (state is Markov)</td><td class="num">0.10</td><td class="num">0.15</td><td class="num">0.05</td><td class="num">0.10</td></tr>
+          <tr><td>0.1</td><td class="num">0.20</td><td class="num">0.75</td><td class="num">0.90</td><td class="num">0.95</td></tr>
+          <tr><td>0.2</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">1.00</td></tr>
+          <tr><td>0.4 and 0.8</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">1.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Among 60 cases the framework flagged, the recommended revision (adding history) reduced the value-estimation error by 71%, while random revisions increased it by 23%. For small violations (c = 0.2) the revision brought no improvement, which supports using an effect-size threshold, not significance alone.</p>
+
+    <h3>Overlap and coverage</h3>
+    <p>The support-violation rate tracks the true violation rate well (&rho; = 0.82) but underestimates it by 0.14 on average, because a smooth behaviour model cannot represent hard restrictions. Effective sample size anticipates off-policy evaluation error best, but only moderately (&rho; = &minus;0.44); no pre-training diagnostic predicts that error precisely.</p>
+
+    <h3>PK/PD anaesthesia simulator</h3>
+    <p>All state representations were flagged, including the full compartment state. Further checks showed this is correct: drug kinetics depend on unrecorded patient characteristics, so past observations identify the patient. A coarser decision interval (6 instead of 2 minutes) raised history dependence of the BIS-only state from 0.07 to 0.6 nats.</p>
+
+    <h3>Temporal data defects</h3>
+    <p>Each defect moved its own indicator and left the others alone. Recording actions one step late dropped the action-effect gain from 0.43 to 0.00; random missingness left the informative-missingness test at chance level, as it should.</p>
+  </section>
+
+  <section>
+    <h2>Case study: eICU sepsis</h2>
+    <div class="finding">
+      <p><strong>Overlap looks excellent until history is included.</strong> Given heart rate and blood pressure alone, the norepinephrine dose looks almost random (entropy 0.97, no support violations). The previous dose predicts the next one very strongly (0.95 nats). With that history included, entropy drops to 0.30 and importance sampling becomes unreliable (Pareto-k&#770; 1.34). The framework now runs this history-aware check automatically.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criterion</th><th>Primary formulation (60-min steps)</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>State sufficiency (HR, MAP)</td><td class="num">0.086 nats</td><td><span class="pill warn">Concern</span></td></tr>
+          <tr><td>Recorded dose informs next state</td><td class="num">0.0005 nats</td><td><span class="pill warn">Concern</span></td></tr>
+          <tr><td>Reward, stationarity, estimability</td><td>within thresholds</td><td><span class="pill ok">No concern detected</span></td></tr>
+          <tr><td>Behaviour depends on history</td><td class="num">0.95 nats</td><td><span class="pill warn">Concern</span></td></tr>
+          <tr><td>Overlap (history-aware)</td><td class="num">20% of decisions violate support</td><td><span class="pill warn">Concern</span></td></tr>
+          <tr><td>Off-policy evaluation reliability</td><td class="num">ESS 0.001, k&#770; 1.34</td><td><span class="pill bad">Serious concern</span></td></tr>
+          <tr><td>Unmeasured confounding</td><td>not testable from data</td><td><span class="pill na">Not assessable</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The near-zero dose effect is consistent with closed-loop titration (the dose is adjusted to keep blood pressure stable) or with timing misalignment; these data cannot separate the two. Finer steps (30 minutes) made importance sampling worse; coarser steps (120 minutes) bundled more decisions into one step. The cardiac-arrest cohort has no treatment variable, so the framework rules out MDP modelling from it, matching the earlier interdisciplinary project.</p>
+    <p class="note">Statistical findings only, not clinical conclusions. Patient data stay outside the repository; only aggregate reports are stored.</p>
+  </section>
+
+  <section>
+    <h2>Problems found and fixed</h2>
+    <ul>
+      <li><strong>Spurious history dependence</strong> from state columns that are exact copies of earlier values (lagged states, static covariates, noise-free compartments). Such columns are now excluded automatically.</li>
+      <li><strong>Over-optimistic overlap</strong> when the state omits what drives treatment decisions. Fixed by the history-aware behaviour model.</li>
+      <li><strong>Unobserved actions were invisible</strong> to overlap diagnostics. The action space can now be declared.</li>
+      <li><strong>Model-class dependence:</strong> a linear model falsely flags a reward that is nonlinear in the next state. Reporting both linear and flexible models is recommended.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Open items</h2>
+    <div class="grid2">
+      <div class="box">
+        <h3>Decisions for the supervisor</h3>
+        <ul>
+          <li>Relevance threshold for information gains (currently 0.01 nats, a convention)</li>
+          <li>Definition of a "moderate violation" for the RQ1 targets</li>
+          <li>How deep the offline-RL layer and Level E should go in the thesis</li>
+          <li>Whether reporting aggregate eICU results is acceptable, and whether to add a second dataset</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Technical next steps</h3>
+        <ul>
+          <li>Implement or call the Forward-Backward Markov test (Shi et al. 2020)</li>
+          <li>Recalibrate the GCM test to bring false alarms to 0.05</li>
+          <li>Add a patient-heterogeneity diagnostic</li>
+          <li>Redesign the informative-missingness experiment (it saturates) and validate timestamp heaping</li>
+          <li>Cross-check PK/PD parameters against the original sources</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Limitations</h2>
+    <ul>
+      <li>Diagnostics only see dependence on recorded variables; a latent factor that leaves no trace is undetectable.</li>
+      <li>No conditional-independence test has power against every alternative, so non-rejection is never proof of the Markov property.</li>
+      <li>Gains are relative to the base model's fit and must be compared across formulations together with the model fit.</li>
+      <li>Only the Pareto-k&#770; threshold (0.7) and &alpha; = 0.05 have an external basis; all other thresholds are conventions.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Details: <code>research/results_summary.md</code>, <code>research/metric_comparison.md</code>, <code>research/framework_specification.md</code> and <code>research/open_questions.md</code> in the thesis repository.
+  </footer>
+</div>
+
+</body></html>

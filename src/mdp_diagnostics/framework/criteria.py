@@ -95,6 +95,19 @@ def classify_gain(gain: MetricResult, test: MetricResult | None, min_gain: float
     return Status.INCONCLUSIVE, f"Relevant dependence can neither be confirmed nor excluded ({txt}; threshold {min_gain:g})."
 
 
+def gain_next_step(status: Status, concern: str, inconclusive: str, no_concern: str = "") -> str:
+    """Recommended next step for a gain-based criterion, chosen per status.
+
+    An inconclusive result must never receive the reassuring "no concern" advice:
+    a significant test with an uncertain effect size is a possible problem.
+    """
+    if status == Status.CONCERN:
+        return concern
+    if status == Status.NO_CONCERN_DETECTED:
+        return no_concern
+    return inconclusive
+
+
 def threshold_status(value: float, concern: float, serious: float | None = None, higher_is_worse: bool = True) -> Status:
     if value is None or not np.isfinite(value):
         return Status.INCONCLUSIVE

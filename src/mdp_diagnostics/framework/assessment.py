@@ -10,7 +10,7 @@ import yaml
 
 from mdp_diagnostics.data.preprocessing import PreprocessingLog, add_terminal_outcome_reward, discretize_actions, resample_to_grid
 from mdp_diagnostics.data.schema import TrajectoryData, TrajectorySchema
-from mdp_diagnostics.framework.criteria import CriterionResult, Status, classify_gain, threshold_status, worst
+from mdp_diagnostics.framework.criteria import CriterionResult, Status, classify_gain, gain_next_step, threshold_status, worst
 from mdp_diagnostics.framework.report import Report
 from mdp_diagnostics.metrics import coverage, markov, ope_reliability, overlap, temporal
 from mdp_diagnostics.metrics.base import MetricResult
@@ -228,22 +228,32 @@ class FeasibilityAssessment:
         prof = [self._safe(markov.history_gain, f"history_gain[state,k={k}]", transL, "state", lags=k, n_boot=0, **kw) for k in range(1, c.lags + 1)]
         st, txt = classify_gain(g_state, t_state, th.min_gain_nats, c.alpha)
         crit.append(CriterionResult("B.state_sufficiency", "B", "State sufficiency (Markov property w.r.t. recorded history)", st, txt,
-            "Augment the state with the lags/aggregates that carry the gain (see lag profile), or use a belief state / recurrent representation; partial observability is likely." if st == Status.CONCERN else
-            "Report as 'no relevant observable history dependence'; this does not exclude latent confounders.",
+            gain_next_step(st,
+                concern="Augment the state with the lags/aggregates that carry the gain (see lag profile), or use a belief state / recurrent representation; partial observability is likely.",
+                inconclusive="Do not assume the state is sufficient: relevant history dependence is not excluded. Inspect the lag profile, "
+                             "compare with an augmented formulation (state + lags) and, if possible, use more trajectories; a rejecting GCM test "
+                             "with an uncertain effect size is a possible concern.",
+                no_concern="Report as 'no relevant observable history dependence'; this does not exclude latent confounders."),
             [g_state, t_state, *prof]))
         if transL.reward is not None:
             g_r = self._safe(markov.history_gain, "history_gain[reward]", transL, "reward", n_boot=c.n_boot, **kw)
             t_r = self._safe(markov.history_gcm, "history_gcm[reward]", transL, "reward", **kw)
             st, txt = classify_gain(g_r, t_r, th.min_gain_nats, c.alpha)
             crit.append(CriterionResult("B.reward_sufficiency", "B", "Reward depends only on (s, a, s')", st, txt,
-                "Include the history the reward depends on in the state or redefine the reward." if st == Status.CONCERN else "", [g_r, t_r]))
+                gain_next_step(st,
+                    concern="Include the history the reward depends on in the state or redefine the reward.",
+                    inconclusive="Do not assume reward sufficiency yet: compare with the reward on an augmented state (state + lags) "
+                                 "or use more trajectories."), [g_r, t_r]))
         else:
             crit.append(CriterionResult("B.reward_sufficiency", "B", "Reward depends only on (s, a, s')", Status.NOT_ASSESSABLE,
                 "No reward column provided.", "Specify a reward to assess reward sufficiency.", evidence_type="none"))
         g_t = self._safe(markov.time_inhomogeneity_gain, "time_inhomogeneity_gain", trans0, n_boot=c.n_boot, **kw)
         st, txt = classify_gain(g_t, None, th.min_gain_nats, c.alpha)
         crit.append(CriterionResult("B.stationarity", "B", "Time-homogeneous dynamics", st, txt,
-            "Add time/phase of treatment to the state or model a finite-horizon, time-indexed MDP." if st == Status.CONCERN else "", [g_t]))
+            gain_next_step(st,
+                concern="Add time/phase of treatment to the state or model a finite-horizon, time-indexed MDP.",
+                inconclusive="Do not assume time-homogeneity yet: compare with a time-indexed formulation (state + time/phase) "
+                             "or use more trajectories."), [g_t]))
         stab = self._safe(coverage.transition_model_stability, "transition_epistemic_ratio", trans0, seed=c.seed)
         r2 = g_state.details.get("oof_r2_base") if g_state.ok else None
         crit.append(CriterionResult("B.transition_estimability", "B", "Transition dynamics estimable and stochastic",

@@ -1,7 +1,7 @@
 import numpy as np
 from threadpoolctl import threadpool_limits
 
-from mdp_diagnostics.experiments.agents import fit_fqi
+from mdp_diagnostics.experiments.agents import MLPQ, fit_dqn, fit_fqi, huber_grad
 from mdp_diagnostics.experiments.run import GENE_REPS, _gene_frame, _gene_obs_features, _gene_transitions
 from mdp_diagnostics.experiments.synthetic import GeneTreatmentEnv
 
@@ -49,6 +49,37 @@ def test_fqi_with_true_gene_beats_constant_policies():
     d, cols = _gene_frame(env.generate(300, seed=0), rep, np.random.default_rng(0))
     with threadpool_limits(1):
         agent = fit_fqi(*_gene_transitions(d, cols)[:5], env.n_actions, iterations=10)
+        rng = np.random.default_rng(0)
+        v_agent = env.rollout(lambda o: agent.act(_gene_obs_features(o, rep, rng)), n_traj=2000, gamma=0.95)
+    v_const = max(env.rollout(lambda o, k=k: np.tile(np.eye(3)[k], (len(o["m"]), 1)), n_traj=2000, gamma=0.95) for k in range(3))
+    assert v_agent > v_const
+
+
+def test_mlp_gradient_matches_finite_differences():
+    rng = np.random.default_rng(1)
+    net = MLPQ(4, 3, hidden=8, seed=1)
+    X, a, y = rng.normal(size=(16, 4)), rng.integers(0, 3, 16), rng.normal(size=16)
+    q, cache = net.forward(X, cache=True)
+    _, dq = huber_grad(q, a, y)
+    grads = net.backward(dq, cache)
+    for k in ("W1", "b2", "W3"):
+        P = net.params[k]
+        j = np.unravel_index(1, P.shape)
+        old = P[j]
+        P[j] = old + 1e-6
+        lp = huber_grad(net.forward(X), a, y)[0]
+        P[j] = old - 1e-6
+        lm = huber_grad(net.forward(X), a, y)[0]
+        P[j] = old
+        assert np.isclose(grads[k][j], (lp - lm) / 2e-6, rtol=1e-4, atol=1e-8)
+
+
+def test_dqn_with_true_gene_beats_constant_policies():
+    env = GeneTreatmentEnv(prevalence=0.5, test_share=0.0, sigma=0.2)
+    rep = GENE_REPS["oracle"]
+    d, cols = _gene_frame(env.generate(300, seed=0), rep, np.random.default_rng(0))
+    with threadpool_limits(1):
+        agent = fit_dqn(*_gene_transitions(d, cols)[:5], env.n_actions, steps=6000)
         rng = np.random.default_rng(0)
         v_agent = env.rollout(lambda o: agent.act(_gene_obs_features(o, rep, rng)), n_traj=2000, gamma=0.95)
     v_const = max(env.rollout(lambda o, k=k: np.tile(np.eye(3)[k], (len(o["m"]), 1)), n_traj=2000, gamma=0.95) for k in range(3))

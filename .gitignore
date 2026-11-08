@@ -10,3 +10,4 @@ proposal/*.blg
 proposal/*.fdb_latexmk
 proposal/*.fls
 proposal/.Rhistory
+results/gene/curves_checkpoints/

@@ -16,6 +16,22 @@ def test_markov_vs_second_order_status():
     assert _assess(make_ar_data(phi2=0.35)).by_id("B.state_sufficiency").status == Status.CONCERN
 
 
+def test_gain_next_step_inconclusive_is_not_reassuring():
+    from mdp_diagnostics.framework.criteria import gain_next_step
+
+    kw = dict(concern="C", inconclusive="I", no_concern="N")
+    assert gain_next_step(Status.CONCERN, **kw) == "C"
+    assert gain_next_step(Status.NO_CONCERN_DETECTED, **kw) == "N"
+    assert gain_next_step(Status.INCONCLUSIVE, **kw) == "I"
+
+
+def test_state_sufficiency_next_step_matches_status():
+    for df in (make_ar_data(), make_ar_data(phi2=0.35)):
+        c = _assess(df).by_id("B.state_sufficiency")
+        reassuring = "no relevant observable history dependence" in c.next_step
+        assert reassuring == (c.status == Status.NO_CONCERN_DETECTED)
+
+
 def test_confounding_never_claimed_resolved():
     rep = _assess(make_ar_data())
     assert rep.by_id("D.unmeasured_confounding").status == Status.NOT_ASSESSABLE
