@@ -7,6 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{xurl}
 \usepackage[final,hidelinks]{hyperref}
 \urlstyle{same}
@@ -70,21 +71,20 @@ The thesis follows Design Science Research~\cite{Hevner2004,Peffers2007} with th
 MDP and POMDP theory~\cite{Puterman1994,Kaelbling1998} and clinical MDP modelling~\cite{Steimle2017} provide the formal basis; approximate information states~\cite{Subramanian2022} quantify the cost of imperfect state representations. In healthcare RL, Gottesman et al.~\cite{Gottesman2019} give qualitative guidelines, while critiques of sepsis studies~\cite{Jeter2019,Luo2024} show that conclusions depend on formulation and evaluation choices. Shi et al.~\cite{Shi2020} propose a test of the Markov property; Killian et al.~\cite{Killian2020} compare state representations for clinical RL. Causal inference contributes positivity diagnostics~\cite{Petersen2012} and shows that conditional independence testing has inherent limits~\cite{Shah2020}. In anaesthesia, differential-equation models of drug effect are well established~\cite{Schnider1998,Eleveld2018} and underlie RL dosing studies~\cite{Schamberg2022}, offering a ground truth rarely available elsewhere. None of these works organises the assumptions of the MDP abstraction into a quantitative, validated assessment that separates model adequacy from policy-learning feasibility.
 
 \section{Timeline}
-\noindent\begin{tabular}{@{}lp{0.85\textwidth}@{}}
+\noindent\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.28\textwidth}@{}}
 \toprule
-Month & Milestones and deliverables \\
+Period & Work & Deliverable \\
 \midrule
-1 & Literature synthesis; formal framework and assumption taxonomy drafted \\
-2 & Diagnostics implemented; synthetic data generator built; ADEMP protocol fixed \\
-3 & Simulation study executed (RQ1, RQ2) \\
-4 & Remedy experiments (RQ3); illustrative application to existing data \\
-5 & Analysis; chapters on results and discussion drafted; feedback round \\
-6 & Revision of full draft, buffer (3 weeks), submission \\
+Sep--Oct 2026 & Literature review; shaping of the topic & Proposal \\
+Nov 2026 & Framework designed and implemented & Framework design completed \\
+Dec 2026 & Synthetic data-generating processes modelled and implemented; interfaces between framework and simulators & Synthetic data models completed \\
+Jan 2027 & Framework applied to synthetic data, including edge cases and limits; application to real ICU data & Results for RQ1--3 \\
+Feb--Mar 2027 & Analysis, writing, revision and submission & Thesis submitted \\
 \bottomrule
 \end{tabular}
 
 \smallskip
-\noindent Supervisor meetings every two weeks; written feedback on the framework (end of month 2) and on the full draft (end of month 5).
+\noindent Weekly meetings with the co-supervisor and monthly meetings with the supervisor. The plan is subject to change if unexpected circumstances arise; submission is expected in February or March 2027.
 
 \section{Relevance to the Qualification Profile}
 The thesis applies core Data Science competencies: probabilistic modelling and statistical inference (formalising MDP assumptions, hypothesis tests, bootstrap uncertainty), machine learning (flexible conditional density and classification models, cross-fitting, leakage-free evaluation), and the design of reproducible simulation experiments based on differential-equation models. It further requires a responsible treatment of clinical data and communicating the limitations of data-driven decision support to an interdisciplinary audience, building directly on the preceding interdisciplinary project on modelling cardiac arrest as an MDP.
