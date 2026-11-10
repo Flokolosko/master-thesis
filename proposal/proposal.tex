@@ -7,7 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{array}
+\usepackage{pgfgantt}
 \usepackage{xurl}
 \usepackage[final,hidelinks]{hyperref}
 \urlstyle{same}
@@ -71,17 +71,38 @@ The thesis follows Design Science Research~\cite{Hevner2004,Peffers2007} with th
 MDP and POMDP theory~\cite{Puterman1994,Kaelbling1998} and clinical MDP modelling~\cite{Steimle2017} provide the formal basis; approximate information states~\cite{Subramanian2022} quantify the cost of imperfect state representations. In healthcare RL, Gottesman et al.~\cite{Gottesman2019} give qualitative guidelines, while critiques of sepsis studies~\cite{Jeter2019,Luo2024} show that conclusions depend on formulation and evaluation choices. Shi et al.~\cite{Shi2020} propose a test of the Markov property; Killian et al.~\cite{Killian2020} compare state representations for clinical RL. Causal inference contributes positivity diagnostics~\cite{Petersen2012} and shows that conditional independence testing has inherent limits~\cite{Shah2020}. In anaesthesia, differential-equation models of drug effect are well established~\cite{Schnider1998,Eleveld2018} and underlie RL dosing studies~\cite{Schamberg2022}, offering a ground truth rarely available elsewhere. None of these works organises the assumptions of the MDP abstraction into a quantitative, validated assessment that separates model adequacy from policy-learning feasibility.
 
 \section{Timeline}
-\noindent\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.28\textwidth}@{}}
-\toprule
-Period & Work & Deliverable \\
-\midrule
-Sep--Oct 2026 & Literature review; shaping of the topic & Proposal \\
-Nov 2026 & Framework designed and implemented & Framework design completed \\
-Dec 2026 & Synthetic data-generating processes modelled and implemented; interfaces between framework and simulators & Synthetic data models completed \\
-Jan 2027 & Framework applied to synthetic data, including edge cases and limits; application to real ICU data & Results for RQ1--3 \\
-Feb--Mar 2027 & Analysis, writing, revision and submission & Thesis submitted \\
-\bottomrule
-\end{tabular}
+\begin{center}
+\begin{ganttchart}[
+    time slot format=isodate,
+    x unit=0.03cm, y unit chart=0.45cm, y unit title=0.45cm,
+    vgrid=false, hgrid=false,
+    title height=1,
+    title label font=\footnotesize,
+    bar label font=\footnotesize,
+    milestone label font=\footnotesize\itshape,
+    bar/.append style={fill=black!25, draw=black!70},
+    bar height=0.55,
+    milestone/.append style={fill=black, draw=black},
+    milestone height=0.5,
+    milestone left shift=-3, milestone right shift=3,
+    bar label node/.append style={align=right},
+    milestone label node/.append style={align=right},
+  ]{2026-09-01}{2027-03-31}
+  \gantttitlecalendar{year, month=shortname} \\
+  \ganttbar{Literature review, topic}{2026-09-01}{2026-11-27} \\
+  \ganttmilestone{Proposal submitted}{2026-11-18} \\
+  \ganttmilestone{Proposal presentation}{2026-11-27} \\
+  \ganttbar{Framework design and implementation}{2026-11-01}{2026-11-30} \\
+  \ganttmilestone{Framework design completed}{2026-11-30} \\
+  \ganttbar{Synthetic data models, interfaces}{2026-11-15}{2026-12-31} \\
+  \ganttmilestone{Synthetic data models completed}{2026-12-31} \\
+  \ganttbar{Experiments, edge cases and limits}{2027-01-01}{2027-01-31} \\
+  \ganttbar{Application to ICU data}{2027-01-01}{2027-01-31} \\
+  \ganttmilestone{Results for RQ1--3}{2027-01-31} \\
+  \ganttbar{Analysis, writing, revision}{2027-02-01}{2027-03-27} \\
+  \ganttmilestone{Thesis submitted (Feb/Mar)}{2027-03-27}
+\end{ganttchart}
+\end{center}
 
 \smallskip
 \noindent Weekly meetings with the co-supervisor and monthly meetings with the supervisor. The plan is subject to change if unexpected circumstances arise; submission is expected in February or March 2027.
