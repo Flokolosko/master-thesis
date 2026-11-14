@@ -1,0 +1,128 @@
+% Master's thesis proposal for Business Informatics and Data Science
+% at TU Wien (based on ProposalInstructions.tex).
+%
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[runningheads]{llncs}
+%
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{pgfgantt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xurl}
+\usepackage[final,hidelinks]{hyperref}
+\urlstyle{same}
+%
+\begin{document}
+%
+\title{Data Support and the Markov Property: A Diagnostic Framework for MDP Models in Healthcare}
+%
+\titlerunning{Data Support and Markov Property in Healthcare MDPs}
+%
+\author{Florian Stadler BSc\inst{1}}
+%
+\authorrunning{Florian Stadler}
+%
+\institute{TU Wien, 11835945,
+  \email{florian.stadler@asc.tuwien.ac.at}}
+%
+\maketitle
+%
+Supervisor: Assistant Prof. Dipl.-Ing. Dipl.-Ing. Dr.techn. Andreas K\"orner, Institute of Analysis and Scientific Computing, TU Wien \\
+Co-supervisor: Mag.rer.nat. Dr.techn. Daniel Pasterk, Institute of Analysis and Scientific Computing, TU Wien
+
+\begin{abstract}
+% \textbf{Length: max 1000 characters}
+Reinforcement Learning studies in healthcare model clinical decisions as Markov Decision Processes (MDPs), but rarely examine whether the chosen formulation is supported by the data. This thesis addresses two prerequisites: whether observational data provide sufficient support for a given formulation, and whether its state, time grid and reward satisfy the Markov property. To answer both, it develops a diagnostic framework that formalises the MDP formulation and translates these prerequisites into statistical diagnostics with uncertainty estimates. The diagnostics are validated on synthetic data from simulators of sequential clinical treatment, where the true process is known and violations can be injected in a controlled, reproducible way, and are then applied to real ICU data. Whether the diagnostics can be condensed into an interpretable score is examined as a secondary question.
+
+\keywords{Markov decision process \and Reinforcement learning \and Healthcare \and Model diagnostics \and Observational data}
+\end{abstract}
+%
+\section{Introduction}
+%\textbf{Maximum length: 1,500 characters.}
+Clinical treatment is often a sequence of interdependent decisions, such as titrating anaesthetics or vasopressors, where each choice affects the patient’s conditions and constrains subsequent treatment options. Such problems can be formalised as Markov Decision Processes (MDPs)~\cite{Puterman1994}, from which Reinforcement Learning (RL) can learn potentially improved treatment policies. Applying RL to observational health records has attracted wide attention~\cite{Komorowski2018}. Many of these studies rely on a rarely examined modelling step in which irregular and incomplete clinical data are reduced to discrete states, time steps, actions and rewards under the assumption that the Markov property holds. If this abstraction is inadequate, conclusions about ``optimal'' treatments may reflect modelling artefacts rather than clinical reality. Existing guidance is largely qualitative~\cite{Gottesman2019}, and critiques of prominent sepsis studies show that results change substantially with the formulation~\cite{Jeter2019,Luo2024}. This thesis focuses on two prerequisites that must hold before any policy is learned: whether the data provide sufficient support for the chosen formulation, and whether the formulation satisfies the Markov property. Both are properties of a specific formulation rather than of the clinical problem itself; comparing formulations indicates whether a violation can be corrected by remodelling or reflects a limitation of the data.
+
+\section{Research Problem}
+% \textbf{Maximum length: 2,000 characters.}
+Researchers who model a clinical decision problem as an MDP from observational data must choose a state representation, a decision-time grid, an action discretisation and a reward. Current practice assesses these choices qualitatively, if at all: guidelines pose questions such as whether the state captures all relevant information~\cite{Gottesman2019} without measures to answer them, and formulations are typically adopted from prior work without reporting whether the Markov, temporal or action assumptions hold. The consequences are observable. In more than 17,000 evaluation runs on a public sepsis dataset, conclusions about RL methods changed with the MDP formulation and evaluation metric, and in some settings random policies were not outperformed~\cite{Luo2024}. In preliminary work on public critical-care datasets, treatment variables were often missing or recorded only as sparse indicators, a limitation that existing guidelines do not allow to be quantified. Because violations are neither measured nor localised, researchers cannot tell whether poor or unstable results stem from a correctable formulation choice (e.g.\ a too coarse time grid or a state lacking relevant history) or from a fundamental lack of support. Two questions therefore remain open in practice: (1) whether the data are sufficient for a specific formulation, and (2) whether its Markov assumption holds. Both are statistical questions, but existing tools address them in isolation~\cite{Shi2020,Petersen2012}, do not cover temporal and action-related causes, do not quantify the extent of a violation or attribute it to a formulation component, and have not been validated against a known ground truth.
+
+\section{Goals and expected results}
+%\textbf{Maximum length: 1,500 characters.}
+The goal is to answer, for a given MDP formulation of a clinical decision problem and before any policy is learned, (1) whether the observational data provide sufficient support and (2) whether the Markov property holds. A diagnostic framework is developed as the instrument for this. The expected results are: (1) a formalisation of the MDP formulation as an abstraction of the observational process, stating the data-sufficiency and Markov assumptions and their testability; (2) diagnostics for both questions, each with an estimand, an estimator and an uncertainty interval; (3) empirical evidence on synthetic processes with known ground truth and on ICU data on how reliably the diagnostics detect violations and reflect their consequences, including the conditions under which they fail; and (4) as a secondary, exploratory result, an assessment of whether the diagnostics can be condensed into a profile or score. \\
+Unmeasured confounding, clinical validity of the reward, policy optimisation and deployment are out of scope; the diagnostics can reveal violations but never certify a formulation as adequate. Compared with checklists and isolated tests, they quantify the extent of a violation, attribute it to a formulation component and cover temporal and action-related causes. Success criteria are given in Section~\ref{sec:rq}.
+
+\section{Research Questions}
+\label{sec:rq}
+%\textbf{Maximum length: 1,200 characters.}
+\begin{description}
+  \item[RQ1] How reliably do the diagnostics detect insufficient data support for a given formulation (sparse state--action coverage, limited action overlap, low effective sample size), depending on sample size and sparsity?
+  \item[RQ2] What true-positive rate (TPR) and false-positive rate (FPR) does the Markov diagnostic achieve for controlled violations (missing state information, too coarse time grid, history-dependent reward), and how reliably does it localise the violated component?
+  \item[RQ3] How strongly do the diagnostics rank-correlate with the consequences of misspecification (value-estimation error, policy-value loss) when the true process is known?
+  \item[RQ4] (exploratory) Can the diagnostics be condensed into a profile or score that separates correctable formulation choices from limits of the data?
+\end{description}
+\emph{Success criteria} (synthetic data, magnitudes fixed in advance, 95\% bootstrap intervals). RQ1--2: FPR $\le 0.05$, TPR $\ge 0.8$; matching component flagged in $\ge 80\%$ of single-violation runs. RQ3: Spearman $\rho \ge 0.5$. RQ4 is reported descriptively.
+
+\section{Research Methodology}
+% \textbf{Maximum length: 2,500 characters.}
+The thesis follows Design Science Research~\cite{Hevner2004,Peffers2007}; the framework is the artefact and serves as the instrument for answering both questions. Evaluation follows FEDS~\cite{Venable2016}: controlled experiments on synthetic data (RQ1--4) and an illustrative application to existing data. \\
+\emph{Formalisation.} A formulation is a tuple of state map, time grid, action map, reward and horizon. Each assumption is stated formally and classified by testability; approximate information states~\cite{Subramanian2022} link Markov violations to value loss. \\
+\emph{Data sufficiency.} State--action coverage, effective sample size and, for policy learning, overlap and importance-sampling reliability~\cite{Petersen2012}, each with an uncertainty interval. \\
+\emph{Markov property.} Central is the cross-fitted history information gain, the out-of-sample likelihood gain from adding past history to the state, paired with a generalised covariance measure test~\cite{Shah2020}; missing state information, coarse time grids and history-dependent rewards are treated as distinct causes. \\
+\emph{Experiments.} Three simulators with known ground truth (latent-factor linear process, propofol pharmacokinetic--pharmacodynamic model~\cite{Schnider1998}, treatment process with a hidden patient trait); the design follows ADEMP~\cite{Morris2019}. Independent variables are violation type (including data sparsity and reduced overlap) and magnitude, sample size and formulation; one violation is injected at a time in a factorial design with shared seeds and simulated patients. Dependent variables are fixed beforehand: TPR and FPR (RQ1--2), where support counts as insufficient if the true estimation error of transition and reward models exceeds a preset threshold; Spearman $\rho$ with true errors from Monte-Carlo rollouts and offline RL agents trained on each formulation (RQ3); relative error reduction of recommended versus random revisions (RQ4). Ground truth never uses the diagnostics' own models. Baselines are isolated tests and state-only overlap. Stress scenarios near the detection boundary (weak or trace-free latent factors, small samples) locate the framework's limits. The final protocol is fixed before the final runs. \\
+\emph{Application.} The framework is applied to ICU data (eICU sepsis vasopressor dosing) under credentialed access; only aggregates are reported. \\
+\emph{Validity and reproducibility.} Patient-level cross-fitting with per-fold preprocessing prevents leakage; several model classes separate absent violations from weak estimators; results are replicated over seeds with bootstrap intervals; code and seeds are released.
+
+\section{State-of-the-Art}
+%\textbf{Maximum length: 1,200 characters.}
+MDP and POMDP theory~\cite{Puterman1994,Kaelbling1998} and clinical MDP modelling~\cite{Steimle2017} provide the formal basis; approximate information states~\cite{Subramanian2022} quantify the cost of imperfect state representations. In healthcare RL, Gottesman et al.~\cite{Gottesman2019} give qualitative guidelines, while critiques of sepsis studies~\cite{Jeter2019,Luo2024} show that conclusions depend on formulation and evaluation choices. Shi et al.~\cite{Shi2020} propose a test of the Markov property; Killian et al.~\cite{Killian2020} compare state representations for clinical RL. Causal inference contributes positivity diagnostics~\cite{Petersen2012} and shows that conditional independence testing has inherent limits~\cite{Shah2020}. In anaesthesia, differential-equation models of drug effect are well established~\cite{Schnider1998,Eleveld2018} and underlie RL dosing studies~\cite{Schamberg2022}, offering a ground truth rarely available elsewhere. None of these works answers both questions jointly for a given formulation, attributes violations to formulation components, or validates the diagnostics against a known ground truth.
+
+
+\section{Timeline}
+%\textbf{Maximum length: 1,000 characters.}
+
+\begin{center}
+\begin{ganttchart}[
+    time slot format=isodate,
+    x unit=0.03cm, y unit chart=0.45cm, y unit title=0.45cm,
+    vgrid=false, hgrid=false,
+    title height=1,
+    title label font=\footnotesize,
+    bar label font=\footnotesize,
+    milestone label font=\footnotesize\itshape,
+    bar/.append style={fill=black!25, draw=black!70},
+    bar height=0.55,
+    milestone/.append style={fill=black, draw=black},
+    milestone height=0.5,
+    milestone left shift=-3, milestone right shift=3,
+    bar label node/.append style={align=right},
+    milestone label node/.append style={align=right},
+  ]{2026-09-01}{2027-03-31}
+  \gantttitlecalendar{year, month=shortname} \\
+  \ganttbar{Literature review, topic}{2026-09-01}{2026-11-27} \\
+  \ganttmilestone{Proposal presentation}{2026-11-27} \\
+  \ganttbar{Diagnostics design and implementation}{2026-11-01}{2026-11-30} \\
+  \ganttmilestone{Framework design completed}{2026-11-30} \\
+  \ganttbar{Synthetic data models, interfaces}{2026-11-15}{2026-12-31} \\
+  \ganttmilestone{Synthetic data models completed}{2026-12-31} \\
+  \ganttbar{Experiments, edge cases and limits}{2027-01-01}{2027-01-31} \\
+  \ganttbar{Application to ICU data}{2027-01-01}{2027-01-31} \\
+  \ganttmilestone{Results for RQ1--4}{2027-01-31} \\
+  \ganttbar{Analysis, writing, revision}{2027-02-01}{2027-03-27} \\
+  \ganttmilestone{Thesis submitted (Feb/Mar)}{2027-03-27}
+\end{ganttchart}
+\end{center}
+
+\smallskip
+\noindent Weekly meetings with the co-supervisor and monthly meetings with the supervisor. The plan is subject to change if unexpected circumstances arise; submission is expected in February or March 2027.
+
+
+
+
+\section{Relevance to the Qualification Profile}
+%\textbf{Maximum length: 800 characters.}
+The thesis contributes to data analytics and decision support in medicine within the key area Machine Learning and Statistics. It uses bootstrap and cross-validation (Statistical Simulation and Computerintensive Methods), regression and classification models (Advanced Methods for Regression and Classification; Machine Learning) and system abstraction for simulators (Modeling and Simulation). Controlled experiments follow Experiment Design for Data Science; privacy-aware handling of clinical data draws on Security, Privacy and Explainability in Machine Learning. Reporting what the data cannot support reflects the profile’s aims of reproducibility, critical evaluation and assessing consequences.
+
+\bibliographystyle{splncs04}%
+\bibliography{literature}%
+
+\end{document}
